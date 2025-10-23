@@ -1,0 +1,22 @@
+.custom-nav-item {
+    .custom-nav-link {
+        padding: 15px 20px !important;
+        font-weight: 500 !important;
+        color: #000000 !important;
+        border: 2px solid transparent !important;
+        border-radius: 6px !important;
+        background-color: #f8f9fa !important;
+        transition: all 0.3s ease !important;
+
+        &.active,
+        &.current {
+            color: #fff !important;
+            background-color: #243e79 !important;
+        }
+
+        &:disabled {
+            cursor: not-allowed !important;
+            opacity: 0.5 !important;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+/* DropZone CSS */
+.dropzone:hover {
+    background-color: #243d78 !important;
+    color: #fff !important;
+}
+
+.dropzone:hover .text-secondary,
+.dropzone:hover .camera-icon {
+    color: #fff !important;
+}
+
+/* Header CSS */
+.nav-pills .nav-link {
+    color: #4d4d66;
+    font-weight: 500;
+    margin-right: 12px;
+    border-radius: 8px;
+}
+
+.nav-pills .nav-link.active-nav {
+    background-color: #4b0082;
+    /* Purple highlight */
+    color: white;
+    font-weight: 600;
+}
