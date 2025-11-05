@@ -18,7 +18,7 @@ import Contacts from "pages/Contacts"
 import PreDeals from "pages/Pre-Deals"
 import Deals from "pages/Deals"
 import Reports from "pages/Reports"
-import ContactDetails from "pages/ContactsDetails"
+import ContactDetails from "pages/SinglePages/ContactsDetails"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },

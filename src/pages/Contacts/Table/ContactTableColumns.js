@@ -4,7 +4,7 @@ import { contactTypes, statusTypes, sourceTypes } from "AllDummyData/ContacsDumm
 import "../../../assets/scss/custom.scss";
 
 export let ContactTableColumns = (callback = {}) => [
-    { dataField: "contact_name", text: "Name", formatter: (cell, row) => (<Link to="/contact" className="text-primary link-style" onClick={() => callback?.edit?.(row)} > {cell} </Link>), filterable: false },
+    { dataField: "contact_name", text: "Name", formatter: (cell, row) => (<Link to="/contact-details" className="text-primary link-style" onClick={() => callback?.edit?.(row)} > {cell} </Link>), filterable: false },
     { dataField: "phone", text: "Phone Number", filterable: false },
     { dataField: "email", text: "Email Address", filterable: false },
     { dataField: "type", text: "Type", filterable: true, filterOptions: contactTypes },
