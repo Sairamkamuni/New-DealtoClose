@@ -4,10 +4,13 @@ import { Row, Col, Container } from "reactstrap";
 import { PencilButton } from "pages/utils/allButton";
 
 import ContactModal from "pages/Contacts/ContactFrom/ContactModal";
-import ContactInfo from "./comps/ContactInfo/ContactInfo";
-import AdditionalInfo from "./comps/AdditoinalInfo";
+import ContactInfo from "./comps/LeftComps/ContactInfo/ContactInfo";
+import AdditionalInfo from "./comps/LeftComps/AdditoinalInfo";
 
+import ActivitySection from "./comps/CenterComps/ActivitySection";
 import { Link } from "react-router-dom";
+import AttachedDealsCard from "./comps/RightComps/AttachedDealsCard";
+import TasksCard from "./comps/RightComps/TasksCard";
 
 const ContactDetails = () => {
     const [modalOpen, setModalOpen] = useState(false)
@@ -43,6 +46,15 @@ const ContactDetails = () => {
                                 <AdditionalInfo />
                             </Col>
                         </Row>
+                    </Col>
+
+                    <Col md={6}>
+                        <ActivitySection />
+                    </Col>
+
+                    <Col md={3}>
+                        <AttachedDealsCard />
+                        <TasksCard />
                     </Col>
                 </Row>
 

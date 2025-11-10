@@ -48,7 +48,7 @@ const Contacts = () => {
                                 </Col>
                                 <Col >
                                     <div className="d-flex align-items-center justify-content-end gap-2" style={{ marginTop: "4px" }}>
-                                        <Searchbar />
+                                        <Searchbar style={{ width: "600px" }} />
                                         <FilterDropdown dropdownFilterOptions={FilterOptions} selectedOption={selectedOption} setSelectedOption={setSelectedOption}
                                             width="140px" height="36px" />
                                         <AddPlusCircleButton label="Add New" width="120px" outline={false} onClick={() => setModalOpen(true)} height="36px" />

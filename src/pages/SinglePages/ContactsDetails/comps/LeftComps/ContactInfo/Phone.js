@@ -61,13 +61,12 @@ const PhoneNumber = () => {
                                 onClick={() => {
                                     setEditMode(!editMode);
                                     console.log(editMode ? "❌ Exited edit mode" : "✏️ Entered edit mode");
-                                }} style={{ width: "30px", borderRadius: "50%" }} >
+                                }}  >
                                 <i className={`fas ${editMode ? "fa-times" : "fa-pencil-alt"}`} />
                             </button>
                             <button
                                 className={`btn btn-sm btn-${showPhoneInput ? "danger" : "primary"}`}
                                 onClick={() => setShowPhoneInput(!showPhoneInput)}
-                                style={{ width: "30px", borderRadius: "50%" }}
                             >
                                 <i className={`fas ${showPhoneInput ? "fa-times" : "fa-plus-circle"}`} />
                             </button>

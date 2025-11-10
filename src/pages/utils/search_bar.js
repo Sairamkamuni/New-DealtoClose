@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Input } from 'reactstrap'
+import { Input } from 'reactstrap';
 
-const Searchbar = ({ callback }) => {
+const Searchbar = ({ callback, style = {} }) => {
     return (
-        <div className="search-box" style={{ width: "600px" }}>
+        <div className="search-box" style={style}>
             <div className="position-relative">
                 <Input
                     type="text"
@@ -16,6 +16,6 @@ const Searchbar = ({ callback }) => {
             </div>
         </div>
     );
-}
+};
 
 export default Searchbar;

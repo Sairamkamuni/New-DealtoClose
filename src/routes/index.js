@@ -19,6 +19,7 @@ import PreDeals from "pages/Pre-Deals"
 import Deals from "pages/Deals"
 import Reports from "pages/Reports"
 import ContactDetails from "pages/SinglePages/ContactsDetails"
+import PreDealsDetails from "pages/SinglePages/PreDealDetails"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -26,6 +27,7 @@ const authProtectedRoutes = [
   { path: "/contacts", component: Contacts },
   { path: "/contact-details", component: ContactDetails },
   { path: "/pre-deals", component: PreDeals },
+  { path: "/pre-deals-details", component: PreDealsDetails },
   { path: "/deals", component: Deals },
   { path: "/reports", component: Reports },
 

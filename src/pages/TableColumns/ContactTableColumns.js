@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { contactTypes, statusTypes, sourceTypes } from "AllDummyData/ContacsDummyData";
-import "../../../assets/scss/custom.scss";
+import "../../assets/scss/custom.scss"
 
 export let ContactTableColumns = (callback = {}) => [
     { dataField: "contact_name", text: "Name", formatter: (cell, row) => (<Link to="/contact-details" className="text-primary link-style" onClick={() => callback?.edit?.(row)} > {cell} </Link>), filterable: false },

@@ -1,6 +1,6 @@
 import React from "react";
 import Datatables from "pages/table/datatable";
-import { ContactTableColumns } from "./ContactTableColumns";
+import { ContactTableColumns } from "../../TableColumns/ContactTableColumns";
 
 const ContactTable = ({ rows, callback }) => {
     return (
