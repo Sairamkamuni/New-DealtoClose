@@ -4,7 +4,7 @@ import Select from "react-select"
 import "flatpickr/dist/themes/material_blue.css"
 import Flatpickr from "react-flatpickr"
 import CreatableSelect from 'react-select/creatable';
-import { TypeOption, StatusOption, TitleOption, FamilyMembersOption, SourceOption, RelationshipTypeOption } from "constants/config"
+import { FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption } from "AllDummyData/ContacsDummyData"
 
 const ContactModal = ({ isOpen, toggle }) => {
     const [formType, setFormType] = useState("Client")

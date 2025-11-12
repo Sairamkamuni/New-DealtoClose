@@ -144,7 +144,7 @@ export const showSuccessAlert = (message) => {
     });
 };
 
-export const showErroeAlert = (message) => {
+export const showErrorAlert = (message) => {
     // Swal.fire({
     //     title: message,
     //     icon: 'success',

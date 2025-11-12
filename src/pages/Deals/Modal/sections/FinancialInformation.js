@@ -1,0 +1,110 @@
+import React from "react";
+import { Row, Col } from "reactstrap";
+import Select from "react-select"
+import { financeTypes } from "AllDummyData/DealsDummyData";
+
+const FinancialInformation = ({ formType, handleChange }) => {
+    return (
+        <div id="section-2">
+            <div className="d-block mb-3">
+                <h3 className="modal-title fw-bold mb-1">Financial Information</h3>
+            </div>
+            <Row>
+                <Col md={6} className="mt-2">
+                    <div className="mb-2">
+                        <label>{formType === "Buyer" ? "Finance Types" : "Acceptable Finance Types"}</label>
+                        <Select name="financeTypes" isClearable isMulti classNamePrefix="select" options={financeTypes} onChange={(e) => handleChange('financeTypes', e)}
+                            placeholder={formType === "Buyer" ? "Select Finance Type" : "Select Type"} />
+                    </div>
+                </Col>
+
+                <Col md={6} className="mt-2">
+                    <div className="mb-2 position-relative">
+                        <label>Purchase Price</label>
+                        <span className="position-absolute" style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
+                        <input type="text" name="purchase_price" className="form-control ps-4" placeholder="Enter Purchase Price" />
+                    </div>
+
+                </Col>
+
+                <Col md={6} className="mt-2">
+                    <div className="mb-2 position-relative">
+                        <label>Transaction Fee</label>
+                        <span className="position-absolute" style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
+                        <input type="text" name="transaction_fee" onChange={(e) => handleChange('transaction_fee', e.target.value)} className="form-control ps-4"
+                            placeholder="Enter Transaction Fee" />
+
+                    </div>
+                </Col>
+
+                {formType === "Buyer" && (
+                    <Col md={6} className="mt-2">
+                        <div className="mb-2 position-relative">
+                            <label>1st Initial Deposit (EMD)</label>
+                            <span className="position-absolute" style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
+                            <input type="text" name="initial_deposit" onChange={(e) => handleChange('initial_deposit', e.target.value)} className="form-control ps-4"
+                                placeholder="Enter 1st Initial Deposit (EMD)" />
+                        </div>
+                    </Col>
+                )}
+
+                {formType === "Buyer" && (
+                    <Col md={6} className="mt-2">
+                        <div className="mb-2 position-relative">
+                            <label>2nd Initial Deposit (EMD)</label>
+                            <span className="position-absolute" style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
+                            <input type="text" name="second_initial_deposit" onChange={(e) => handleChange('second_initial_deposit', e.target.value)} className="form-control ps-4"
+                                placeholder="Enter 2nd Initial Deposit (EMD)" />
+                        </div>
+                    </Col>
+                )}
+
+                <Col md={6} className="mt-2">
+                    <div className="mb-2">
+                        <label>Compensation to Buyer&apos;s Agent</label>
+                        <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input type="text" name="compensation_buyer" className="form-control" onChange={(e) => handleChange('compensation_buyer', e.target.value)}
+                                placeholder="Enter value" />
+                        </div>
+                    </div>
+                </Col>
+
+                <Col md={6} className="mt-2">
+                    <div className="mb-2">
+                        <label>Compensation to Listing&apos;s Agent</label>
+                        <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input type="text" name="compensation_listing" className="form-control" onChange={(e) => handleChange('compensation_listing', e.target.value)}
+                                placeholder="Enter value" />
+                        </div>
+                    </div>
+                </Col>
+
+                <Col md={6} className="mt-2">
+                    <div className="mb-2">
+                        <label>Team Leader Split</label>
+                        <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input type="text" name="team_leader_split" className="form-control" onChange={(e) => handleChange('team_leader_split', e.target.value)}
+                                placeholder="Enter value" />
+                        </div>
+                    </div>
+                </Col>
+
+                <Col md={6} className="mt-2">
+                    <div className="mb-2">
+                        <label>Brokerage Split</label>
+                        <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input type="text" name="brokerage_split" className="form-control" onChange={(e) => handleChange('brokerage_split', e.target.value)}
+                                placeholder="Enter value" />
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+        </div>
+    )
+};
+
+export default FinancialInformation;

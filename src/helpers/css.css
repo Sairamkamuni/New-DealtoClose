@@ -1,0 +1,9 @@
+.dropzone:hover {
+    background-color: #243d78 !important;
+    color: #fff !important;
+}
+
+.dropzone:hover .text-secondary,
+.dropzone:hover .camera-icon {
+    color: #fff !important;
+}

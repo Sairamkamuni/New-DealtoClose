@@ -270,28 +270,26 @@ const Datatables = ({
                   </Row>
                 )}
 
-                <div className="mt-3">
-                  {filteredRows.length === 0 ? (
-                    <div className="text-center">No data available</div>
-                  ) : (
-                    <BootstrapTable
-                      {...props.baseProps}
-                      keyField={keyField}
-                      data={filteredRows}
-                      responsive
-                      bordered
-                      striped
-                      hover
-                      classes="table align-middle table-nowrap"
-                      headerWrapperClasses="thead-light"
-                      remote={is_remote}
-                      sort={defaultSorted}
-                      pagination={paginationFactory(pageOptions)}
-                      onTableChange={handleTableChange}
-                      selectRow={selectRow}
-                    />
-                  )}
-                </div>
+                {filteredRows.length === 0 ? (
+                  <div className="text-center">No data available</div>
+                ) : (
+                  <BootstrapTable
+                    {...props.baseProps}
+                    keyField={keyField}
+                    data={filteredRows}
+                    responsive
+                    bordered
+                    striped
+                    hover
+                    classes="table align-middle table-nowrap"
+                    headerWrapperClasses="thead-light"
+                    remote={is_remote}
+                    sort={defaultSorted}
+                    pagination={paginationFactory(pageOptions)}
+                    onTableChange={handleTableChange}
+                    selectRow={selectRow}
+                  />
+                )}
               </div>
             )}
           </ToolkitProvider>
