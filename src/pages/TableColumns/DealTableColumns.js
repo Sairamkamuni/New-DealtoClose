@@ -163,3 +163,56 @@ export let DealContactTableColumns = (callback = {}) => [
         ),
     },
 ];
+
+export let DealComplianceColumns = (callback = {}, ComplianceComments = []) => [
+    {
+        dataField: "", text: "View Doc", isDummyField: true,
+        formatter: (cell, row) => (
+            <button className="btn btn-primary" role="button">View</button>
+        ),
+        headerStyle: { width: "100px" },
+    },
+    { dataField: "sr_no", text: "Sr. No.", headerStyle: { width: "100px" }, },
+    { dataField: "checklist_name", text: "Property Address", headerStyle: { width: "400px" }, },
+    {
+        dataField: "comments",
+        text: "Comments",
+        formatter: (cell, row) => {
+            return (
+
+                <Select value={row.comments ? { label: row.comments, value: row.comments } : null}
+                    onChange={(selectedOption) => callback?.handleCommentsChange?.(row.id, selectedOption?.value)}
+                    options={ComplianceComments.map((comments) => ({ label: comments, value: comments }))}
+                    styles={{
+                        control: (provided, state) => ({
+                            ...provided, backgroundColor: "white", borderColor: state.isFocused ? "#80bdff" : "#ced4da",
+                            boxShadow: state.isFocused ? "0 0 0 0.2rem rgba(0,123,255,.25)" : "none",
+                            minHeight: "32px", height: "32px",
+                        }),
+                        valueContainer: (provided) => ({ ...provided, padding: "0 8px", }),
+                        singleValue: (provided) => ({ ...provided, color: "#817979ff", }),
+                        indicatorsContainer: (provided) => ({ ...provided, height: "30px", }),
+                        dropdownIndicator: (provided) => ({ ...provided, padding: "2px", }),
+                        menu: (provided) => ({ ...provided, zIndex: 9999, }),
+                    }}
+                />
+            );
+        },
+        headerStyle: { width: "650px" },
+    },
+    {
+        dataField: "", text: "Attach", isDummyField: true,
+        formatter: (cell, row) => (
+            <button className="btn btn-primary" role="button">Upload</button>
+        ),
+        headerStyle: { width: "100px" },
+    },
+    {
+        dataField: "actions", text: "Actions", isDummyField: true,
+        formatter: (cell, row) => (
+            <Link to="#" className="btn btn-primary btn-sm edit" onClick={(e) => { e.preventDefault(); callback?.edit?.(row); }} title="Edit" >
+                <i className="fas fa-pencil-alt" />
+            </Link>
+        ),
+    },
+];

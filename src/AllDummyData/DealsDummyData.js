@@ -201,3 +201,34 @@ export const complianceOptions = [
     { value: "action3", label: "Action 03" },
     { value: "action4", label: "Action 04" },
 ];
+
+export const omplianceTableData = [
+    { sr_no: "01", checklist_name: "Executed Contract", comments: "Approved, KSB" },
+    { sr_no: "02", checklist_name: "LBP Rider", comments: "Reviewed, KSB" },
+    { sr_no: "03", checklist_name: "HOA Addendum Rider", comments: "Please confirm if the seller has agreed..." },
+    { sr_no: "04", checklist_name: "Escrow Receipt", comments: "Attached to Contract" },
+    { sr_no: "05", checklist_name: "SPD Rider", comments: "Attached to Contract" },
+];
+
+export const ComplianceComments = ["Executed Contract", "LBP Rider", "HOA Addendum Rider", "Escrow Receipt", "SPD Rider"];
+
+// Commission Tabs
+export const referralTypes = [
+    { id: 1, label: "Type 1" },
+    { id: 2, label: "Type 2" },
+    { id: 3, label: "Type 3" },
+    { id: 4, label: "Type 4" },
+    { id: 5, label: "Type 5" },
+    { id: 6, label: "Type 6" },
+    { id: 7, label: "Type 7" },
+    { id: 8, label: "Type 8" },
+    { id: 9, label: "Type 9" },
+    { id: 10, label: "Type 10" },
+];
+
+// Notes Tabs
+export const noteText1 = "Received preliminary approval from the lender. Waiting on final documents."
+export const noteText2 = "Initial client conversation was positive. They are very interested in moving forward quickly."
+export const noteAgentUser = "Alice Agent";
+export const noteDate = "Sep 17, 2025";
+export const noteTime = "5:40 AM";

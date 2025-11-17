@@ -8,6 +8,8 @@ import TaskTab from "./Tabs/TaskTab";
 import DocumentsTab from "./Tabs/DocumentsTab";
 import ContactTabs from "./Tabs/ContactTab";
 import ComplianceTab from "./Tabs/ComplianceTab";
+import CommissionTab from "./CommissionTab";
+import NoteTab from "./Tabs/NoteTab";
 
 const NavsHeader = ({ activeTags, toggleTags }) => {
     return (
@@ -40,6 +42,14 @@ const NavsHeader = ({ activeTags, toggleTags }) => {
 
                             <TabPane tabId={6}>
                                 <ComplianceTab />
+                            </TabPane>
+
+                            <TabPane tabId={7}>
+                                <CommissionTab />
+                            </TabPane>
+
+                            <TabPane tabId={8}>
+                                <NoteTab />
                             </TabPane>
 
 
