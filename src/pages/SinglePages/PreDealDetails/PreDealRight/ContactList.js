@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Collapse, Row, Col, Card } from "reactstrap";
 import { AddPlusCircleButton, PencilButton } from "pages/utils/allButton";
 import classnames from "classnames";
-import NewContactModal from "pages/AllModals/ContactModal";
+import NewContactModal from "pages/AllModals/NewContactModal";
 
 const ContactList = ({ contacts }) => {
     const [modalOpen, setModalOpen] = useState(false);

@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Button, CardTitle, Col, Row, Input, Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
+import {
+  Button,
+  CardTitle,
+  Col,
+  Row,
+  Input,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+} from "reactstrap";
 import "./datatables.scss";
 import { Filter } from "react-feather";
 
@@ -32,6 +41,7 @@ const Datatables = ({
   isCheckbox = false,
   is_remote = false,
   ssr = () => { },
+  showPagination = true, // ✅ Added new prop
 }) => {
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(10);
@@ -219,34 +229,26 @@ const Datatables = ({
           <ToolkitProvider
             keyField={keyField}
             data={filteredRows}
-            columns={formattedColumns} // <-- use formattedColumns here
+            columns={formattedColumns}
             search
             exportCSV={{ fileName: filename }}
           >
             {(props) => (
               <div>
                 {isTableHead && (
-                  <Row className="align-items-center mb-3">
+                  <Row className="align-items-center">
                     <Col sm="7">
-                      <CardTitle className="h2 mt-2">{title}</CardTitle>
+                      <CardTitle className="h2 m-3">{title}</CardTitle>
                     </Col>
 
                     {selectField}
 
                     <Col className="d-flex justify-content-end">
                       {isSearch && (
-                        <div
-                          className="search-box me-2 d-inline-block"
-                          style={{ width: "100%" }}
-                        >
+                        <div className="search-box me-2 d-inline-block" style={{ width: "100%" }} >
                           <div className="position-relative">
-                            <input
-                              className="form-control"
-                              placeholder={placeholder}
-                              value={searchTerm}
-                              onChange={(e) =>
-                                setSearchTerm(e.target.value.trim())
-                              }
+                            <input className="form-control" placeholder={placeholder} value={searchTerm}
+                              onChange={(e) => setSearchTerm(e.target.value.trim())}
                             />
                             <i className="bx bx-search-alt search-icon" />
                           </div>
@@ -254,15 +256,8 @@ const Datatables = ({
                       )}
 
                       {isAdd && (
-                        <Button
-                          disabled={isDisabled}
-                          color="primary"
-                          style={{ width: "160px" }}
-                          onClick={handleAddButton}
-                        >
-                          <i
-                            className={`fas ${fas ? fas : "fa-plus"} me-2`}
-                          ></i>
+                        <Button disabled={isDisabled} color="primary" style={{ width: "160px" }} onClick={handleAddButton} >
+                          <i className={`fas ${fas ? fas : "fa-plus"} me-2`} ></i>
                           {btnTitle}
                         </Button>
                       )}
@@ -278,7 +273,7 @@ const Datatables = ({
                     keyField={keyField}
                     data={filteredRows}
                     responsive
-                    bordered
+                    bordered={false}
                     striped
                     hover
                     classes="table align-middle table-nowrap"

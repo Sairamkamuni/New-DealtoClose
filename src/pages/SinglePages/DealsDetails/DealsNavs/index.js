@@ -6,6 +6,8 @@ import KeyDatesTab from "./Tabs/KeyDatesTab";
 import EmailTab from "./Tabs/EmailTab";
 import TaskTab from "./Tabs/TaskTab";
 import DocumentsTab from "./Tabs/DocumentsTab";
+import ContactTabs from "./Tabs/ContactTab";
+import ComplianceTab from "./Tabs/ComplianceTab";
 
 const NavsHeader = ({ activeTags, toggleTags }) => {
     return (
@@ -19,15 +21,28 @@ const NavsHeader = ({ activeTags, toggleTags }) => {
                             <TabPane tabId={1}>
                                 <KeyDatesTab />
                             </TabPane>
+
                             <TabPane tabId={2}>
                                 <EmailTab />
                             </TabPane>
+
                             <TabPane tabId={3}>
                                 <TaskTab />
                             </TabPane>
+
                             <TabPane tabId={4}>
                                 <DocumentsTab />
                             </TabPane>
+
+                            <TabPane tabId={5}>
+                                <ContactTabs />
+                            </TabPane>
+
+                            <TabPane tabId={6}>
+                                <ComplianceTab />
+                            </TabPane>
+
+
                         </TabContent>
                     </CardBody>
                 </Card>

@@ -3,7 +3,7 @@ import { Modal, Row, Col } from "reactstrap";
 import AsyncSelect from "react-select/async";
 import Select, { components } from "react-select";
 import { contactRoles, buyerTypeOptions } from "constants/config";
-import { FaPlusButton } from "pages/utils/allButton"; 
+import { FaPlusButton } from "pages/utils/allButton";
 import ContactModal from "pages/Contacts/ContactFrom/ContactModal";
 
 const NewContactModal = ({ isOpen, toggle }) => {

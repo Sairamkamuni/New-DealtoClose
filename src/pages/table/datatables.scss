@@ -1,15 +1,17 @@
-table.dataTable thead > tr > th.sorting_asc,
-table.dataTable thead > tr > th.sorting_desc,
-table.dataTable thead > tr > th.sorting,
-table.dataTable thead > tr > td.sorting_asc,
-table.dataTable thead > tr > td.sorting_desc,
-table.dataTable thead > tr > td.sorting {
+table.dataTable thead>tr>th.sorting_asc,
+table.dataTable thead>tr>th.sorting_desc,
+table.dataTable thead>tr>th.sorting,
+table.dataTable thead>tr>td.sorting_asc,
+table.dataTable thead>tr>td.sorting_desc,
+table.dataTable thead>tr>td.sorting {
   padding-right: 30px;
 }
-table.dataTable thead > tr > th:active,
-table.dataTable thead > tr > td:active {
+
+table.dataTable thead>tr>th:active,
+table.dataTable thead>tr>td:active {
   outline: none;
 }
+
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc,
@@ -18,6 +20,7 @@ table.dataTable thead .sorting_desc_disabled {
   cursor: pointer;
   position: relative;
 }
+
 table.dataTable thead .sorting:before,
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting_asc:before,
@@ -33,6 +36,7 @@ table.dataTable thead .sorting_desc_disabled:after {
   display: block;
   opacity: 0.3;
 }
+
 table.dataTable thead .sorting:before,
 table.dataTable thead .sorting_asc:before,
 table.dataTable thead .sorting_desc:before,
@@ -41,6 +45,7 @@ table.dataTable thead .sorting_desc_disabled:before {
   right: 1em;
   content: "\2191";
 }
+
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after,
@@ -49,22 +54,27 @@ table.dataTable thead .sorting_desc_disabled:after {
   right: 0.5em;
   content: "\2193";
 }
+
 table.dataTable thead .sorting_asc:before,
 table.dataTable thead .sorting_desc:after {
   opacity: 1;
 }
+
 table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:after {
   opacity: 0;
 }
+
 div.dataTables_scrollHead table.dataTable {
   margin-bottom: 0 !important;
 }
+
 div.dataTables_scrollBody table {
   border-top: none;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
+
 div.dataTables_scrollBody table thead .sorting:before,
 div.dataTables_scrollBody table thead .sorting_asc:before,
 div.dataTables_scrollBody table thead .sorting_desc:before,
@@ -73,18 +83,23 @@ div.dataTables_scrollBody table thead .sorting_asc:after,
 div.dataTables_scrollBody table thead .sorting_desc:after {
   display: none;
 }
+
 div.dataTables_scrollBody table tbody tr:first-child th,
 div.dataTables_scrollBody table tbody tr:first-child td {
   border-top: none;
 }
-div.dataTables_scrollFoot > .dataTables_scrollFootInner {
+
+div.dataTables_scrollFoot>.dataTables_scrollFootInner {
   box-sizing: content-box;
 }
-div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
+
+div.dataTables_scrollFoot>.dataTables_scrollFootInner>table {
   margin-top: 0 !important;
   border-top: none;
 }
+
 @media screen and (max-width: 767px) {
+
   div.dataTables_wrapper div.dataTables_length,
   div.dataTables_wrapper div.dataTables_filter,
   div.dataTables_wrapper div.dataTables_info,
@@ -92,66 +107,74 @@ div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
     text-align: center;
   }
 }
-table.dataTable.table-sm > thead > tr > th {
+
+table.dataTable.table-sm>thead>tr>th {
   padding-right: 20px;
 }
+
 table.dataTable.table-sm .sorting:before,
 table.dataTable.table-sm .sorting_asc:before,
 table.dataTable.table-sm .sorting_desc:before {
   top: 5px;
   right: 0.85em;
 }
+
 table.dataTable.table-sm .sorting:after,
 table.dataTable.table-sm .sorting_asc:after,
 table.dataTable.table-sm .sorting_desc:after {
   top: 5px;
 }
+
 table.table-bordered.dataTable th,
 table.table-bordered.dataTable td {
   border-left-width: 0;
 }
+
 table.table-bordered.dataTable th:last-child,
 table.table-bordered.dataTable th:last-child,
 table.table-bordered.dataTable td:last-child,
 table.table-bordered.dataTable td:last-child {
   border-right-width: 0;
 }
+
 table.table-bordered.dataTable tbody th,
 table.table-bordered.dataTable tbody td {
   border-bottom-width: 0;
 }
+
 div.dataTables_scrollHead table.table-bordered {
   border-bottom-width: 0;
 }
-div.table-responsive > div.dataTables_wrapper > div.row {
+
+div.table-responsive>div.dataTables_wrapper>div.row {
   margin: 0;
 }
-div.table-responsive
-  > div.dataTables_wrapper
-  > div.row
-  > div[class^="col-"]:first-child {
+
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:first-child {
   padding-left: 0;
 }
-div.table-responsive
-  > div.dataTables_wrapper
-  > div.row
-  > div[class^="col-"]:last-child {
+
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child {
   padding-right: 0;
 }
+
 .table tbody tr {
   cursor: pointer;
 }
-.dropup > .caret {
+
+.dropup>.caret {
   margin: 10px 0;
   color: #cccccc;
 }
+
 .dropup .caret,
 .navbar-fixed-bottom .dropdown .caret {
   content: "";
   border-top: 0;
   border-bottom: 4px dashed;
 }
-.react-bootstrap-table th > .react-bootstrap-table-sort-order > .caret {
+
+.react-bootstrap-table th>.react-bootstrap-table-sort-order>.caret {
   margin: 10px 6.5px;
 }
 
@@ -167,15 +190,15 @@ div.table-responsive
   border-left: 4px solid transparent;
 }
 
-.search-label{
+.search-label {
   width: 100%;
 }
 
-.mobile-view-csv{
+.mobile-view-csv {
   display: none;
 }
 
-.desktop-view-csv .btn{
+.desktop-view-csv .btn {
   float: right;
   background-color: gray !important;
   padding: 8px;
@@ -183,12 +206,14 @@ div.table-responsive
 }
 
 @media (max-width: 480px) {
-  .page-title-box h4, .desktop-view-csv{
+
+  .page-title-box h4,
+  .desktop-view-csv {
     display: none;
   }
-  
-  .mobile-view-csv{
-    display:block;
+
+  .mobile-view-csv {
+    display: block;
     position: absolute;
     right: 0;
     z-index: 999;
@@ -197,7 +222,7 @@ div.table-responsive
 
 }
 
-.addText{
+.addText {
   display: block;
   width: 100px;
   overflow: hidden;
@@ -205,6 +230,19 @@ div.table-responsive
   text-overflow: ellipsis;
 }
 
-#printablediv .table-bordered > :not(caption) > * > * {
+#printablediv .table-bordered> :not(caption)>*>* {
   padding: 2px 5px;
+}
+
+.no-border-table {
+  border: none !important;
+}
+
+.no-border-table th,
+.no-border-table td {
+  border: none !important;
+}
+
+.no-border-table thead {
+  border-bottom: none !important;
 }

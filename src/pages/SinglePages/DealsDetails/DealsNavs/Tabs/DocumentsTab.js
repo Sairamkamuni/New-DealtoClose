@@ -6,8 +6,12 @@ import Searchbar from "pages/utils/search_bar";
 import AddDocumentModal from "pages/AllModals/AddDocumentModal";
 import DocButtons from "./DocButtons";
 
-import { dealsDocumentsTabs } from "AllDummyData/DealsDummyData";
-const DocumentsTab = () => {
+import Datatables from "pages/table/datatable";
+import { DealDockTableColumns } from "pages/TableColumns/DealTableColumns";
+
+import { dealsDocumentsTabs, foldersRows } from "AllDummyData/DealsDummyData";
+
+const DocumentsTab = ({ callback }) => {
     const [docTags, setDocTags] = useState(1)
     const [docModalOpen, setDocModalOpen] = useState(false);
 
@@ -49,6 +53,17 @@ const DocumentsTab = () => {
             <TabContent activeTab={docTags} className="p-2 text-muted">
                 <TabPane tabId={1} >
                     <DocButtons />
+                    <div style={{ border: "1px solid #dad1e0", borderRadius: "10px", marginTop: "15px" }} >
+                        <Datatables
+                            columns={DealDockTableColumns(callback)}
+                            showTableOnly={true}
+                            rows={foldersRows}
+                            keyField={"id"}
+                            isCheckbox={true}
+                            loading={false}
+                            ssr={() => { }}
+                        />
+                    </div>
                 </TabPane>
 
 
