@@ -46,7 +46,7 @@ export const EllipsisVDropdown = ({ dropdownFilterOptions, selectedOption, setSe
     const toggle = () => setDropdownOpen((prev) => !prev);
 
     return (
-        <div className="d-flex align-items-center justify-content-end gap-2">
+        <div className="d-flex align-items-center gap-2">
             <Dropdown isOpen={dropdownOpen} toggle={toggle} className="custom-dropdown">
                 <DropdownToggle tag="span" data-toggle="dropdown" aria-expanded={dropdownOpen}                >
                     <EllipsisVButton width="30px" />

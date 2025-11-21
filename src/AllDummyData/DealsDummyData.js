@@ -214,16 +214,16 @@ export const ComplianceComments = ["Executed Contract", "LBP Rider", "HOA Addend
 
 // Commission Tabs
 export const referralTypes = [
-    { id: 1, label: "Type 1" },
-    { id: 2, label: "Type 2" },
-    { id: 3, label: "Type 3" },
-    { id: 4, label: "Type 4" },
-    { id: 5, label: "Type 5" },
-    { id: 6, label: "Type 6" },
-    { id: 7, label: "Type 7" },
-    { id: 8, label: "Type 8" },
-    { id: 9, label: "Type 9" },
-    { id: 10, label: "Type 10" },
+    { value: 1, label: "Type 1" },
+    { value: 2, label: "Type 2" },
+    { value: 3, label: "Type 3" },
+    { value: 4, label: "Type 4" },
+    { value: 5, label: "Type 5" },
+    { value: 6, label: "Type 6" },
+    { value: 7, label: "Type 7" },
+    { value: 8, label: "Type 8" },
+    { value: 9, label: "Type 9" },
+    { value: 10, label: "Type 10" }
 ];
 
 // Notes Tabs

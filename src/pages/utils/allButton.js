@@ -1,10 +1,15 @@
 import React from "react";
-import { FaFolderPlus, FaEnvelope, FaShareAlt, FaArchive, FaHistory, FaCheck, FaFileSignature, FaDownload, FaPrint, FaCopy, FaArrowsAlt, FaCertificate, FaTimesCircle, FaUpload, FaEllipsisV, FaUser, FaPencilAlt, FaUserPlus, FaAngleDown, FaRegStickyNote, FaStar, FaRegStar, FaPlusCircle, FaCalendarAlt, FaTelegramPlane, FaPlus, FaRegBell, FaFileAlt, FaChevronLeft, FaEye } from "react-icons/fa";
+import {
+    FaFolderPlus, FaEnvelope, FaShareAlt, FaArchive, FaHistory, FaCheck, FaFileSignature, FaDownload, FaPrint, FaCopy,
+    FaArrowsAlt, FaCertificate, FaTimesCircle, FaUpload, FaEllipsisV, FaUser, FaPencilAlt, FaUserPlus, FaAngleDown,
+    FaRegStickyNote, FaStar, FaRegStar, FaPlusCircle, FaCalendarAlt, FaTelegramPlane, FaPlus, FaRegBell, FaFileAlt, FaChevronLeft, FaEye
+} from "react-icons/fa";
 import { FaEllipsis, FaMessage, FaScissors, FaTrashCan, FaUserGroup, FaGear, FaLifeRing, FaListCheck } from "react-icons/fa6";
 import { BiSolidInbox } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-const AllButton = ({ icon: Icon, size = 40, width = "130px", height = "34px", color = "primary", className = "", label, asIconOnly = false, outline = true, to, ...props }) => {
+const AllButton = ({ icon: Icon, size = 40, width = "130px", height = "34px", color = "primary", className = "", label,
+    asIconOnly = false, outline = true, to, ...props }) => {
     if (asIconOnly) { return Icon ? <Icon {...props} className={className} /> : null }
 
     const btnClass = outline ? `btn btn-outline-${color}` : `btn btn-${color}`;

@@ -9,7 +9,7 @@ import Register from "../pages/Authentication/Register"
 import ForgetPwd from "../pages/Authentication/ForgetPassword"
 
 // Profile
-import UserProfile from "../pages/Authentication/user-profile"
+import UserProfiles from "../pages/Authentication/user-profile"
 
 // Dashboard
 import Dashboard from "../pages/Dashboard/index"
@@ -22,6 +22,13 @@ import ContactDetails from "pages/SinglePages/ContactsDetails"
 import PreDealsDetails from "pages/SinglePages/PreDealDetails"
 import DealsDetails from "pages/SinglePages/DealsDetails"
 
+//  User Profile Dropdown
+import UserTemplates from "pages/UserProfile/UserTemplates"
+import CustomUserTemplates from "pages/UserProfile/CustomUserTemplates"
+import TeamSettings from "pages/UserProfile/TeamSettings"
+import UserProfile from "pages/UserProfile/Profile"
+import Settings from "pages/UserProfile/Settings"
+
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
   { path: "/inbox", component: Inbox },
@@ -32,10 +39,14 @@ const authProtectedRoutes = [
   { path: "/deals-details", component: DealsDetails },
   { path: "/deals", component: Deals },
   { path: "/reports", component: Reports },
-
-
-  // //profile
+  { path: "/templates", component: UserTemplates },
+  { path: "/templates/1", component: CustomUserTemplates },
+  { path: "/team-settings", component: TeamSettings },
   { path: "/profile", component: UserProfile },
+  { path: "/settings", component: Settings },
+
+  //profile
+  { path: "/profiles", component: UserProfiles },
 
   // eslint-disable-next-line react/display-name
   { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },

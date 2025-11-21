@@ -52,8 +52,9 @@ const PreDeals = () => {
 
                             {/* Table */}
                             <Row>
-                                <Col>
-                                    <DealsTableTabs activeTab={preDealTabs[activeFilterTab].id} allRows={All} buyerRows={Buyer} sellerRows={Seller} callback={{ edit: handleEdit }} />
+                                <Col className="mt-3" style={{ border: "1px solid #dad1e0", borderRadius: "6px", }}>
+                                    <DealsTableTabs activeTab={preDealTabs[activeFilterTab].id} allRows={All} buyerRows={Buyer} sellerRows={Seller}
+                                        callback={{ edit: handleEdit }} />
                                 </Col>
                             </Row>
                         </CardBody>

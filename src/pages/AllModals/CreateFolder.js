@@ -36,7 +36,8 @@ const CreateFolder = ({ isOpen, toggle }) => {
                     <Col>
                         <div className="mb-2">
                             <label>Folder Name</label>
-                            <input type="text" name="folderName" className="form-control" placeholder="Search/Create Folder..." value={formData.folderName} onChange={handleChange} />
+                            <input type="text" name="folderName" className="form-control" placeholder="Search/Create Folder..."
+                                value={formData.folderName} onChange={handleChange} />
                         </div>
                     </Col>
                 </Row>

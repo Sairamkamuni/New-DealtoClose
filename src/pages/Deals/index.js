@@ -39,7 +39,8 @@ const Deals = () => {
                         <Col>
                             <div className="d-flex align-items-center justify-content-end gap-2" style={{ marginTop: "4px" }}>
                                 <Searchbar style={{ width: "600px" }} />
-                                <FilterDropdown dropdownFilterOptions={FilterOptions} selectedOption={selectedOption} setSelectedOption={setSelectedOption} width="140px" height="36px" />
+                                <FilterDropdown dropdownFilterOptions={FilterOptions} selectedOption={selectedOption}
+                                    setSelectedOption={setSelectedOption} width="140px" height="36px" />
                                 <FaPlusButton width="140px" label="Add Deal" outline={false} color="primary" onClick={togScroll} height="36px" />
                             </div>
                         </Col>
@@ -49,7 +50,8 @@ const Deals = () => {
 
                     <Card style={{ border: "1px solid #dad1e0", borderRadius: "12px" }}>
                         <CardBody>
-                            <DealsTable activeTab={dealStatusFilters[activeFilterTab].id} allRows={All} buyerRows={Buyer} sellerRows={Seller} callback={{ edit: handleEdit }} />
+                            <DealsTable activeTab={dealStatusFilters[activeFilterTab].id}
+                                allRows={All} buyerRows={Buyer} sellerRows={Seller} callback={{ edit: handleEdit }} />
                         </CardBody>
                     </Card>
 

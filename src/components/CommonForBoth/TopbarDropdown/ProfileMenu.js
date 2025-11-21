@@ -22,29 +22,38 @@ const ProfileMenu = props => {
 
   return (
     <React.Fragment>
-      <Dropdown
-        isOpen={menu}
-        toggle={() => setMenu(!menu)}
-        className="d-inline-block"
-      >
-        <DropdownToggle
-          className="btn header-item "
-          id="page-header-user-dropdown"
-          tag="button"
-        >
-          <img
-            className="rounded-circle header-profile-user"
-            src={user1}
-            alt="Header Avatar"
-          />
+      <Dropdown isOpen={menu} toggle={() => setMenu(!menu)} className="d-inline-block">
+        <DropdownToggle className="btn header-item " id="page-header-user-dropdown" tag="button" >
+          <img className="rounded-circle header-profile-user" src={user1} alt="Header Avatar" />
           <span className="d-none d-xl-inline-block ms-2 me-1">{username}</span>
           <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
         </DropdownToggle>
+
         <DropdownMenu className="dropdown-menu-end">
+          <DropdownItem tag="a" href="#" className="d-flex">
+            <i className="bx bx-envelope font-size-16 align-middle me-1" />
+            <p>Steve@VTechAgents.Com</p>
+          </DropdownItem>
+          <div className="dropdown-divider" />
+          <DropdownItem tag="a" href="/templates">
+            <i className="bx bx-file font-size-16 align-middle me-1" />
+            {props.t("Templates")}
+          </DropdownItem>
+          <DropdownItem tag="a" href="/team-settings">
+            <i className="bx bx-group font-size-16 align-middle me-1" />
+            {props.t("Team Settings")}
+          </DropdownItem>
           <DropdownItem tag="a" href="/profile">
-            {" "}
-            <i className="bx bx-user font-size-16 align-middle me-1" />
-            {props.t("Profile")}{" "}
+            <i className="bx bx-user-circle font-size-16 align-middle me-1" />
+            {props.t("Profile")}
+          </DropdownItem>
+          <DropdownItem tag="a" href="/settings">
+            <i className="bx bx-cog font-size-16 align-middle me-1" />
+            {props.t("Settings")}
+          </DropdownItem>
+          <DropdownItem tag="a" href="/user-help">
+            <i className="bx bx-help-circle font-size-16 align-middle me-1" />
+            {props.t("Help")}
           </DropdownItem>
           <div className="dropdown-divider" />
           <Link to="/logout" className="dropdown-item">

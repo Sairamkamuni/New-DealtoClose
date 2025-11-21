@@ -179,7 +179,6 @@ export let DealComplianceColumns = (callback = {}, ComplianceComments = []) => [
         text: "Comments",
         formatter: (cell, row) => {
             return (
-
                 <Select value={row.comments ? { label: row.comments, value: row.comments } : null}
                     onChange={(selectedOption) => callback?.handleCommentsChange?.(row.id, selectedOption?.value)}
                     options={ComplianceComments.map((comments) => ({ label: comments, value: comments }))}

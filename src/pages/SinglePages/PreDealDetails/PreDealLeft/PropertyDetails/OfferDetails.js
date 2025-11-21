@@ -1,10 +1,17 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
 import AccordionSection from "./AccordionSection";
-import { PurchasePrice, Deposit1st, Deposit1stDueIn, Deposit2nd, Deposit2ndDueIn, LoanToValue, BalanceToClose, LoanCommitmentPeriod, InspectionPeriod, CompensationToBuyersBroker } from "AllDummyData/PreDealDummyData";
+import {
+    PurchasePrice, Deposit1st, Deposit1stDueIn, Deposit2nd, Deposit2ndDueIn, LoanToValue,
+    BalanceToClose, LoanCommitmentPeriod, InspectionPeriod, CompensationToBuyersBroker
+} from "AllDummyData/PreDealDummyData";
 
 const OfferDetails = ({ isOpen, toggle }) => {
-    const data = { purchasePrice: PurchasePrice[0], deposit1st: Deposit1st[0], deposit1stDue: Deposit1stDueIn[0], deposit2nd: Deposit2nd[0], deposit2ndDue: Deposit2ndDueIn[0], loanToValue: LoanToValue[0], balanceToClose: BalanceToClose[0], loanCommitmentPeriod: LoanCommitmentPeriod[0], inspectionPeriod: InspectionPeriod[0], buyersBrokerComp: CompensationToBuyersBroker[0] };
+    const data = {
+        purchasePrice: PurchasePrice[0], deposit1st: Deposit1st[0], deposit1stDue: Deposit1stDueIn[0],
+        deposit2nd: Deposit2nd[0], deposit2ndDue: Deposit2ndDueIn[0], loanToValue: LoanToValue[0], balanceToClose: BalanceToClose[0],
+        loanCommitmentPeriod: LoanCommitmentPeriod[0], inspectionPeriod: InspectionPeriod[0], buyersBrokerComp: CompensationToBuyersBroker[0]
+    };
 
     const infoItems = [
         { label: "Purchase Price", value: data.purchasePrice },

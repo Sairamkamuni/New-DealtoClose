@@ -56,7 +56,11 @@ const Contacts = () => {
                                 </Col>
                             </Row>
 
-                            <ContactTable rows={tableRows} callback={{ edit: handleEdit }} />
+                            <Row>
+                                <Col className="mt-3" style={{ border: "1px solid #dad1e0", borderRadius: "6px", }}>
+                                    <ContactTable rows={tableRows} callback={{ edit: handleEdit }} />
+                                </Col>
+                            </Row>
                         </CardBody>
                     </Card>
 

@@ -5,7 +5,6 @@ import Flatpickr from "react-flatpickr";
 import moment from "moment";
 import "../../Style.css"
 
-
 const keyWithDates = [
     { label: "Effective Date", date: "Nov 12, 2025" },
     { label: "1st Escrow Due", date: "Nov 15, 2025" },
@@ -56,7 +55,8 @@ const KeyDatesTab = () => {
                     {/* Header */}
                     <div className="d-flex justify-content-between align-items-center mb-2">
                         <h5 className="text-start fw-bolder mb-0">Key Dates</h5>
-                        <PencilButton className={dateChangeMode ? "active" : ""} title={`Edit Mode ${dateChangeMode ? "Active" : "Disabled"}`} width="36px" borderless
+                        <PencilButton className={dateChangeMode ? "active" : ""}
+                            title={`Edit Mode ${dateChangeMode ? "Active" : "Disabled"}`} width="36px" borderless={true} outline={true}
                             onClick={() => setDateChangeMode(!dateChangeMode)} />
                     </div>
 
@@ -86,7 +86,7 @@ const KeyDatesTab = () => {
 
             <Col md={8}>
                 <div className="d-flex justify-content-end align-items-end mb-3">
-                    <AllButton label="Edit" width="60px" color="primary" className={isEditMode ? "active" : ""}
+                    <AllButton label="Edit" width="60px" color="primary" className={isEditMode ? "active" : ""} outline={false}
                         title={`Edit Mode ${isEditMode ? "Active" : "Disabled"}`} onClick={() => setIsEditMode(!isEditMode)} />
                 </div>
 
@@ -108,7 +108,9 @@ const KeyDatesTab = () => {
                 <Row>
                     {bottomSection.map((item, index) => (
                         <Col md={4} key={index} className="mb-3">
-                            <p className="text-muted mb-0" style={{ fontSize: "14px" }}> {item.label} </p>
+                            <p className="text-muted mb-0" style={{ fontSize: "14px" }}>
+                                {item.label}
+                            </p>
                             {isEditMode ? (
                                 <input type="text" defaultValue={item.value} className="form-control mt-1" />
                             ) : (

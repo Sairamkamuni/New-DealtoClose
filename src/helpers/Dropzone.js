@@ -37,7 +37,10 @@ export const Dropzone = ({ callback }) => {
       <div
         {...getRootProps()}
         className="dropzone d-flex mt-4 align-items-center justify-content-center text-center"
-        style={{ border: "1px solid #949494", borderRadius: "5px", minHeight: "50px", width: "190px", cursor: "pointer", transition: "all 0.3s ease-in-out", background: "#fafafa", }}
+        style={{
+          border: "1px solid #949494", borderRadius: "5px", minHeight: "50px", width: "190px", cursor: "pointer",
+          transition: "all 0.3s ease-in-out", background: "#fafafa",
+        }}
       >
         <input {...getInputProps()} />
         <div className="d-flex align-items-center text-secondary camera-icon" style={{ fontSize: "14px", gap: "8px" }}>

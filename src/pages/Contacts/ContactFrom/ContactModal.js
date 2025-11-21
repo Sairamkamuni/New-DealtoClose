@@ -4,17 +4,20 @@ import Select from "react-select"
 import "flatpickr/dist/themes/material_blue.css"
 import Flatpickr from "react-flatpickr"
 import CreatableSelect from 'react-select/creatable';
+import { post, put } from "helpers/api_helper"
+import { showSuccessAlert } from "pages/utils/Alerts/alertMessages"
 import { FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption } from "AllDummyData/ContacsDummyData"
 
-const ContactModal = ({ isOpen, toggle }) => {
-    const [formType, setFormType] = useState("Client")
-    const [formData, setFormData] = useState({ first_name: "", last_name: "", company_name: "", phone: "", email: "", type: null, status_or_title: null, date_of_birth: null, home_anniversary: null, source: null, tags: [], family_member: null, relation_type: null, agent_name: null })
+const InitialFormatData = {
+    first_name: "", last_name: "", company_name: "", phone: "", email: "",
+    type: null, status_or_title: null, date_of_birth: null, home_anniversary: null, source: null, tags: [],
+    family_member: null, relation_type: null, agent_name: null
+};
 
-    // Handle normal input change
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
-    }
+const ContactModal = ({ isOpen, toggle }) => {
+    const [formType, setFormType] = useState("Client");
+    const [formData, setFormData] = useState(InitialFormatData);
+    const [editMode, setEditMode] = useState(false);
 
     // Handle select change
     const handleSelectChange = (name, option) => {
@@ -26,20 +29,28 @@ const ContactModal = ({ isOpen, toggle }) => {
         setFormData({ ...formData, [name]: date?.[0] || null })
     }
 
-    // Submit function
-    const handleSubmit = () => {
-        console.log("Selected Form Type:", formType);
-        const payload = {
-            formType, first_name: formData.first_name, last_name: formData.last_name, company_name: formData.company_name, phone: formData.phone, email: formData.email,
-            type: formData.type?.value || null, status_or_title: formData.status_or_title?.value || null,
-            date_of_birth: formData.date_of_birth ? formData.date_of_birth.toISOString().split("T")[0] : null,
-            home_anniversary: formData.home_anniversary ? formData.home_anniversary.toISOString().split("T")[0] : null, source: formData.source?.value || null,
-            tags: formData.tags?.map((tag) => tag.value) || [], family_member: formData.family_member?.value || null, relation_type: formData.relation_type?.value || null,
-            agent_name: formData.agent_name?.value || null,
-        }
-
-        console.log("✅ Backend Payload:", payload);
+    // Handle normal input change
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
     }
+
+    // Submit function
+    const handleSubmit = async () => {
+        console.log('Submitting formData:', formData);
+        // const url = editMode ? `${BANK_URL}/${editingId}` : BANK_URL;
+        // const method = editMode ? put : post;
+        // const { success, body } = await method(url, formData); 
+        console.log("Edit mode:", editMode);
+        console.log("API method call:", editMode ? "PUT" : "POST");
+        const success = true;
+        if (success) {
+            showSuccessAlert(editMode ? 'Contact updated successfully!' : 'Contact created successfully!');
+            setFormData(InitialFormatData);
+            setEditMode(false);
+            toggle();
+        }
+    };
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} scrollable={true} style={{ maxWidth: "650px" }} >
@@ -64,13 +75,15 @@ const ContactModal = ({ isOpen, toggle }) => {
                     <Col>
                         <div className="mb-2">
                             <label>First Name</label>
-                            <input type="text" name="first_name" className="form-control" placeholder="Enter First Name" value={formData.first_name} onChange={handleChange} />
+                            <input type="text" name="first_name" className="form-control" placeholder="Enter First Name" value={formData.first_name}
+                                onChange={handleChange} />
                         </div>
                     </Col>
                     <Col>
                         <div className="mb-2">
                             <label>Last Name</label>
-                            <input type="text" name="last_name" className="form-control" placeholder="Enter Last Name" value={formData.last_name} onChange={handleChange} />
+                            <input type="text" name="last_name" className="form-control" placeholder="Enter Last Name" value={formData.last_name}
+                                onChange={handleChange} />
                         </div>
                     </Col>
                 </Row>
@@ -79,7 +92,8 @@ const ContactModal = ({ isOpen, toggle }) => {
                     <Col>
                         <div className="mb-2">
                             <label>Company Name</label>
-                            <input type="text" name="company_name" className="form-control" placeholder="Enter Company Name" value={formData.company_name} onChange={handleChange} />
+                            <input type="text" name="company_name" className="form-control" placeholder="Enter Company Name" value={formData.company_name}
+                                onChange={handleChange} />
                         </div>
                     </Col>
                 </Row>
@@ -141,7 +155,8 @@ const ContactModal = ({ isOpen, toggle }) => {
                             <Col>
                                 <div className="mb-2 ajax-select mt-3 mt-lg-0 select2-container">
                                     <label>Source</label>
-                                    <CreatableSelect isClearable={true} isMulti={true} options={SourceOption} value={formData.source} onChange={(opt) => handleSelectChange("source", opt)} />
+                                    <CreatableSelect isClearable={true} isMulti={true} options={SourceOption} value={formData.source}
+                                        onChange={(opt) => handleSelectChange("source", opt)} />
                                 </div>
                             </Col>
                         </Row>
@@ -152,7 +167,7 @@ const ContactModal = ({ isOpen, toggle }) => {
                     <Col>
                         <div className="mb-2 ajax-select mt-3 mt-lg-0 select2-container">
                             <label>Tags</label>
-                            <CreatableSelect isClearable={true} isMulti={true} onChange={(opt) => handleSelectChange("tags", opt)} />
+                            <CreatableSelect isClearable={true} isMulti={true} value={formData.tags} onChange={(opt) => handleSelectChange("tags", opt)} />
                         </div>
                     </Col>
                 </Row>

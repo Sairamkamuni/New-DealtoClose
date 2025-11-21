@@ -29,7 +29,7 @@ import { __user } from "helpers/auth_user"
 import { post } from "helpers/api_helper"
 import { showSuccessAlert } from "helpers/alert_helper";
 
-const UserProfile = props => {
+const UserProfiles = props => {
   const dispatch = useDispatch()
 
   const { error, success } = useSelector(state => ({
@@ -54,7 +54,7 @@ const UserProfile = props => {
 
   const handleValidSubmit = async (event, values) => {
     const { success, data } = await post('users/password-update', values);
-    if(success){
+    if (success) {
       showSuccessAlert(data.message);
     }
   }
@@ -133,4 +133,4 @@ const UserProfile = props => {
   )
 }
 
-export default withRouter(UserProfile)
+export default withRouter(UserProfiles)
