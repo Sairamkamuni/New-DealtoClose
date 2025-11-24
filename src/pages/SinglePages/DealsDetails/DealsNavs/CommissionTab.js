@@ -454,8 +454,6 @@ const CommissionTab = () => {
 
                                 </div>
                             </Row>
-
-
                         </Col>
 
                         <Col md={12}>

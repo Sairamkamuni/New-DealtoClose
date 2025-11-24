@@ -37,23 +37,23 @@ const Dashboard = () => {
           </Row>
 
           {/* ⚡ FIXED: ADDED SPACING BETWEEN THE 2 COLUMNS */}
-          <Row className="gy-3 gx-4">
-            <Col md={6}>
-              <Card style={{ border: "1px solid #dad1e0", borderRadius: "12px" }}>
+          <Row >
+            <Col >
+              <Card style={{ border: "1px solid #dad1e0", borderRadius: "12px", }}>
                 <CardBody>
                   <PreDealBar />
                 </CardBody>
               </Card>
             </Col>
-
-            <Col md={6}>
-              <Card style={{ border: "1px solid #dad1e0", borderRadius: "12px" }}>
-                <CardBody>
-                  <ClosingBar />
-                </CardBody>
-              </Card>
-            </Col>
           </Row>
+
+          <Col>
+            <Card style={{ border: "1px solid #dad1e0", borderRadius: "12px" }}>
+              <CardBody>
+                <ClosingBar />
+              </CardBody>
+            </Card>
+          </Col>
 
         </Container>
       </div>

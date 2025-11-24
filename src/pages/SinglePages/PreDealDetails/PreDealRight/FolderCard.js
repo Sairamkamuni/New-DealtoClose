@@ -43,7 +43,7 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                         <div className="p-3">
                             {folder.documents.length > 0 ? (
                                 folder.documents.map((doc, i) => (
-                                    <Row key={i} className="align-items-center py-2 border-top">
+                                    <Row key={i} className="align-items-center py-2" style={{ borderBottom: "1px solid #dad3deff" }}>
                                         <Col xs="auto">
                                             <input type="checkbox" checked={!!selectedDocs[`${index}-${i}`]} onChange={() => handleDocCheckbox(index, i)} />
                                         </Col>

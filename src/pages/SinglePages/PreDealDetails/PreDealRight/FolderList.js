@@ -1,4 +1,4 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import ActionButtons from "../ActionButtons";
 import FolderCard from "./FolderCard";
 
@@ -35,7 +35,7 @@ const FolderList = ({ folders, selectedDocs, setSelectedDocs }) => {
                 const hasSelectedDocs = folder.documents.some((_, i) => selectedDocs[`${index}-${i}`]);
 
                 return (
-                    <div key={index}>
+                    <div key={index} className="mt-3">
                         {hasSelectedDocs && <ActionButtons />}
 
                         <FolderCard

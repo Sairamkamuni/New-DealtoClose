@@ -71,16 +71,16 @@ const ContactModal = ({ isOpen, toggle }) => {
                         onClick={() => setFormType("Collaborator")}>Collaborator</button>
                 </div>
 
-                <Row>
+                <Row className="mb-3">
                     <Col>
-                        <div className="mb-2">
+                        <div>
                             <label>First Name</label>
                             <input type="text" name="first_name" className="form-control" placeholder="Enter First Name" value={formData.first_name}
                                 onChange={handleChange} />
                         </div>
                     </Col>
                     <Col>
-                        <div className="mb-2">
+                        <div>
                             <label>Last Name</label>
                             <input type="text" name="last_name" className="form-control" placeholder="Enter Last Name" value={formData.last_name}
                                 onChange={handleChange} />
@@ -88,9 +88,9 @@ const ContactModal = ({ isOpen, toggle }) => {
                     </Col>
                 </Row>
 
-                <Row className="mt-2">
+                <Row className="mb-3">
                     <Col>
-                        <div className="mb-2">
+                        <div>
                             <label>Company Name</label>
                             <input type="text" name="company_name" className="form-control" placeholder="Enter Company Name" value={formData.company_name}
                                 onChange={handleChange} />
@@ -98,33 +98,33 @@ const ContactModal = ({ isOpen, toggle }) => {
                     </Col>
                 </Row>
 
-                <Row className="mt-2">
+                <Row className="mb-3">
                     <Col>
-                        <div className="mb-2">
+                        <div>
                             <label>Phone Number</label>
                             <input type="text" name="phone" className="form-control" placeholder="Enter Phone Number" value={formData.phone} onChange={handleChange} />
                         </div>
                     </Col>
                     <Col>
-                        <div className="mb-2">
+                        <div>
                             <label>Email Address</label>
                             <input type="text" name="email" className="form-control" placeholder="Enter Email Address" value={formData.email} onChange={handleChange} />
                         </div>
                     </Col>
                 </Row>
 
-                <Row className="mt-2">
+                <Row className="mb-3">
                     <Col>
-                        <div className="mb-2 ajax-select mt-3 mt-lg-0 select2-container">
+                        <div className="ajax-select mt-lg-0 select2-container">
                             <label>Type</label>
                             <Select isClearable={true} isDisabled={formType === "Collaborator"} options={TypeOption} value={formData.type} onChange={(opt) => handleSelectChange("type", opt)} />
                         </div>
                     </Col>
                 </Row>
 
-                <Row className="mt-2">
+                <Row className="mb-3">
                     <Col>
-                        <div className="mb-2 ajax-select mt-3 mt-lg-0 select2-container">
+                        <div className="ajax-select mt-lg-0 select2-container">
                             <label>{formType === "Collaborator" ? "Title" : "Status"}</label>
                             <Select isClearable={true} options={formType === "Collaborator" ? TitleOption : StatusOption} value={formData.status_or_title}
                                 onChange={(opt) => handleSelectChange("status_or_title", opt)} />
@@ -134,16 +134,16 @@ const ContactModal = ({ isOpen, toggle }) => {
 
                 {formType === "Client" && (
                     <>
-                        <Row className="mt-2">
+                        <Row className="mb-3">
                             <Col>
-                                <div className="mb-2">
+                                <div>
                                     <label>Date Of Birth</label>
                                     <Flatpickr className="form-control" options={{ altInput: true, altFormat: "F j, Y" }} value={formData.date_of_birth}
                                         onChange={(date) => handleDateChange("date_of_birth", date)} placeholder="MM, DD, YYYY" />
                                 </div>
                             </Col>
                             <Col>
-                                <div className="mb-2">
+                                <div>
                                     <label>Home Anniversary Date</label>
                                     <Flatpickr className="form-control" options={{ altInput: true, altFormat: "F j, Y" }} value={formData.home_anniversary}
                                         onChange={(date) => handleDateChange("home_anniversary", date)} placeholder="MM, DD, YYYY" />
@@ -151,9 +151,9 @@ const ContactModal = ({ isOpen, toggle }) => {
                             </Col>
                         </Row>
 
-                        <Row className="mt-2">
+                        <Row className="mb-3">
                             <Col>
-                                <div className="mb-2 ajax-select mt-3 mt-lg-0 select2-container">
+                                <div className="ajax-select mt-lg-0 select2-container">
                                     <label>Source</label>
                                     <CreatableSelect isClearable={true} isMulti={true} options={SourceOption} value={formData.source}
                                         onChange={(opt) => handleSelectChange("source", opt)} />
@@ -163,17 +163,17 @@ const ContactModal = ({ isOpen, toggle }) => {
                     </>
                 )}
 
-                <Row className="mt-2">
+                <Row className="mb-3">
                     <Col>
-                        <div className="mb-2 ajax-select mt-3 mt-lg-0 select2-container">
+                        <div className="ajax-select mt-lg-0 select2-container">
                             <label>Tags</label>
                             <CreatableSelect isClearable={true} isMulti={true} value={formData.tags} onChange={(opt) => handleSelectChange("tags", opt)} />
                         </div>
                     </Col>
                 </Row>
 
-                <div className="mt-2 p-4 rounded-4 border shadow-sm bg-light">
-                    <h5 className="mb-3 text-primary fw-semibold">Add Family Member</h5>
+                <div className="mb-3 p-4 rounded-4 border shadow-sm bg-light">
+                    <h5 className="text-primary fw-semibold">Add Family Member</h5>
                     <Row>
                         <Col md={6} className="mb-3">
                             <label className="form-label fw-medium">Family Member</label>
@@ -181,16 +181,16 @@ const ContactModal = ({ isOpen, toggle }) => {
                                 onChange={(opt) => handleSelectChange("family_member", opt)}
                             />
                         </Col>
-                        <Col md={6} className="mb-3">
+                        <Col md={6} >
                             <label className="form-label fw-medium">Relation Type</label>
                             <Select isClearable={true} options={RelationshipTypeOption} value={formData.relation_type} onChange={(opt) => handleSelectChange("relation_type", opt)} />
                         </Col>
                     </Row>
                 </div>
 
-                <Row className="mt-2">
+                <Row className="mb-3">
                     <Col>
-                        <div className="mb-2 ajax-select mt-3 mt-lg-0 select2-container">
+                        <div className="ajax-select mt-lg-0 select2-container">
                             <label>Agent Name</label>
                             <Select isClearable={true} options={RelationshipTypeOption} value={formData.agent_name} onChange={(opt) => handleSelectChange("agent_name", opt)} />
                         </div>
@@ -200,9 +200,8 @@ const ContactModal = ({ isOpen, toggle }) => {
                 <Row>
                     <Col>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={toggle}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={handleSubmit}> <i className="mdi mdi-plus me-1" /> Add Contact
-                            </button>
+                            <button type="button" className="btn btn-secondary" style={{ width: "70px" }} onClick={toggle}>Close</button>
+                            <button type="button" className="btn btn-primary" style={{ width: "120px" }} onClick={handleSubmit}> Add Contact </button>
                         </div>
                     </Col>
                 </Row>

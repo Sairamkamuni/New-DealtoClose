@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Row, Col, TabContent } from "reactstrap";
 import { DealTabs } from "AllDummyData/DealsDummyData";
+import { showSuccessAlert } from "pages/utils/Alerts/alertMessages"
 
 import Sidebar from "./sections/Sidebar";
 import DealType from "./sections/DealType";
@@ -13,6 +14,41 @@ import AllButton from "pages/utils/allButton";
 const DealsModal = ({ isOpen, toggle, deal }) => {
     const [activeTabVartical, setActiveTabVartical] = useState(1);
     const [formType, setFormType] = useState("Buyer");
+    const [formData, setFormData] = useState({});
+    const [editMode, setEditMode] = useState({});
+
+    // Handle normal input change
+    const handleChange = (nameOrEvent, value) => {
+        // 1️⃣ Normal input event
+        if (nameOrEvent?.target) {
+            const { name, value } = nameOrEvent.target;
+            setFormData(prev => ({ ...prev, [name]: value }));
+            return;
+        }
+
+        // 2️⃣ react-select (manual)
+        setFormData(prev => ({ ...prev, [nameOrEvent]: value }));
+    };
+
+
+
+    // Submit function
+    const handleSubmit = async () => {
+        console.log('Submitting formData:', formData);
+        // const url = editMode ? `${BANK_URL}/${editingId}` : BANK_URL;
+        // const method = editMode ? put : post;
+        // const { success, body } = await method(url, formData); 
+        console.log("Edit mode:", editMode);
+        console.log("API method call:", editMode ? "PUT" : "POST");
+        const success = true;
+        if (success) {
+            showSuccessAlert(editMode ? 'Deal updated successfully!' : 'Deal created successfully!');
+            setFormData({});
+            setEditMode(false);
+            toggle();
+        }
+    };
+
 
     const toggleTabVertical = (tab) => {
         if (tab >= 1 && tab <= 5) setActiveTabVartical(tab);
@@ -51,10 +87,12 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
         <Modal isOpen={isOpen} toggle={toggle} scrollable size="xl" centered>
             {/* Header */}
             <div className="modal-header d-block">
-                <h4 className="modal-title fw-bold text-black">
+                <h4 className="modal-title fw-bolder">
                     {deal ? "Edit Deal" : "Create a New Deal"}
                 </h4>
-                <button type="button" onClick={toggle} className="close">×</button>
+                <button type="button" onClick={toggle} className="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             {/* Body */}
@@ -68,11 +106,12 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                     {/* Sections */}
                     <Col md={9}>
                         <TabContent activeTab={activeTabVartical}>
-                            <div id="section-1"><DealType formType={formType} setFormType={setFormType} /></div>
-                            <div id="section-2"><FinancialInformation formType={formType} /></div>
-                            <div id="section-3"><ImportantDates formType={formType} /></div>
-                            <div id="section-4"><Contact /></div>
-                            <div id="section-5"><Template /></div>
+                            <div id="section-1"><DealType formType={formType} setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
+                            <div id="section-2"><FinancialInformation formType={formType} setFormType={setFormType}
+                                handleChange={handleChange} formData={formData} /></div>
+                            <div id="section-3"><ImportantDates formType={formType} setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
+                            <div id="section-4"><Contact setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
+                            <div id="section-5"><Template setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
                         </TabContent>
                     </Col>
                 </Row>
@@ -80,24 +119,10 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                 {/* Footer */}
                 <div className="mt-4 d-flex justify-content-end">
                     <AllButton label="Cancel" width="80px" color="danger" className="me-2" onClick={toggle} />
-                    <AllButton
-                        label="Previous"
-                        width="80px"
-                        color="secondary"
-                        className="me-2"
-                        disabled={activeTabVartical === 1}
-                        onClick={() => toggleTabVertical(activeTabVartical - 1)}
-                    />
-                    <AllButton
-                        label={activeTabVartical === 5 ? "Submit" : "Next"}
-                        width="80px"
-                        color={activeTabVartical === 5 ? "success" : "primary"}
-                        onClick={() =>
-                            activeTabVartical === 5
-                                ? console.log("Submit form here!", deal)
-                                : toggleTabVertical(activeTabVartical + 1)
-                        }
-                    />
+                    <AllButton label="Previous" width="80px" color="secondary" className="me-2"
+                        disabled={activeTabVartical === 1} onClick={() => toggleTabVertical(activeTabVartical - 1)} />
+                    <AllButton label={activeTabVartical === 5 ? "Submit" : "Next"} width="80px" color={activeTabVartical === 5 ? "success" : "primary"}
+                        onClick={() => activeTabVartical === 5 ? handleSubmit() : toggleTabVertical(activeTabVartical + 1)} />
                 </div>
             </div>
         </Modal>

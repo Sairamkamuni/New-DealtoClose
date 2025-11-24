@@ -15,11 +15,12 @@ const AllButton = ({ icon: Icon, size = 40, width = "130px", height = "34px", co
     const btnClass = outline ? `btn btn-outline-${color}` : `btn btn-${color}`;
 
     const content = (
-        <>
-            {Icon && <span className="d-flex align-items-center"><Icon /></span>}
+        <div className="d-flex justify-content-between align-items-center">
+            {Icon && <span className="d-flex align-items-center" style={{ marginBottom: "2px", marginRight: "6px" }}><Icon /></span>}
             {label && <span className="d-flex align-items-center">{label}</span>}
-        </>
-    );
+
+        </div>
+    )
 
     const styles = { height: height || `${size}px`, width: width || (label ? "auto" : `${size}px`), padding: label ? "0 12px" : undefined, gap: "6px" };
 

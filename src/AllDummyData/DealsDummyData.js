@@ -50,8 +50,8 @@ export const SideBarDealTabs = [
 ];
 
 export const propertyStatus = [
-    { value: "Active", label: "Active" },
-    { value: "Under Contract", label: "Under Contract" },
+    { value: 1, label: "Active" },
+    { value: 2, label: "Under Contract" },
 ];
 
 export const buyerTypeOptions = [

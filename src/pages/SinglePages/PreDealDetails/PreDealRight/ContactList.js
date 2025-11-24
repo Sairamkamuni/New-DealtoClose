@@ -48,11 +48,11 @@ const ContactList = ({ contacts }) => {
                                 </div>
 
                                 {/* Contact Group Collapse */}
-                                <Collapse isOpen={openGroups.includes(index)}>
+                                <Collapse isOpen={openGroups.includes(index)} className="px-2">
                                     <div className="p-2">
                                         {contact.contactNames.length > 0 ? (
                                             contact.contactNames.map((c, i) => (
-                                                <Row key={i} className="p-2 border-top align-items-center">
+                                                <Row key={i} className="p-2 align-items-center" style={{ borderBottom: "1px solid #dad3deff" }}>
                                                     <Col>{c.name}</Col>
                                                     <Col>{c.role}</Col>
                                                     {c.company && <Col>{c.company}</Col>}
