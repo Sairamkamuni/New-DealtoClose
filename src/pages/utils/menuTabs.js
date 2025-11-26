@@ -1,11 +1,9 @@
 import React from "react";
 import { Nav, NavItem, NavLink } from "reactstrap";
 
-const MenuTabs = ({ menus = [], activeTab, setActiveTab, isCustomStyle = false, tabIndex = 0 }) => {
+const MenuTabs = ({ menus = [], activeTab, setActiveTab, isCustomStyle = false }) => {
 
-    const toggleTab = (tab) => {
-        if (tabIndex != tab) setActiveTab(tab);
-    };
+    const toggleTab = (tab) => { setActiveTab(tab) };
 
     return (
         <Nav pills className="navtab-bg justify-content-between" style={{ backgroundColor: "#e1e7f6", padding: "6px", borderRadius: "10px" }} >

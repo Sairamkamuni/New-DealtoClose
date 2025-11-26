@@ -14,27 +14,25 @@ const DatesInfo = ({ isOpen, toggle }) => {
 
     return (
         <AccordionSection title="Dates" isOpen={isOpen} toggle={toggle}>
-            <div className="px-1 py-1">
-                <Row className="mb-1">
-                    <Col>
-                        <p className="mb-0 fw-semibold  ">{data.address}</p>
-                    </Col>
-                </Row>
-                <Row className="mb-2">
-                    <Col>
-                        <p className="mb-0  ">{data.city}</p>
-                    </Col>
-                </Row>
+            <Row className="mb-1">
+                <Col>
+                    <p className="mb-0">{data.address}</p>
+                </Col>
+            </Row>
+            <Row className="mb-2">
+                <Col>
+                    <p className="mb-0  ">{data.city}</p>
+                </Col>
+            </Row>
 
-                {infoItems.map((item, index) => (
-                    <Row key={index} className="align-items-center mb-1">
-                        <Col xs="auto">
-                            <p className="fw-bold mb-0">{item.label}:</p>
-                        </Col>
-                        <Col className="ps-0 text-muted">{item.value}</Col>
-                    </Row>
-                ))}
-            </div>
+            {infoItems.map((item, index) => (
+                <Row key={index} className="align-items-center mb-1">
+                    <Col xs="auto">
+                        <p className="mb-0">{item.label}:</p>
+                    </Col>
+                    <Col className="ps-0">{item.value}</Col>
+                </Row>
+            ))}
         </AccordionSection>
     );
 };

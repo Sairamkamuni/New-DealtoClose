@@ -33,12 +33,12 @@ const Deals = () => {
                 </MetaTags>
                 <Container fluid>
                     <Row className="d-flex flex-wrap align-items-center justify-content-between">
-                        <Col md={4}>
+                        <Col md="4">
                             <MenuTabs menus={dealStatusFilters} activeTab={dealStatusFilters[activeFilterTab].id} setActiveTab={setActiveFilterTab} />
                         </Col>
-                        <Col>
-                            <div className="d-flex align-items-center justify-content-end gap-2" style={{ marginTop: "4px" }}>
-                                <Searchbar style={{ width: "600px" }} />
+                        <Col md="8">
+                            <div className="d-flex align-items-center justify-content-end gap-2 mt-1">
+                                <Searchbar style={{ width: "500px" }} />
                                 <FilterDropdown dropdownFilterOptions={FilterOptions} selectedOption={selectedOption}
                                     setSelectedOption={setSelectedOption} width="140px" height="36px" />
                                 <FaPlusButton width="140px" label="Add Deal" outline={false} color="primary" onClick={togScroll} height="36px" />
@@ -58,7 +58,7 @@ const Deals = () => {
                     <DealsModal isOpen={modalScroll} toggle={() => setModalScroll(!modalScroll)} deal={selectedDeal} />
                 </Container>
             </div>
-        </React.Fragment>
+        </React.Fragment >
     );
 }
 

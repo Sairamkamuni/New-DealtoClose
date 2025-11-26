@@ -16,13 +16,39 @@ const PreDealsModal = ({ isOpen, toggle, preDeal }) => {
     const [activeTabVartical, setActiveTabVartical] = useState(1);
     const [formType, setFormType] = useState("Buyer");
     const [formData, setFormData] = useState({});
-    const [editMode, setEditMode] = useState({});
+    const [editMode, setEditMode] = useState(false);
 
     // Handle normal input change
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
     }
+
+    const handleSelectChange = (selectedOption, field) => {
+        const name = field.name;
+        const value = selectedOption?.label || null;
+
+        setFormData({ ...formData, [name]: value, });
+    };
+
+    const handleAsyncSelectChange = (fieldName, selectedOption) => {
+        setFormData({
+            ...formData,
+            [fieldName]: selectedOption?.label || null,
+        });
+    };
+
+    const handleDateChange = (selectedDates, name) => {
+        const date = selectedDates?.[0];
+        setFormData(prev => ({
+            ...prev, [name]:
+                date ? date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : ""
+        }));
+    };
+
+    const handleContactChange = (contacts) => {
+        setFormData(prev => ({ ...prev, contacts }));
+    };
 
     // Submit function
     const handleSubmit = async () => {
@@ -94,12 +120,14 @@ const PreDealsModal = ({ isOpen, toggle, preDeal }) => {
 
                     <Col md={9}>
                         <TabContent activeTab={activeTabVartical}>
-                            <div id="section-1"><PreDealType formType={formType} setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
+                            <div id="section-1"><PreDealType formType={formType} setFormType={setFormType} handleSelectChange={handleSelectChange} handleAsyncSelectChange={handleAsyncSelectChange} formData={formData} /></div>
                             <div id="section-2"><PropertyDetail formType={formType} handleChange={handleChange} formData={formData} setFormData={setFormData} /></div>
                             <div id="section-3"><OfferDetail formType={formType} handleChange={handleChange} formData={formData} setFormData={setFormData} /></div>
-                            <div id="section-4"><Contact handleChange={handleChange} formData={formData} setFormData={setFormData} /></div>
-                            <div id="section-5"><Dates handleChange={handleChange} formData={formData} setFormData={setFormData} /></div>
-                            <div id="section-6"><AdditionalTerms handleChange={handleChange} formData={formData} setFormData={setFormData} /></div>
+                            <div id="section-4"><Contact onContactChange={handleContactChange} /></div>
+                            <div id="section-5"><Dates formType={formType} handleDateChange={handleDateChange} formData={formData}
+                                handleChange={handleChange} /></div>
+                            <div id="section-6"><AdditionalTerms handleChange={handleChange} formData={formData}
+                                handleAsyncSelectChange={handleAsyncSelectChange} /></div>
                         </TabContent>
                     </Col>
                 </Row>

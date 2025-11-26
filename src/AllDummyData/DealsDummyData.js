@@ -54,28 +54,72 @@ export const propertyStatus = [
     { value: 2, label: "Under Contract" },
 ];
 
+export const transactionOwner = [
+    { value: 1, label: "Sai Kamuni" },
+    { value: 2, label: "Usha Kamuni" },
+    { value: 3, label: "Raj Kamuni" },
+    { value: 4, label: "Praveen Kumar" },
+];
+
+export const BuyersOrTenants = [
+    { value: 1, label: "Sai Kamuni" },
+    { value: 2, label: "Usha Kamuni" },
+    { value: 3, label: "Raj Kamuni" },
+    { value: 4, label: "Praveen Kumar" },
+];
+
+export const SellersOrLandlords = [
+    { value: 1, label: "Sai Kamuni" },
+    { value: 2, label: "Usha Kamuni" },
+    { value: 3, label: "Raj Kamuni" },
+    { value: 4, label: "Praveen Kumar" },
+];
+
+export const Templates = [
+    { value: 1, label: "Template 01" },
+    { value: 2, label: "Template 02" },
+    { value: 3, label: "Template 03" },
+    { value: 4, label: "Template 04" },
+    { value: 5, label: "Template 05" },
+];
+
 export const buyerTypeOptions = [
-    { value: "Buyer", label: "Buyer" },
-    { value: "Tenant", label: "Tenant" },
-    { value: "Both", label: "Both" },
+    { value: 1, label: "Buyer" },
+    { value: 2, label: "Tenant" },
+    { value: 3, label: "Both" },
+];
+
+export const sellerTypeOptions = [
+    { value: 1, label: "Seller" },
+    { value: 2, label: "Landlord" },
+    { value: 3, label: "Both" },
 ];
 
 export const financeTypes = [
-    { value: "Cash", label: "Cash" },
-    { value: "Conventional", label: "Conventional" },
-    { value: "FHA", label: "FHA" },
-    { value: "VA", label: "VA" },
-    { value: "Other", label: "Other" },
+    { value: 1, label: "Cash" },
+    { value: 2, label: "Conventional" },
+    { value: 3, label: "FHA" },
+    { value: 4, label: "VA" },
+    { value: 5, label: "Other" },
+];
+
+export const acceptableFinanceTypes = [
+    { value: 1, label: "Cash" },
+    { value: 2, label: "Conventional" },
+    { value: 3, label: "FHA" },
+    { value: 4, label: "VA" },
+    { value: 5, label: "Other" },
 ];
 
 export const contactRoles = [
-    { value: "Listing Agent", label: "Listing Agent" },
-    { value: "Buyer Agent", label: "Buyer Agent" },
-    { value: "Escrow Agent", label: "Escrow Agent" },
-    { value: "Lender", label: "Lender" },
-    { value: "Title Company", label: "Title Company" },
-    { value: "Inspector", label: "Inspector" },
-    { value: "HOA", label: "HOA" },
+    { value: 1, label: "Listing Agent" },
+    { value: 2, label: "Buyer Agent" },
+    { value: 3, label: "Escrow Agent" },
+    { value: 4, label: "Lender" },
+    { value: 5, label: "Title Company" },
+    { value: 6, label: "Inspector" },
+    { value: 7, label: "HOA" },
+    { value: 8, label: "Attorney" },
 ];
 
 // Tabs in Deals Details 

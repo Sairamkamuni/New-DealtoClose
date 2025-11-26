@@ -102,11 +102,11 @@ const Layout = (props) => {
       </div>
 
       <div id="layout-wrapper">
-        <Header
+        {/* <Header
           theme={topbarTheme}
           isMenuOpened={isMenuOpened}
           openLeftMenuCallBack={openMenu}
-        />
+        /> */}
         {
           tokenData?.role != 'client' && <Navbar menuOpen={isMenuOpened} />
         }

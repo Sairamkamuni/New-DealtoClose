@@ -3,112 +3,126 @@ import { Row, Col } from "reactstrap";
 import "flatpickr/dist/themes/material_blue.css"
 import Flatpickr from "react-flatpickr"
 
-const ImportantDates = ({ formType, handleChange, formData, setFormData }) => {
-
-    const handleDateChange = (selectedDates, name) => {
-        setFormData(prev => ({
-            ...prev,
-            [name]: selectedDates[0] || ""
-        }));
-    };
+const ImportantDates = ({ formType, handleChange, formData, handleDateChange }) => {
 
     return (
         <div id="section-3">
-            <div className="d-block mb-3">
-                <h3 className="modal-title fw-bold mb-1">Important Due Date</h3>
+            <div className="d-block mb-3 mt-3">
+                <h3 className="modal-title fw-bolder mb-1">Important Due Date</h3>
             </div>
-            <Row>
+
+            <Row className="g-3">
                 {formType === "Buyer" && (
-                    <Col md="6" className="mb-3">
+                    <Col md="6">
                         <label>Effective Date</label>
-                        <div className="input-group">
-                            <span className="input-group-text"><i className="mdi mdi-calendar" ></i></span>
-                            <Flatpickr
-                                name="effective_date"
-                                className="form-control d-block"
-                                options={{ altInput: true, time_24hr: false, altFormat: "F j, Y" }}
-                                placeholder="MM, DD, YYYY"
-                                onChange={(dates) => handleDateChange(dates)}
-                            />
-                        </div>
+                        <Flatpickr
+                            name="effective_date"
+                            className="form-control d-block"
+                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
+                            value={formData?.effective_date || ""}
+                            onChange={(dates) => handleDateChange(dates, "effective_date")}
+                            placeholder="MM, DD, YYYY"
+                        />
                     </Col>
                 )}
 
-                {formType === "Buyer" && (
-                    <Col md="6" className="mb-2">
+                {formType == "Buyer" && (
+                    <Col md="6">
                         <label>Closing Date</label>
-                        <div className="input-group">
-                            <span className="input-group-text"><i className="mdi mdi-calendar" ></i></span>
-                            <Flatpickr
-                                name="closing_date"
-                                className="form-control d-block"
-                                options={{ altInput: true, time_24hr: false, altFormat: "F j, Y" }}
-                                placeholder="MM, DD, YYYY"
-                                onChange={(dates) => handleDateChange(dates)}
-                            />
-                        </div>
+                        <Flatpickr
+                            name="closing_date"
+                            className="form-control d-block"
+                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
+                            value={formData?.closing_date || ""}
+                            onChange={(dates) => handleDateChange(dates, "closing_date")}
+                            placeholder="MM, DD, YYYY"
+                        />
                     </Col>
                 )}
 
-                {formType === "Seller" && (
-                    <Col md="6" className="mb-2">
+                {formType == "Seller" && (
+                    <Col md="6">
                         <label>Listing Date</label>
-                        <div className="input-group">
-                            <span className="input-group-text"><i className="mdi mdi-calendar" ></i></span>
-                            <Flatpickr
-                                name="listing_date"
-                                className="form-control d-block"
-                                options={{ altInput: true, time_24hr: false, altFormat: "F j, Y" }}
-                                placeholder="MM, DD, YYYY"
-                                onChange={(dates) => handleDateChange(dates)}
-                            />
-                        </div>
+                        <Flatpickr
+                            name="listing_date"
+                            className="form-control d-block"
+                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
+                            value={formData?.listing_date || ""}
+                            onChange={(dates) => handleDateChange(dates, "listing_date")}
+                            placeholder="MM, DD, YYYY"
+                        />
                     </Col>
                 )}
 
-                {formType === "Seller" && (
-                    <Col md="6" className="mb-2">
+                {formType == "Seller" && (
+                    <Col md="6">
                         <label>Expiry Date</label>
-                        <div className="input-group">
-                            <span className="input-group-text"><i className="mdi mdi-calendar" ></i></span>
-                            <Flatpickr
-                                name="expiry_date"
-                                className="form-control d-block"
-                                options={{ altInput: true, time_24hr: false, altFormat: "F j, Y" }}
-                                placeholder="MM, DD, YYYY"
-                                onChange={(dates) => handleDateChange(dates)}
-                            />
-                        </div>
+                        <Flatpickr
+                            name="expiry_date"
+                            className="form-control d-block"
+                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
+                            value={formData?.expiry_date || ""}
+                            onChange={(dates) => handleDateChange(dates, "expiry_date")}
+                            placeholder="MM, DD, YYYY"
+                        />
                     </Col>
                 )}
 
                 {formType === "Buyer" && (
                     <>
-                        <Col md="6" className="mb-2">
+                        <Col md="6">
                             <label>1st Escrow Due (Days)</label>
-                            <input type="number" name="first_escrow" className="form-control" value={formData.first_escrow || ""} onChange={handleChange} />
+                            <input name="first_escrow_days"
+                                className="form-control"
+                                type="number"
+                                value={formData?.first_escrow_days || ""}
+                                onChange={handleChange}
+                            />
                         </Col>
-                        <Col md="6" className="mb-2">
+                        <Col md="6">
                             <label>2nd Escrow Due (Days)</label>
-                            <input type="number" name="second_escrow" className="form-control" value={formData.second_escrow || ""} onChange={handleChange} />
+                            <input name="second_escrow_days"
+                                className="form-control"
+                                type="number"
+                                value={formData?.second_escrow_days || ""}
+                                onChange={handleChange}
+                            />
                         </Col>
-
-                        <Col md="6" className="mb-2">
+                        <Col md="6">
                             <label>Loan Application Due (Days)</label>
-                            <input type="number" name="loan_application" className="form-control" value={formData.loan_application || ""} onChange={handleChange} />
+                            <input name="loan_application_days"
+                                className="form-control"
+                                type="number"
+                                value={formData?.loan_application_days || ""}
+                                onChange={handleChange}
+                            />
                         </Col>
-                        <Col md="6" className="mb-2">
+                        <Col md="6">
                             <label>HOA Application Due (Days)</label>
-                            <input type="number" name="hoa_application" className="form-control" value={formData.hoa_application || ""} onChange={handleChange} />
+                            <input name="hoa_application_days"
+                                className="form-control"
+                                type="number"
+                                value={formData?.hoa_application_days || ""}
+                                onChange={handleChange}
+                            />
                         </Col>
-
-                        <Col md="6" className="mb-2">
+                        <Col md="6">
                             <label>Inspection Period Due (Days)</label>
-                            <input type="number" name="inspection_period" className="form-control" value={formData.inspection_period || ""} onChange={handleChange} />
+                            <input name="inspection_period_days"
+                                className="form-control"
+                                type="number"
+                                value={formData?.inspection_period_days || ""}
+                                onChange={handleChange}
+                            />
                         </Col>
-                        <Col md="6" className="mb-2">
+                        <Col md="6">
                             <label>Loan Commitment Due (Days)</label>
-                            <input type="number" name="loan_commitment" className="form-control" value={formData.loan_commitment || ""} onChange={handleChange} />
+                            <input name="loan_commitment_days"
+                                className="form-control"
+                                type="number"
+                                value={formData?.loan_commitment_days || ""}
+                                onChange={handleChange}
+                            />
                         </Col>
                     </>
                 )}

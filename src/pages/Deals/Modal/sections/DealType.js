@@ -1,182 +1,159 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import AsyncSelect from "react-select/async";
-import Select, { components } from "react-select";
-import { propertyStatus, buyerTypeOptions } from "AllDummyData/DealsDummyData";
+import AsyncSelect from 'react-select/async';
+import Select, { components } from "react-select"
+import { transactionOwner, propertyStatus, buyerTypeOptions, sellerTypeOptions, BuyersOrTenants, SellersOrLandlords } from "AllDummyData/DealsDummyData";
 import AllButton, { FaPlusButton } from "pages/utils/allButton";
 
-const DealType = ({ formType, setFormType, formData, handleChange }) => {
-
-    // Load options asynchronously
-    const loadOptions = (inputValue, callback) => {
-        const filtered = buyerTypeOptions.filter((opt) =>
+const DealType = ({ formType, setFormType, formData, handleChange, handleSelectChange, handleAsyncSelectChange }) => {
+    const loadOptions = (optionsList) => (inputValue, callback) => {
+        const filtered = optionsList.filter((opt) =>
             opt.label.toLowerCase().includes(inputValue.toLowerCase())
         );
         callback(filtered);
     };
 
-    // Custom Add New Button inside the dropdown menu
-    const CustomMenuList = (props) => (
-        <components.MenuList {...props}>
-            {props.children}
-            <FaPlusButton
-                label="Add New"
-                width="100%"
-                outline
-                onClick={(e) => e.stopPropagation()}
-                className="mt-2"
-            />
-        </components.MenuList>
-    );
+    const CustomMenuList = (props) => {
+        return (
+            <components.MenuList {...props}>
+                {props.children}
+                <FaPlusButton label="Add New" width="100%" outline={false} onClick={(e) => { e.stopPropagation() }} className="mt-2" />
+            </components.MenuList>
+        );
+    };
 
     return (
         <div>
-            <h3 className="fw-bold mb-3">Pre-Deal Type</h3>
-
-            {/* BUTTON TO SELECT TYPE */}
+            <h3 className="fw-bolder mb-3">Deal Type</h3>
             <div className="mb-4 d-flex gap-2">
-                <AllButton
-                    label="Buyer / Tenant"
-                    outline={formType !== "Buyer"}
-                    width="240px"
-                    onClick={() => setFormType("Buyer")}
-                />
-                <AllButton
-                    label="Seller / Landlord"
-                    outline={formType !== "Seller"}
-                    width="240px"
-                    onClick={() => setFormType("Seller")}
-                />
+                <AllButton label="Buyer / Tenant" outline={formType !== "Buyer"} width="240px" onClick={() => setFormType("Buyer")} />
+                <AllButton label="Seller / Landlord" outline={formType !== "Seller"} width="240px" onClick={() => setFormType("Seller")} />
             </div>
 
-            <div id="section-1" className="mb-3">
+            <Row>
+                <Col>
+                    <label>Property Address</label>
+                    <input name="property_address"
+                        className="form-control"
+                        type="text"
+                        placeholder="Search address from MLS or Google..."
+                        value={formData?.property_address || ""}
+                        onChange={handleChange}
+                    />
+                </Col>
+            </Row>
 
-                {/* PROPERTY ADDRESS */}
-                <Row>
-                    <Col className="mb-2">
-                        <label>Property Address</label>
-                        <input
-                            type="text"
-                            name="property_address"
-                            className="form-control"
-                            value={formData.property_address || ""}
-                            onChange={handleChange}
-                            placeholder="Search address from MLS or Google Maps..."
-                        />
-                    </Col>
-                </Row>
-
-                {/* SUMMARY BOX */}
-                <Row>
-                    <Col className="mt-2">
-                        <div className="mt-2 mb-4 bg-light p-3 rounded border border-dark">
-                            <p className="fw-normal mb-1">Property Address</p>
-                            <h2
-                                className="fw-bolder"
-                                style={{ fontSize: "16px" }}
-                            >
-                                123 Main St, City Name, FL 333414
-                            </h2>
-                            <div className="d-flex gap-4">
-                                <p className="fw-normal mb-1">Listed By: Full Name</p>
-                                <p className="fw-normal mb-1">Brokerage: ABC Realty</p>
-                            </div>
+            <Row>
+                <Col className="mt-3">
+                    <div className="p-3" style={{ border: "1px solid #dad1e0", borderRadius: "5px", backgroundColor: "#ece4f1" }}>
+                        <p className="modal-title mb-2">MLS# A125613</p>
+                        <h2 className="fw-bolder mb-2" style={{ fontSize: "16px" }}> 123 Main St, City Name, FL 333414 </h2>
+                        <div className="d-flex">
+                            <p className="modal-title me-4">Listed By: Full Name</p>
+                            <p className="modal-title">Brokerage: ABC Realty</p>
                         </div>
-                    </Col>
-                </Row>
+                    </div>
+                </Col>
+            </Row>
 
-                {/* OWNER + TYPE */}
-                <Row>
-                    <Col className="mb-2">
-                        <label>Transaction Owner</label>
-                        <input
-                            type="text"
-                            name="transaction_owner"
-                            className="form-control"
-                            value={formData.transaction_owner || ""}
-                            onChange={handleChange}
-                            placeholder="Search team Member..."
-                        />
-                    </Col>
+            <Row className="mt-1 g-3">
+                <Col md="6">
+                    <label>Transaction Owner</label>
+                    <Select
+                        name="transaction_owner"
+                        isClearable={true}
+                        className="basic-single"
+                        classNamePrefix="select"
+                        options={transactionOwner}
+                        onChange={handleSelectChange}
+                        value={transactionOwner.find(
+                            (opt) => opt.label === formData?.transaction_owner
+                        )}
+                    />
+                </Col>
 
-                    <Col className="mb-2">
+                {formType === "Buyer" && (
+                    <Col md="6">
                         <label>Type</label>
-                        <AsyncSelect
-                            loadOptions={loadOptions}
-                            defaultOptions
-                            isClearable
-                            name="type"
-                            value={buyerTypeOptions.find(
-                                (x) => x.value === formData.type
-                            ) || null}
-                            onChange={(selected) =>
-                                handleChange("type", selected ? selected.value : "")
-                            }
-                            components={{ MenuList: CustomMenuList }}
-                            placeholder="Select an option"
-                        />
-                    </Col>
-                </Row>
-
-                {/* STATUS + BUYER + SELLER */}
-                <Row>
-                    <Col className="mb-2">
-                        <label>Status</label>
                         <Select
-                            name="property_status"
-                            isClearable
-                            options={propertyStatus.map((item) => ({
-                                value: item.id,
-                                label: item.label,
-                            }))}
-                            value={
-                                propertyStatus
-                                    .map((item) => ({
-                                        value: item.id,
-                                        label: item.label,
-                                    }))
-                                    .find(
-                                        (opt) =>
-                                            opt.value === formData.property_status
-                                    ) || null
-                            }
-                            onChange={(option) =>
-                                handleChange(
-                                    "property_status",
-                                    option ? option.value : ""
-                                )
-                            }
-                            placeholder="Select Status"
+                            name="buyer_type"
+                            isClearable={true}
+                            className="basic-single"
+                            classNamePrefix="select"
+                            options={buyerTypeOptions}
+                            onChange={handleSelectChange}
+                            value={buyerTypeOptions.find(
+                                (opt) => opt.label === formData?.buyer_type
+                            )}
                         />
                     </Col>
+                )}
 
-                    <Col className="mb-2">
-                        <label>Buyer / Tenant</label>
-                        <input
-                            type="text"
-                            name="buyer"
-                            className="form-control"
-                            value={formData.buyer || ""}
-                            onChange={handleChange}
-                            placeholder="Search Contact..."
+                {formType === "Seller" && (
+                    <Col md="6">
+                        <label>Type</label>
+                        <Select
+                            name="seller_type"
+                            isClearable={true}
+                            className="basic-single"
+                            classNamePrefix="select"
+                            options={sellerTypeOptions}
+                            onChange={handleSelectChange}
+                            value={sellerTypeOptions.find(
+                                (opt) => opt.label === formData?.seller_type
+                            )}
                         />
                     </Col>
+                )}
 
-                    <Col className="mb-2">
-                        <label>Seller / Landlord</label>
-                        <input
-                            type="text"
-                            name="seller"
-                            className="form-control"
-                            value={formData.seller || ""}
-                            onChange={handleChange}
-                            placeholder="Search Contact..."
-                        />
-                    </Col>
-                </Row>
-            </div>
+                <Col md="6">
+                    <label>Status</label>
+                    <Select
+                        name="property_status"
+                        isClearable={true}
+                        className="basic-single"
+                        classNamePrefix="select"
+                        options={propertyStatus}
+                        onChange={handleSelectChange}
+                        value={propertyStatus.find(
+                            (opt) => opt.label === formData?.property_status
+                        )}
+                    />
+                </Col>
+
+                <Col md="6">
+                    <label>Buyer / Tenant</label>
+                    <AsyncSelect
+                        loadOptions={loadOptions(BuyersOrTenants)}
+                        defaultOptions
+                        name="buyer_tenant"
+                        isClearable={true}
+                        components={{ MenuList: CustomMenuList }}
+                        placeholder="Select an option"
+                        onChange={(option) => handleAsyncSelectChange("buyer_tenant", option)}
+                        value={BuyersOrTenants.find(
+                            (opt) => opt.label === formData?.buyer_tenant
+                        )}
+                    />
+                </Col>
+                <Col md="6">
+                    <label>Seller / Landlord</label>
+                    <AsyncSelect
+                        loadOptions={loadOptions(SellersOrLandlords)}
+                        defaultOptions
+                        name="seller_landlord"
+                        isClearable={true}
+                        components={{ MenuList: CustomMenuList }}
+                        placeholder="Select an option"
+                        onChange={(option) => handleAsyncSelectChange("seller_landlord", option)}
+                        value={SellersOrLandlords.find(
+                            (opt) => opt.label === formData?.seller_landlord
+                        )}
+                    />
+                </Col>
+            </Row>
         </div>
-    );
+    )
 };
 
 export default DealType;

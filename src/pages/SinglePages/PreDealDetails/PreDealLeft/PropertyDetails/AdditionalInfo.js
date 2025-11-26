@@ -11,22 +11,20 @@ const AdditionalInfo = ({ isOpen, toggle }) => {
 
     return (
         <AccordionSection title="Additional" isOpen={isOpen} toggle={toggle}>
-            <div className="px-1 py-1">
-                <Row>
+            <Row>
+                <Col>
+                    <p className=" mb-1">{data.title}</p>
+                </Col>
+            </Row>
+            {data.links.map((link, index) => (
+                <Row key={index}>
                     <Col>
-                        <p className="fw-semibold mb-1">{data.title}</p>
+                        <p className="mb-0 text-primary" style={{ cursor: "pointer" }}>
+                            {link}
+                        </p>
                     </Col>
                 </Row>
-                {data.links.map((link, index) => (
-                    <Row key={index}>
-                        <Col>
-                            <p className="mb-0 text-primary" style={{ cursor: "pointer" }}>
-                                {link}
-                            </p>
-                        </Col>
-                    </Row>
-                ))}
-            </div>
+            ))}
         </AccordionSection>
     );
 };

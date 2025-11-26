@@ -1,42 +1,132 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
+import AsyncSelect from 'react-select/async';
+import Select, { components } from "react-select"
+import AllButton, { FaPlusButton } from "pages/utils/allButton";
+import { buyerTypeOptions, sellerTypeOptions, BuyersOrTenants, SellersOrLandlords, Templates } from "AllDummyData/DealsDummyData";
 
-const PreDealType = ({ formType, setFormType, formData, handleChange }) => {
+
+const PreDealType = ({ formType, setFormType, formData, handleSelectChange, handleAsyncSelectChange }) => {
+
+    const loadOptions = (optionsList) => (inputValue, callback) => {
+        const filtered = optionsList.filter((opt) =>
+            opt.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+        callback(filtered);
+    };
+
+    const CustomMenuList = (props) => {
+        return (
+            <components.MenuList {...props}>
+                {props.children}
+                <FaPlusButton label="Add New" width="100%" outline={false} onClick={(e) => { e.stopPropagation() }} className="mt-2" />
+            </components.MenuList>
+        );
+    };
+
     return (
         <div>
             <h3 className="fw-bold mb-3">Pre-Deal Type</h3>
-            <div className="mb-4">
-                <button className={`btn me-3 w-25 ${formType === "Buyer" ? "btn-primary" : "btn-outline-primary"}`}
-                    role="button" onClick={() => setFormType("Buyer")} >Buyer / Tenant</button>
-                <button className={`btn w-25 ${formType === "Seller" ? "btn-primary" : "btn-outline-primary"}`}
-                    role="button" onClick={() => setFormType("Seller")}>Seller / Landlord</button>
+            <div className="mb-4 d-flex gap-2">
+                <AllButton label="Buyer / Tenant" outline={formType !== "Buyer"} width="240px" onClick={() => setFormType("Buyer")} />
+                <AllButton label="Seller / Landlord" outline={formType !== "Seller"} width="240px" onClick={() => setFormType("Seller")} />
             </div>
+
             <div id="section-1" >
-                <Row>
-                    <Col md="6" className="mb-3">
+                <Row className="g-3">
+                    <Col md="6">
                         <label>Transaction Owner</label>
-                        <input type="text" name="transaction_owner" className="form-control" placeholder="Search team Member..."
-                            value={formData.transaction_owner || ""} onChange={handleChange} />
+                        <AsyncSelect
+                            loadOptions={loadOptions(BuyersOrTenants)}
+                            defaultOptions
+                            name="transaction_owner"
+                            isClearable={true}
+                            components={{ MenuList: CustomMenuList }}
+                            placeholder="Select an option"
+                            onChange={(option) => handleAsyncSelectChange("transaction_owner", option)}
+                            value={BuyersOrTenants.find((opt) => opt.label === formData?.transaction_owner)}
+                        />
                     </Col>
-                    <Col md="6" className="mb-3">
-                        <label>Type</label>
-                        <input type="text" name="type" className="form-control" placeholder="Select Type..."
-                            value={formData.type || ""} onChange={handleChange} />
-                    </Col>
-                    <Col md="6" className="mb-3">
+
+                    {formType === "Buyer" && (
+                        <Col md="6">
+                            <label>Type</label>
+                            <Select
+                                name="buyer_type"
+                                isClearable={true}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                options={buyerTypeOptions}
+                                onChange={handleSelectChange}
+                                value={buyerTypeOptions.find(
+                                    (opt) => opt.label === formData?.buyer_type
+                                )}
+                            />
+                        </Col>
+                    )}
+
+                    {formType === "Seller" && (
+                        <Col md="6">
+                            <label>Type</label>
+                            <Select
+                                name="seller_type"
+                                isClearable={true}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                options={sellerTypeOptions}
+                                onChange={handleSelectChange}
+                                value={sellerTypeOptions.find(
+                                    (opt) => opt.label === formData?.seller_type
+                                )}
+                            />
+                        </Col>
+                    )}
+
+                    <Col md="6">
                         <label>Buyer / Tenant</label>
-                        <input type="text" name="buyer_tenant" className="form-control" placeholder="Search Contact..."
-                            value={formData.buyer_tenant || ""} onChange={handleChange} />
+                        <AsyncSelect
+                            loadOptions={loadOptions(BuyersOrTenants)}
+                            defaultOptions
+                            name="buyer_tenant"
+                            isClearable={true}
+                            components={{ MenuList: CustomMenuList }}
+                            placeholder="Select an option"
+                            onChange={(option) => handleAsyncSelectChange("buyer_tenant", option)}
+                            value={BuyersOrTenants.find(
+                                (opt) => opt.label === formData?.buyer_tenant
+                            )}
+                        />
                     </Col>
-                    <Col md="6" className="mb-3">
+                    <Col md="6">
                         <label>Seller / Landlord</label>
-                        <input type="text" name="seller_landlord" className="form-control" placeholder="Search Contact..."
-                            value={formData.seller_landlord || ""} onChange={handleChange} />
+                        <AsyncSelect
+                            loadOptions={loadOptions(SellersOrLandlords)}
+                            defaultOptions
+                            name="seller_landlord"
+                            isClearable={true}
+                            components={{ MenuList: CustomMenuList }}
+                            placeholder="Select an option"
+                            onChange={(option) => handleAsyncSelectChange("seller_landlord", option)}
+                            value={SellersOrLandlords.find(
+                                (opt) => opt.label === formData?.seller_landlord
+                            )}
+                        />
                     </Col>
-                    <Col md="12" className="mb-3">
+
+                    <Col md="12">
                         <label>Template</label>
-                        <input type="text" name="template" className="form-control" placeholder="Search Template..."
-                            value={formData.template || ""} onChange={handleChange} />
+                        <AsyncSelect
+                            loadOptions={loadOptions(Templates)}
+                            defaultOptions
+                            name="template"
+                            isClearable={true}
+                            components={{ MenuList: CustomMenuList }}
+                            placeholder="Select an option"
+                            onChange={(option) => handleAsyncSelectChange("template", option)}
+                            value={Templates.find(
+                                (opt) => opt.label === formData?.template
+                            )}
+                        />
                     </Col>
                 </Row>
             </div>

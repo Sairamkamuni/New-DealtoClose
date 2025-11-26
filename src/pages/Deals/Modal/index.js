@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Row, Col, TabContent } from "reactstrap";
 import { DealTabs } from "AllDummyData/DealsDummyData";
-import { showSuccessAlert } from "pages/utils/Alerts/alertMessages"
+import { showSuccessAlert } from "pages/utils/Alerts/alertMessages";
 
 import Sidebar from "./sections/Sidebar";
 import DealType from "./sections/DealType";
@@ -15,22 +15,42 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
     const [activeTabVartical, setActiveTabVartical] = useState(1);
     const [formType, setFormType] = useState("Buyer");
     const [formData, setFormData] = useState({});
-    const [editMode, setEditMode] = useState({});
-
-    // Handle normal input change
-    const handleChange = (nameOrEvent, value) => {
-        // 1️⃣ Normal input event
-        if (nameOrEvent?.target) {
-            const { name, value } = nameOrEvent.target;
-            setFormData(prev => ({ ...prev, [name]: value }));
-            return;
-        }
-
-        // 2️⃣ react-select (manual)
-        setFormData(prev => ({ ...prev, [nameOrEvent]: value }));
+    const [editMode, setEditMode] = useState(false);
+    const toggleTabVertical = (tab) => {
+        if (tab >= 1 && tab <= 5) setActiveTabVartical(tab);
     };
 
+    // Handle normal input change
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+    }
 
+    const handleSelectChange = (selectedOption, field) => {
+        const name = field.name;
+        const value = selectedOption?.label || null;
+
+        setFormData({ ...formData, [name]: value, });
+    };
+
+    const handleAsyncSelectChange = (fieldName, selectedOption) => {
+        setFormData({
+            ...formData,
+            [fieldName]: selectedOption?.label || null,
+        });
+    };
+
+    const handleDateChange = (selectedDates, name) => {
+        const date = selectedDates?.[0];
+        setFormData(prev => ({
+            ...prev, [name]:
+                date ? date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : ""
+        }));
+    };
+
+    const handleContactChange = (contacts) => {
+        setFormData(prev => ({ ...prev, contacts }));
+    };
 
     // Submit function
     const handleSubmit = async () => {
@@ -47,11 +67,6 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
             setEditMode(false);
             toggle();
         }
-    };
-
-
-    const toggleTabVertical = (tab) => {
-        if (tab >= 1 && tab <= 5) setActiveTabVartical(tab);
     };
 
     // reset on open
@@ -94,7 +109,6 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
             {/* Body */}
             <div id="modal-scroll-body" className="modal-body" style={{ maxHeight: "75vh", overflowY: "auto", overflowX: "hidden" }}>
                 <Row>
@@ -106,12 +120,14 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                     {/* Sections */}
                     <Col md={9}>
                         <TabContent activeTab={activeTabVartical}>
-                            <div id="section-1"><DealType formType={formType} setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
-                            <div id="section-2"><FinancialInformation formType={formType} setFormType={setFormType}
+                            <div id="section-1"><DealType formType={formType} setFormType={setFormType} handleChange={handleChange}
+                                handleSelectChange={handleSelectChange} handleAsyncSelectChange={handleAsyncSelectChange} formData={formData} /></div>
+                            <div id="section-2"><FinancialInformation formType={formType} handleSelectChange={handleSelectChange}
                                 handleChange={handleChange} formData={formData} /></div>
-                            <div id="section-3"><ImportantDates formType={formType} setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
-                            <div id="section-4"><Contact setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
-                            <div id="section-5"><Template setFormType={setFormType} handleChange={handleChange} formData={formData} /></div>
+                            <div id="section-3"><ImportantDates formType={formType} handleDateChange={handleDateChange} formData={formData}
+                                handleChange={handleChange} /></div>
+                            <div id="section-4"><Contact onContactChange={handleContactChange} /></div>
+                            <div id="section-5"><Template formData={formData} handleChange={handleChange} /></div>
                         </TabContent>
                     </Col>
                 </Row>
@@ -119,10 +135,13 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                 {/* Footer */}
                 <div className="mt-4 d-flex justify-content-end">
                     <AllButton label="Cancel" width="80px" color="danger" className="me-2" onClick={toggle} />
-                    <AllButton label="Previous" width="80px" color="secondary" className="me-2"
-                        disabled={activeTabVartical === 1} onClick={() => toggleTabVertical(activeTabVartical - 1)} />
-                    <AllButton label={activeTabVartical === 5 ? "Submit" : "Next"} width="80px" color={activeTabVartical === 5 ? "success" : "primary"}
-                        onClick={() => activeTabVartical === 5 ? handleSubmit() : toggleTabVertical(activeTabVartical + 1)} />
+                    <AllButton label="Previous" width="80px" color="secondary" className="me-2" disabled={activeTabVartical === 1}
+                        onClick={() => toggleTabVertical(activeTabVartical - 1)}
+                    />
+                    <AllButton label={activeTabVartical === 5 ? "Submit" : "Next"} width="80px"
+                        color={activeTabVartical === 5 ? "success" : "primary"}
+                        onClick={() => activeTabVartical === 5 ? handleSubmit() : toggleTabVertical(activeTabVartical + 1)}
+                    />
                 </div>
             </div>
         </Modal>
