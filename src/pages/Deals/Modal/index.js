@@ -28,9 +28,10 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
 
     const handleSelectChange = (selectedOption, field) => {
         const name = field.name;
-        const value = selectedOption?.label || null;
+        const label = selectedOption?.label || null;
+        const value = selectedOption ? selectedOption.value : null;
 
-        setFormData({ ...formData, [name]: value, });
+        setFormData({ ...formData, [name]: { value, label }, });
     };
 
     const handleAsyncSelectChange = (fieldName, selectedOption) => {

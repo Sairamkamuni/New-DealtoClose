@@ -254,7 +254,6 @@ const OfferDetail = ({ formType, handleChange, formData, handleSelectChange }) =
                             value={financeTypes.find((opt) => opt.label === formData?.finance_type)}
                         />
                     </Col>
-
                 )}
             </Row>
         </div>

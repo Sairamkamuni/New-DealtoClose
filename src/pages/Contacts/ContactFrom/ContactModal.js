@@ -1,34 +1,32 @@
 import React, { useState } from "react"
 import { Row, Col, Modal } from "reactstrap"
-import Select from "react-select"
-import "flatpickr/dist/themes/material_blue.css"
-import Flatpickr from "react-flatpickr"
-import CreatableSelect from 'react-select/creatable';
 import { post, put } from "helpers/api_helper"
 import { showSuccessAlert } from "pages/utils/Alerts/alertMessages"
-import { FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption } from "AllDummyData/ContacsDummyData"
-
-const InitialFormatData = {
-    first_name: "", last_name: "", company_name: "", phone: "", email: "",
-    type: null, status_or_title: null, date_of_birth: null, home_anniversary: null, source: null, tags: [],
-    family_member: null, relation_type: null, agent_name: null
-};
+import { FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption, TagsOption } from "AllDummyData/ContacsDummyData"
+import { InputField, SelectField, DatePickerField } from "pages/InputFields/InputFields"
 
 const ContactModal = ({ isOpen, toggle }) => {
     const [formType, setFormType] = useState("Client");
-    const [formData, setFormData] = useState(InitialFormatData);
+    const [formData, setFormData] = useState({});
     const [editMode, setEditMode] = useState(false);
 
     // Handle select change
-    const handleSelectChange = (name, option) => {
-        setFormData({ ...formData, [name]: option })
-    }
+    const handleSelectChange = (selectedOption, field) => {
+        const name = field.name;
+        const label = selectedOption?.label || null;
+        const value = selectedOption ? selectedOption.value : null;
+
+        setFormData({ ...formData, [name]: { value, label }, });
+    };
 
     // Handle date change
-    const handleDateChange = (name, date) => {
-        setFormData({ ...formData, [name]: date?.[0] || null })
-    }
-
+    const handleDateChange = (selectedDates, name) => {
+        const date = selectedDates?.[0];
+        setFormData(prev => ({
+            ...prev, [name]:
+                date ? date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : ""
+        }));
+    };
     // Handle normal input change
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -45,8 +43,8 @@ const ContactModal = ({ isOpen, toggle }) => {
         console.log("API method call:", editMode ? "PUT" : "POST");
         const success = true;
         if (success) {
-            showSuccessAlert(editMode ? 'Contact updated successfully!' : 'Contact created successfully!');
-            setFormData(InitialFormatData);
+            showSuccessAlert(editMode ? `${formData.first_name} ${formData.last_name} updated successfully!` : `${formData.first_name} ${formData.last_name} has been created successfully!`);
+            setFormData({});
             setEditMode(false);
             toggle();
         }
@@ -71,135 +69,91 @@ const ContactModal = ({ isOpen, toggle }) => {
                         onClick={() => setFormType("Collaborator")}>Collaborator</button>
                 </div>
 
-                <Row className="mb-3">
-                    <Col>
-                        <div>
-                            <label>First Name</label>
-                            <input type="text" name="first_name" className="form-control" placeholder="Enter First Name" value={formData.first_name}
-                                onChange={handleChange} />
-                        </div>
+                <Row className="g-3">
+                    <Col md="6">
+                        <InputField label="First Name" type="text" name="first_name" placeholder="Enter First Name" value={formData?.first_name}
+                            onChange={handleChange} />
                     </Col>
-                    <Col>
-                        <div>
-                            <label>Last Name</label>
-                            <input type="text" name="last_name" className="form-control" placeholder="Enter Last Name" value={formData.last_name}
-                                onChange={handleChange} />
-                        </div>
+                    <Col md="6">
+                        <InputField label="Last Name" type="text" name="last_name" placeholder="Enter Last Name" value={formData?.last_name}
+                            onChange={handleChange} />
                     </Col>
-                </Row>
 
-                <Row className="mb-3">
-                    <Col>
-                        <div>
-                            <label>Company Name</label>
-                            <input type="text" name="company_name" className="form-control" placeholder="Enter Company Name" value={formData.company_name}
-                                onChange={handleChange} />
-                        </div>
+                    <Col md="12">
+                        <InputField label="Company Name" type="text" name="company_name" placeholder="Enter Company Name" value={formData?.company_name}
+                            onChange={handleChange} />
                     </Col>
-                </Row>
 
-                <Row className="mb-3">
-                    <Col>
-                        <div>
-                            <label>Phone Number</label>
-                            <input type="text" name="phone" className="form-control" placeholder="Enter Phone Number" value={formData.phone} onChange={handleChange} />
-                        </div>
+                    <Col md="6">
+                        <InputField label="Phone Number" type="number" name="phone" placeholder="Enter Phone Number" value={formData?.phone}
+                            onChange={handleChange} />
                     </Col>
-                    <Col>
-                        <div>
-                            <label>Email Address</label>
-                            <input type="text" name="email" className="form-control" placeholder="Enter Email Address" value={formData.email} onChange={handleChange} />
-                        </div>
+                    <Col md="6">
+                        <InputField label="Email Address" type="email" name="email" placeholder="Enter Email Address" value={formData?.email}
+                            onChange={handleChange} />
                     </Col>
-                </Row>
 
-                <Row className="mb-3">
-                    <Col>
-                        <div className="ajax-select mt-lg-0 select2-container">
-                            <label>Type</label>
-                            <Select isClearable={true} isDisabled={formType === "Collaborator"} options={TypeOption} value={formData.type} onChange={(opt) => handleSelectChange("type", opt)} />
-                        </div>
+                    <Col md="12">
+                        <SelectField label="Type" name="type" options={TypeOption} value={formData?.type}
+                            onChange={handleSelectChange} placeholder="Select Type..." />
                     </Col>
-                </Row>
 
-                <Row className="mb-3">
-                    <Col>
-                        <div className="ajax-select mt-lg-0 select2-container">
-                            <label>{formType === "Collaborator" ? "Title" : "Status"}</label>
-                            <Select isClearable={true} options={formType === "Collaborator" ? TitleOption : StatusOption} value={formData.status_or_title}
-                                onChange={(opt) => handleSelectChange("status_or_title", opt)} />
-                        </div>
+                    <Col md="12">
+                        <SelectField label="Title" name="title" options={TitleOption} value={formData.title}
+                            onChange={handleSelectChange} placeholder="Select Title..." />
                     </Col>
-                </Row>
 
-                {formType === "Client" && (
-                    <>
-                        <Row className="mb-3">
-                            <Col>
-                                <div>
-                                    <label>Date Of Birth</label>
-                                    <Flatpickr className="form-control" options={{ altInput: true, altFormat: "F j, Y" }} value={formData.date_of_birth}
-                                        onChange={(date) => handleDateChange("date_of_birth", date)} placeholder="MM, DD, YYYY" />
-                                </div>
-                            </Col>
-                            <Col>
-                                <div>
-                                    <label>Home Anniversary Date</label>
-                                    <Flatpickr className="form-control" options={{ altInput: true, altFormat: "F j, Y" }} value={formData.home_anniversary}
-                                        onChange={(date) => handleDateChange("home_anniversary", date)} placeholder="MM, DD, YYYY" />
-                                </div>
-                            </Col>
-                        </Row>
+                    <Col md="12">
+                        <SelectField label="Status" name="status" options={StatusOption} value={formData?.status}
+                            onChange={handleSelectChange} placeholder="Select Status..." />
+                    </Col>
 
-                        <Row className="mb-3">
-                            <Col>
-                                <div className="ajax-select mt-lg-0 select2-container">
-                                    <label>Source</label>
-                                    <CreatableSelect isClearable={true} isMulti={true} options={SourceOption} value={formData.source}
-                                        onChange={(opt) => handleSelectChange("source", opt)} />
-                                </div>
-                            </Col>
-                        </Row>
-                    </>
-                )}
+                    <Col md="6">
+                        <DatePickerField label="Date Of Birth" name="date_of_birth" value={formData?.date_of_birth}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
+                    </Col>
 
-                <Row className="mb-3">
-                    <Col>
-                        <div className="ajax-select mt-lg-0 select2-container">
-                            <label>Tags</label>
-                            <CreatableSelect isClearable={true} isMulti={true} value={formData.tags} onChange={(opt) => handleSelectChange("tags", opt)} />
+                    <Col md="6">
+                        <DatePickerField label="Home Anniversary Date" name="home_anniversary" value={formData?.home_anniversary}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
+                    </Col>
+
+                    <Col md="12">
+                        <SelectField label="Source" name="source" options={SourceOption} value={formData?.source}
+                            onChange={handleSelectChange} placeholder="Select Source..." />
+                    </Col>
+
+                    <Col md="12">
+                        <SelectField label="Tags" name="tags" options={TagsOption} value={formData?.tags}
+                            onChange={handleSelectChange} placeholder="Select Tags..." />
+                    </Col>
+
+                    <div style={{ marginTop: "22px" }}>
+                        <div className="p-3" style={{ border: "1px solid #dad1e0", borderRadius: "5px", backgroundColor: "#ece4f1" }}>
+                            <h5 className="text-primary fw-bolder">Add Family Member</h5>
+                            <Row>
+                                <Col md="6">
+                                    <SelectField label="Add Family Member" name="family_member" options={FamilyMembersOption} value={formData?.family_member}
+                                        onChange={handleSelectChange} placeholder="Select Contact Name..." />
+                                </Col>
+                                <Col md="6" >
+                                    <SelectField label="Relation Type" name="relation_type" options={RelationshipTypeOption} value={formData?.relation_type}
+                                        onChange={handleSelectChange} placeholder="Select Relation Type..." />
+                                </Col>
+                            </Row>
                         </div>
+                    </div>
+
+                    <Col md="12" className="mb-3">
+                        <SelectField label="Agent Name" name="agent_name" options={RelationshipTypeOption} value={formData?.agent_name}
+                            onChange={handleSelectChange} placeholder="Select Agent Name..." />
                     </Col>
                 </Row>
 
-                <div className="mb-3 p-4 rounded-4 border shadow-sm bg-light">
-                    <h5 className="text-primary fw-semibold">Add Family Member</h5>
-                    <Row>
-                        <Col md={6} className="mb-3">
-                            <label className="form-label fw-medium">Family Member</label>
-                            <Select isClearable={true} options={FamilyMembersOption} value={formData.family_member}
-                                onChange={(opt) => handleSelectChange("family_member", opt)}
-                            />
-                        </Col>
-                        <Col md={6} >
-                            <label className="form-label fw-medium">Relation Type</label>
-                            <Select isClearable={true} options={RelationshipTypeOption} value={formData.relation_type} onChange={(opt) => handleSelectChange("relation_type", opt)} />
-                        </Col>
-                    </Row>
-                </div>
-
-                <Row className="mb-3">
-                    <Col>
-                        <div className="ajax-select mt-lg-0 select2-container">
-                            <label>Agent Name</label>
-                            <Select isClearable={true} options={RelationshipTypeOption} value={formData.agent_name} onChange={(opt) => handleSelectChange("agent_name", opt)} />
-                        </div>
-                    </Col>
-                </Row>
-
+                <hr />
                 <Row>
                     <Col>
-                        <div className="modal-footer">
+                        <div className="modal-footer" >
                             <button type="button" className="btn btn-secondary" style={{ width: "70px" }} onClick={toggle}>Close</button>
                             <button type="button" className="btn btn-primary" style={{ width: "120px" }} onClick={handleSubmit}> Add Contact </button>
                         </div>

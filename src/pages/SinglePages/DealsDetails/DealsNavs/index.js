@@ -12,6 +12,7 @@ import CommissionTab from "./CommissionTab";
 import NoteTab from "./Tabs/NoteTab";
 
 const NavsHeader = ({ activeTags, toggleTags }) => {
+
     return (
         <Row className="mt-4">
             <Col>

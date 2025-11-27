@@ -139,8 +139,8 @@ export const showSuccessAlert = (message) => {
     // });
 
     toastr.success(message, 'Success', {
-        timeOut: 1000,
-        extendedTimeOut: 1000
+        timeOut: 2000,
+        extendedTimeOut: 2000
     });
 };
 

@@ -4,6 +4,7 @@ import AsyncSelect from 'react-select/async';
 import Select, { components } from "react-select"
 import { transactionOwner, propertyStatus, buyerTypeOptions, sellerTypeOptions, BuyersOrTenants, SellersOrLandlords } from "AllDummyData/DealsDummyData";
 import AllButton, { FaPlusButton } from "pages/utils/allButton";
+import { SelectField } from "pages/InputFields/InputFields";
 
 const DealType = ({ formType, setFormType, formData, handleChange, handleSelectChange, handleAsyncSelectChange }) => {
     const loadOptions = (optionsList) => (inputValue, callback) => {
@@ -66,8 +67,7 @@ const DealType = ({ formType, setFormType, formData, handleChange, handleSelectC
                         classNamePrefix="select"
                         options={transactionOwner}
                         onChange={handleSelectChange}
-                        value={transactionOwner.find(
-                            (opt) => opt.label === formData?.transaction_owner
+                        value={transactionOwner.find((opt) => opt.value === formData?.transaction_owner?.value
                         )}
                     />
                 </Col>

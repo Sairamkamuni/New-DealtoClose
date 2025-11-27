@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import "flatpickr/dist/themes/material_blue.css"
 import Flatpickr from "react-flatpickr"
+import { DatePickerField } from "pages/InputFields/InputFields";
 
 const ImportantDates = ({ formType, handleChange, formData, handleDateChange }) => {
 
@@ -14,13 +15,11 @@ const ImportantDates = ({ formType, handleChange, formData, handleDateChange }) 
             <Row className="g-3">
                 {formType === "Buyer" && (
                     <Col md="6">
-                        <label>Effective Date</label>
-                        <Flatpickr
+                        <DatePickerField
+                            label="Effective Date"
                             name="effective_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.effective_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "effective_date")}
+                            value={formData?.effective_date}
+                            onChange={handleDateChange}
                             placeholder="MM, DD, YYYY"
                         />
                     </Col>

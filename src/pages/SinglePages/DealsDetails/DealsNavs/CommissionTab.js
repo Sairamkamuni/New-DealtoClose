@@ -45,6 +45,12 @@ const CommissionTab = () => {
         });
     };
 
+    const handleFileChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.files[0],
+        });
+    };
 
     // Handle normal input change
     const handleChange = (e) => {
