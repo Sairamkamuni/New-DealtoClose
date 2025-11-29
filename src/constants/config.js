@@ -28,19 +28,3 @@ export const preDealTabs = [
     { id: 5, label: "Dates" },
     { id: 6, label: "Additional Terms" },
 ];
-
-// export const financeTypes = [
-//     { value: "Cash", label: "Cash" },
-//     { value: "Conventional", label: "Conventional" },
-//     { value: "FHA", label: "FHA" },
-//     { value: "VA", label: "VA" },
-//     { value: "Other", label: "Other" },
-// ];
-
-export const financeTypes = [
-    { value: 1, label: "Cash" },
-    { value: 2, label: "Conventional" },
-    { value: 3, label: "FHA" },
-    { value: 4, label: "VA" },
-    { value: 5, label: "Other" },
-];

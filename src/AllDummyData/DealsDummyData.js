@@ -83,6 +83,15 @@ export const Templates = [
     { value: 5, label: "Template 05" },
 ];
 
+export const additionalTerms = [
+    { value: 1, label: "Additional Terms 01" },
+    { value: 2, label: "Additional Terms 02" },
+    { value: 3, label: "Additional Terms 03" },
+    { value: 4, label: "Additional Terms 04" },
+    { value: 5, label: "Additional Terms 05" },
+    { value: 6, label: "Additional Terms 06" },
+];
+
 export const buyerTypeOptions = [
     { value: 1, label: "Buyer" },
     { value: 2, label: "Tenant" },
@@ -120,6 +129,13 @@ export const contactRoles = [
     { value: 6, label: "Inspector" },
     { value: 7, label: "HOA" },
     { value: 8, label: "Attorney" },
+];
+
+export const contactNames = [
+    { value: 1, label: "Sai Kamuni" },
+    { value: 2, label: "Usha Kamuni" },
+    { value: 3, label: "Raj Kamuni" },
+    { value: 4, label: "Praveen Kumar" },
 ];
 
 // Tabs in Deals Details 

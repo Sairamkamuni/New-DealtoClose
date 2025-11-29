@@ -1,27 +1,10 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import AsyncSelect from 'react-select/async';
-import Select, { components } from "react-select"
 import { transactionOwner, propertyStatus, buyerTypeOptions, sellerTypeOptions, BuyersOrTenants, SellersOrLandlords } from "AllDummyData/DealsDummyData";
-import AllButton, { FaPlusButton } from "pages/utils/allButton";
-import { SelectField } from "pages/InputFields/InputFields";
+import AllButton from "pages/utils/allButton";
+import { InputField, SelectField, AsyncSelectField } from "pages/InputFields/InputFields";
 
 const DealType = ({ formType, setFormType, formData, handleChange, handleSelectChange, handleAsyncSelectChange }) => {
-    const loadOptions = (optionsList) => (inputValue, callback) => {
-        const filtered = optionsList.filter((opt) =>
-            opt.label.toLowerCase().includes(inputValue.toLowerCase())
-        );
-        callback(filtered);
-    };
-
-    const CustomMenuList = (props) => {
-        return (
-            <components.MenuList {...props}>
-                {props.children}
-                <FaPlusButton label="Add New" width="100%" outline={false} onClick={(e) => { e.stopPropagation() }} className="mt-2" />
-            </components.MenuList>
-        );
-    };
 
     return (
         <div>
@@ -33,14 +16,8 @@ const DealType = ({ formType, setFormType, formData, handleChange, handleSelectC
 
             <Row>
                 <Col>
-                    <label>Property Address</label>
-                    <input name="property_address"
-                        className="form-control"
-                        type="text"
-                        placeholder="Search address from MLS or Google..."
-                        value={formData?.property_address || ""}
-                        onChange={handleChange}
-                    />
+                    <InputField label="Property Address" type="text" name="property_address" placeholder="Search address from MLS or Google..."
+                        value={formData?.property_address} onChange={handleChange} />
                 </Col>
             </Row>
 
@@ -59,97 +36,36 @@ const DealType = ({ formType, setFormType, formData, handleChange, handleSelectC
 
             <Row className="mt-1 g-3">
                 <Col md="6">
-                    <label>Transaction Owner</label>
-                    <Select
-                        name="transaction_owner"
-                        isClearable={true}
-                        className="basic-single"
-                        classNamePrefix="select"
-                        options={transactionOwner}
-                        onChange={handleSelectChange}
-                        value={transactionOwner.find((opt) => opt.value === formData?.transaction_owner?.value
-                        )}
-                    />
+                    <SelectField label="Transaction Owner" name="transaction_owner" options={transactionOwner} value={formData?.transaction_owner}
+                        onChange={handleSelectChange} placeholder="Select Type..." />
                 </Col>
 
                 {formType === "Buyer" && (
                     <Col md="6">
-                        <label>Type</label>
-                        <Select
-                            name="buyer_type"
-                            isClearable={true}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            options={buyerTypeOptions}
-                            onChange={handleSelectChange}
-                            value={buyerTypeOptions.find(
-                                (opt) => opt.label === formData?.buyer_type
-                            )}
-                        />
+                        <SelectField label="Type" name="buyer_type" options={buyerTypeOptions} value={formData?.buyer_type}
+                            onChange={handleSelectChange} placeholder="Select Type..." />
                     </Col>
                 )}
 
                 {formType === "Seller" && (
                     <Col md="6">
-                        <label>Type</label>
-                        <Select
-                            name="seller_type"
-                            isClearable={true}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            options={sellerTypeOptions}
-                            onChange={handleSelectChange}
-                            value={sellerTypeOptions.find(
-                                (opt) => opt.label === formData?.seller_type
-                            )}
-                        />
+                        <SelectField label="Type" name="seller_type" options={sellerTypeOptions} value={formData?.seller_type}
+                            onChange={handleSelectChange} placeholder="Select Type..." />
                     </Col>
                 )}
 
                 <Col md="6">
-                    <label>Status</label>
-                    <Select
-                        name="property_status"
-                        isClearable={true}
-                        className="basic-single"
-                        classNamePrefix="select"
-                        options={propertyStatus}
-                        onChange={handleSelectChange}
-                        value={propertyStatus.find(
-                            (opt) => opt.label === formData?.property_status
-                        )}
-                    />
+                    <SelectField label="Status" name="property_status" options={propertyStatus} value={formData?.property_status}
+                        onChange={handleSelectChange} placeholder="Select Type..." />
                 </Col>
 
                 <Col md="6">
-                    <label>Buyer / Tenant</label>
-                    <AsyncSelect
-                        loadOptions={loadOptions(BuyersOrTenants)}
-                        defaultOptions
-                        name="buyer_tenant"
-                        isClearable={true}
-                        components={{ MenuList: CustomMenuList }}
-                        placeholder="Select an option"
-                        onChange={(option) => handleAsyncSelectChange("buyer_tenant", option)}
-                        value={BuyersOrTenants.find(
-                            (opt) => opt.label === formData?.buyer_tenant
-                        )}
-                    />
+                    <AsyncSelectField label="Buyer / Tenant" name="buyer_tenant" optionsList={BuyersOrTenants} value={formData?.buyer_tenant}
+                        onChange={handleAsyncSelectChange} />
                 </Col>
                 <Col md="6">
-                    <label>Seller / Landlord</label>
-                    <AsyncSelect
-                        loadOptions={loadOptions(SellersOrLandlords)}
-                        defaultOptions
-                        name="seller_landlord"
-                        isClearable={true}
-                        components={{ MenuList: CustomMenuList }}
-                        placeholder="Select an option"
-                        onChange={(option) => handleAsyncSelectChange("seller_landlord", option)}
-                        value={SellersOrLandlords.find(
-                            (opt) => opt.label === formData?.seller_landlord
-                        )}
-                    />
+                    <AsyncSelectField label="Seller / Landlord" name="seller_landlord" optionsList={SellersOrLandlords} value={formData?.seller_landlord}
+                        onChange={handleAsyncSelectChange} />
                 </Col>
             </Row>
         </div>

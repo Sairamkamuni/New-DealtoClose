@@ -4,6 +4,7 @@ import { post, put } from "helpers/api_helper"
 import { showSuccessAlert } from "pages/utils/Alerts/alertMessages"
 import { FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption, TagsOption } from "AllDummyData/ContacsDummyData"
 import { InputField, SelectField, DatePickerField } from "pages/InputFields/InputFields"
+import AllButton from "pages/utils/allButton"
 
 const ContactModal = ({ isOpen, toggle }) => {
     const [formType, setFormType] = useState("Client");
@@ -22,10 +23,7 @@ const ContactModal = ({ isOpen, toggle }) => {
     // Handle date change
     const handleDateChange = (selectedDates, name) => {
         const date = selectedDates?.[0];
-        setFormData(prev => ({
-            ...prev, [name]:
-                date ? date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : ""
-        }));
+        setFormData(prev => ({ ...prev, [name]: date ? date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : "" }));
     };
     // Handle normal input change
     const handleChange = (e) => {
@@ -103,25 +101,31 @@ const ContactModal = ({ isOpen, toggle }) => {
                             onChange={handleSelectChange} placeholder="Select Title..." />
                     </Col>
 
-                    <Col md="12">
-                        <SelectField label="Status" name="status" options={StatusOption} value={formData?.status}
-                            onChange={handleSelectChange} placeholder="Select Status..." />
-                    </Col>
+                    {formType === "Collabrator" && (
+                        <>
 
-                    <Col md="6">
-                        <DatePickerField label="Date Of Birth" name="date_of_birth" value={formData?.date_of_birth}
-                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
-                    </Col>
+                            <Col md="12">
+                                <SelectField label="Status" name="status" options={StatusOption} value={formData?.status}
+                                    onChange={handleSelectChange} placeholder="Select Status..." />
+                            </Col>
 
-                    <Col md="6">
-                        <DatePickerField label="Home Anniversary Date" name="home_anniversary" value={formData?.home_anniversary}
-                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
-                    </Col>
+                            <Col md="6">
+                                <DatePickerField label="Date Of Birth" name="date_of_birth" value={formData?.date_of_birth}
+                                    onChange={handleDateChange} placeholder="MM, DD, YYYY" />
+                            </Col>
 
-                    <Col md="12">
-                        <SelectField label="Source" name="source" options={SourceOption} value={formData?.source}
-                            onChange={handleSelectChange} placeholder="Select Source..." />
-                    </Col>
+                            <Col md="6">
+                                <DatePickerField label="Home Anniversary Date" name="home_anniversary" value={formData?.home_anniversary}
+                                    onChange={handleDateChange} placeholder="MM, DD, YYYY" />
+                            </Col>
+
+                            <Col md="12">
+                                <SelectField label="Source" name="source" options={SourceOption} value={formData?.source}
+                                    onChange={handleSelectChange} placeholder="Select Source..." />
+                            </Col>
+
+                        </>
+                    )}
 
                     <Col md="12">
                         <SelectField label="Tags" name="tags" options={TagsOption} value={formData?.tags}
@@ -152,11 +156,9 @@ const ContactModal = ({ isOpen, toggle }) => {
 
                 <hr />
                 <Row>
-                    <Col>
-                        <div className="modal-footer" >
-                            <button type="button" className="btn btn-secondary" style={{ width: "70px" }} onClick={toggle}>Close</button>
-                            <button type="button" className="btn btn-primary" style={{ width: "120px" }} onClick={handleSubmit}> Add Contact </button>
-                        </div>
+                    <Col className="d-flex justify-content-end gap-3">
+                        <AllButton label='Cancel' onClick={toggle} width="70px" outline={false} color="danger" />
+                        <AllButton label='Add Contact' onClick={handleSubmit} width="120px" outline={false} />
                     </Col>
                 </Row>
             </div>

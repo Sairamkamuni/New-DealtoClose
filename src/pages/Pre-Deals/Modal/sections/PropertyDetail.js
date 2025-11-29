@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, } from "reactstrap";
+import { InputField } from "pages/InputFields/InputFields";
 
 const PropertyDetail = ({ formType, formData, handleChange }) => {
     return (
@@ -9,14 +10,8 @@ const PropertyDetail = ({ formType, formData, handleChange }) => {
             </div>
             <Row>
                 <Col>
-                    <label>Property Address</label>
-                    <input name="property_address"
-                        className="form-control"
-                        type="text"
-                        placeholder="Search address from MLS or Google..."
-                        value={formData?.property_address || ""}
-                        onChange={handleChange}
-                    />
+                    <InputField label="Property Address" type="text" name="property_address" placeholder="Search address from MLS or Google..."
+                        value={formData?.property_address} onChange={handleChange} />
                 </Col>
             </Row>
 
@@ -35,49 +30,29 @@ const PropertyDetail = ({ formType, formData, handleChange }) => {
 
             <Row className="mt-1 g-3">
                 <Col md="6">
-                    <label>County</label>
-                    <input type="text" name="county" className="form-control" placeholder="Enter County"
-                        value={formData?.county || ""} onChange={handleChange} />
+                    <InputField label="County" type="text" name="county" value={formData?.county} onChange={handleChange} />
                 </Col>
                 {formType === "Buyer" && (
                     <Col md="6">
-                        <label>MLS Number</label>
-                        <input type="text" name="mls_number" className="form-control" placeholder="Enter MLS Number"
-                            value={formData?.mls_number || ""} onChange={handleChange} />
+                        <InputField label="MLS Number" type="text" name="mls_number" value={formData?.mls_number} onChange={handleChange} />
                     </Col>
                 )}
                 <Col md="6">
-                    <label>Parcel ID</label>
-                    <input type="text" name="parcel_id" className="form-control" placeholder="Enter Parcel ID"
-                        value={formData?.parcel_id || ""} onChange={handleChange} />
+                    <InputField label="Parcel ID" type="text" name="parcel_id" value={formData?.parcel_id} onChange={handleChange} />
                 </Col>
                 <Col md="6">
-                    <label>Subdivision Name</label>
-                    <input type="text" name="subdivision_name" className="form-control" placeholder="Enter Subdivision Name"
-                        value={formData?.subdivision_name || ""} onChange={handleChange} />
+                    <InputField label="Subdivision Name" type="text" name="subdivision_name" value={formData?.subdivision_name} onChange={handleChange} />
                 </Col>
                 <Col md="6">
-                    <label>HOA Fee</label>
-                    <span className="position-absolute"
-                        style={{ top: "70%", left: "15px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
-                    <input
-                        type="text"
-                        name="hoa_fee"
-                        className="form-control ps-4"
-                        value={formData?.hoa_fee || ""}
-                        onChange={handleChange}
-                        placeholder="Enter HOA Fee"
-                    />
+                    <InputField label="HOA Fee" type="text" name="hoa_fee" showDollar={true} value={formData?.hoa_fee} onChange={handleChange} />
                 </Col>
                 <Col md="6">
-                    <label>Legal Description</label>
-                    <input type="text" name="legal_description" className="form-control" placeholder="Enter Legal Description"
-                        value={formData?.legal_description || ""} onChange={handleChange} />
+                    <InputField label="Legal Description" type="text" name="legal_description" value={formData?.legal_description} onChange={handleChange} />
                 </Col>
                 <Col md="12">
-                    <label>Equipment&apos;s Included</label>
-                    <textarea type="textarea" rows="4" name="equipments_Included" className="form-control" placeholder="Enter Equipment from MLS..."
-                        value={formData?.equipments_Included || ""} onChange={handleChange} />
+                    <InputField label="Equipment's Included" type="textarea" rows="4" name="equipments_Included"
+                        value={formData?.equipments_Included} onChange={handleChange} />
+                        
                 </Col>
             </Row>
 

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import Select from "react-select"
 import { financeTypes, acceptableFinanceTypes } from "AllDummyData/DealsDummyData";
+import { InputField, SelectField, AsyncSelectField, ToggleSelector } from "pages/InputFields/InputFields";
 
 const FinancialInformation = ({ formType, handleChange, handleSelectChange, formData }) => {
-    const [compBuyer, setCompBuyer] = useState("%");
-    const [compList, setCompList] = useState("$");
-    const [teamLeaderSplit, setTeamLeaderSplit] = useState("%");
-    const [brokerageSplit, setBrokerageSplit] = useState("$");
+    const [compBuyer, setCompBuyer] = useState("percentage");
+    const [compList, setCompList] = useState("fixed");
+    const [teamLeaderSplit, setTeamLeaderSplit] = useState("fixed");
+    const [brokerageSplit, setBrokerageSplit] = useState("percentage");
 
     return (
         <div id="section-2">
@@ -18,138 +19,61 @@ const FinancialInformation = ({ formType, handleChange, handleSelectChange, form
             <Row className="g-3">
                 {formType === "Buyer" && (
                     <Col md="6">
-                        <label>Finance Types</label>
-                        <Select
-                            name="finance_types"
-                            isClearable={true}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            options={financeTypes}
-                            onChange={handleSelectChange}
-                            value={financeTypes.find(
-                                (opt) => opt.label === formData?.finance_types
-                            )}
-                        />
+                        <SelectField label="Finance Types" name="finance_types" options={financeTypes} value={formData?.finance_types}
+                            onChange={handleSelectChange} placeholder="Select Type..." />
                     </Col>
                 )}
 
                 {formType === "Seller" && (
                     <Col md="6">
-                        <label>Acceptable Finance Types</label>
-                        <Select
-                            name="acceptable_finance_types"
-                            isClearable={true}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            options={acceptableFinanceTypes}
-                            onChange={handleSelectChange}
-                            value={acceptableFinanceTypes.find(
-                                (opt) => opt.label === formData?.acceptable_finance_types
-                            )}
-                        />
+                        <SelectField label="Acceptable Finance Types" name="acceptable_finance_types" options={acceptableFinanceTypes} value={formData?.acceptable_finance_types}
+                            onChange={handleSelectChange} placeholder="Select Type..." />
                     </Col>
                 )}
 
                 {formType === "Buyer" && (
                     <Col md="6">
-                        <div className="mb-2 position-relative">
-                            <label>Purchase Price</label>
-                            <span className="position-absolute"
-                                style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
-                            <input type="text" name="purchase_price"
-                                className="form-control ps-4"
-                                value={formData?.purchase_price || ""}
-                                onChange={handleChange}
-                                placeholder="Enter Purchase Price" />
-                        </div>
+                        <InputField label="Purchase Price" type="text" name="purchase_price" showDollar={true}
+                            value={formData?.purchase_price} onChange={handleChange} />
                     </Col>
                 )}
 
                 {formType === "Seller" && (
                     <Col md="6">
-                        <div className="mb-2 position-relative">
-                            <label>Listing Price</label>
-                            <span className="position-absolute"
-                                style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
-                            <input type="text" name="listing_price"
-                                className="form-control ps-4"
-                                value={formData?.listing_price || ""}
-                                onChange={handleChange}
-                                placeholder="Enter Listing Price" />
-                        </div>
+                        <InputField label="Listing Price" type="text" name="listing_price" showDollar={true}
+                            value={formData?.listing_price} onChange={handleChange} />
                     </Col>
                 )}
 
                 <Col md="6">
-                    <div className="mb-2 position-relative">
-                        <label>Transaction Fee</label>
-                        <span className="position-absolute"
-                            style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
-                        <input type="text" name="transaction_fee"
-                            className="form-control ps-4"
-                            value={formData?.transaction_fee || ""}
-                            onChange={handleChange}
-                            placeholder="Enter Transaction Fee" />
-                    </div>
+                    <InputField label="Transaction Fee" type="text" name="transaction_fee" showDollar={true}
+                        value={formData?.transaction_fee} onChange={handleChange} />
                 </Col>
 
                 {formType === "Buyer" && (
                     <>
                         <Col md="6">
-                            <div className="mb-2 position-relative">
-                                <label>1st Initial Deposit (EMD)</label>
-                                <span className="position-absolute"
-                                    style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
-                                <input type="text" name="initial_deposit"
-                                    className="form-control ps-4"
-                                    value={formData?.initial_deposit || ""}
-                                    onChange={handleChange}
-                                    placeholder="Enter 1st Initial Deposit (EMD)" />
-                            </div>
+                            <InputField label="1st Initial Deposit (EMD)" type="text" name="initial_deposit" showDollar={true}
+                                value={formData?.initial_deposit} onChange={handleChange} />
                         </Col>
 
                         <Col md="6">
-                            <div className="mb-2 position-relative">
-                                <label>2nd Initial Deposit (EMD)</label>
-                                <span className="position-absolute"
-                                    style={{ top: "70%", left: "8px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px" }} > $ </span>
-                                <input
-                                    type="text"
-                                    name="additional_deposit"
-                                    className="form-control ps-4"
-                                    value={formData?.additional_deposit || ""}
-                                    onChange={handleChange}
-                                    placeholder="Enter 2nd Initial Deposit (EMD)"
-                                />
-                            </div>
+                            <InputField label="2nd Initial Deposit (EMD)" type="text" name="additional_deposit" showDollar={true}
+                                value={formData?.additional_deposit} onChange={handleChange} />
                         </Col>
                     </>
                 )}
 
                 <Col md="6">
                     <label>Compensation to Buyer&apos;s Agent</label>
-                    <Row>
-                        <Col md="2" className=" d-flex align-items-center"
-                            style={{ marginLeft: "12px", border: "1px solid #dad1e0", height: "36px", borderRadius: "6px", padding: "0" }} >
-                            <div onClick={() => setCompBuyer("%")} style={{
-                                background: compBuyer === "%" ? "#243e79" : "transparent", color: compBuyer === "%" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }}  >
-                                %
-                            </div>
-
-                            <div onClick={() => setCompBuyer("$")} style={{
-                                background: compBuyer === "$" ? "#243e79" : "transparent",
-                                color: compBuyer === "$" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", marginLeft: "4px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }} >
-                                $
-                            </div>
+                    <Row className="g-0 align-items-center">
+                        <Col md={2}>
+                            <ToggleSelector options={[{ label: "%", value: "percentage" }, { label: "$", value: "fixed" }]}
+                                value={compBuyer} onChange={setCompBuyer} />
                         </Col>
                         <Col>
-                            <input type="text" name="compensation_buyer_agent" className="form-control"
-                                value={formData?.compensation_buyer_agent || ""}
-                                onChange={handleChange} placeholder="Enter value" />
+                            <InputField type="text" name="compensation_buyer_agent"
+                                value={formData?.compensation_buyer_agent} onChange={handleChange} />
                         </Col>
                     </Row>
                 </Col>
@@ -157,27 +81,13 @@ const FinancialInformation = ({ formType, handleChange, handleSelectChange, form
                 <Col md="6">
                     <label>Compensation to Listing&apos;s Agent</label>
                     <Row>
-                        <Col md="2" className=" d-flex align-items-center"
-                            style={{ marginLeft: "12px", border: "1px solid #dad1e0", height: "36px", borderRadius: "6px", padding: "0" }} >
-                            <div onClick={() => setCompList("%")} style={{
-                                background: compList === "%" ? "#243e79" : "transparent", color: compList === "%" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }}  >
-                                %
-                            </div>
-
-                            <div onClick={() => setCompList("$")} style={{
-                                background: compList === "$" ? "#243e79" : "transparent",
-                                color: compList === "$" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", marginLeft: "4px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }} >
-                                $
-                            </div>
+                        <Col md={2}>
+                            <ToggleSelector options={[{ label: "%", value: "percentage" }, { label: "$", value: "fixed" }]}
+                                value={compList} onChange={setCompList} />
                         </Col>
                         <Col>
-                            <input type="text" name="compensation_listing_agent" className="form-control"
-                                value={formData?.compensation_listing_agent || ""}
-                                onChange={handleChange} placeholder="Enter value" />
+                            <InputField type="text" name="compensation_listing_agent"
+                                value={formData?.compensation_listing_agent} onChange={handleChange} />
                         </Col>
                     </Row>
                 </Col>
@@ -185,27 +95,13 @@ const FinancialInformation = ({ formType, handleChange, handleSelectChange, form
                 <Col md="6">
                     <label>Team Leader Split</label>
                     <Row>
-                        <Col md="2" className=" d-flex align-items-center"
-                            style={{ marginLeft: "12px", border: "1px solid #dad1e0", height: "36px", borderRadius: "6px", padding: "0" }} >
-                            <div onClick={() => setTeamLeaderSplit("%")} style={{
-                                background: teamLeaderSplit === "%" ? "#243e79" : "transparent", color: teamLeaderSplit === "%" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }}  >
-                                %
-                            </div>
-
-                            <div onClick={() => setTeamLeaderSplit("$")} style={{
-                                background: teamLeaderSplit === "$" ? "#243e79" : "transparent",
-                                color: teamLeaderSplit === "$" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", marginLeft: "4px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }} >
-                                $
-                            </div>
+                        <Col md={2}>
+                            <ToggleSelector options={[{ label: "%", value: "percentage" }, { label: "$", value: "fixed" }]}
+                                value={teamLeaderSplit} onChange={setTeamLeaderSplit} />
                         </Col>
                         <Col>
-                            <input type="text" name="team_leader_split" className="form-control"
-                                value={formData?.team_leader_split || ""}
-                                onChange={handleChange} placeholder="Enter value" />
+                            <InputField type="text" name="team_leader_split"
+                                value={formData?.team_leader_split} onChange={handleChange} />
                         </Col>
                     </Row>
                 </Col>
@@ -213,27 +109,13 @@ const FinancialInformation = ({ formType, handleChange, handleSelectChange, form
                 <Col md="6">
                     <label>Brokerage Split</label>
                     <Row>
-                        <Col md="2" className=" d-flex align-items-center"
-                            style={{ marginLeft: "12px", border: "1px solid #dad1e0", height: "36px", borderRadius: "6px", padding: "0" }} >
-                            <div onClick={() => setBrokerageSplit("%")} style={{
-                                background: brokerageSplit === "%" ? "#243e79" : "transparent", color: brokerageSplit === "%" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }}  >
-                                %
-                            </div>
-
-                            <div onClick={() => setBrokerageSplit("$")} style={{
-                                background: brokerageSplit === "$" ? "#243e79" : "transparent",
-                                color: brokerageSplit === "$" ? "white" : "#231f20",
-                                padding: "6px 14px", borderRadius: "6px", marginLeft: "4px", cursor: "pointer", fontWeight: 600, width: "50%"
-                            }} >
-                                $
-                            </div>
+                        <Col md={2}>
+                            <ToggleSelector options={[{ label: "%", value: "percentage" }, { label: "$", value: "fixed" }]}
+                                value={brokerageSplit} onChange={setBrokerageSplit} />
                         </Col>
                         <Col>
-                            <input type="text" name="brokerage_split" className="form-control"
-                                value={formData?.brokerage_split || ""}
-                                onChange={handleChange} placeholder="Enter value" />
+                            <InputField type="text" name="brokerage_split"
+                                value={formData?.brokerage_split} onChange={handleChange} />
                         </Col>
                     </Row>
                 </Col>

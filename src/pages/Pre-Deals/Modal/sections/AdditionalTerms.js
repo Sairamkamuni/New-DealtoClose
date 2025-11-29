@@ -1,27 +1,9 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import { components } from "react-select"
-import AsyncSelect from 'react-select/async';
-import { FaPlusButton } from "pages/utils/allButton";
-import { Templates } from "AllDummyData/DealsDummyData";
+import { additionalTerms } from "AllDummyData/DealsDummyData";
+import { AsyncSelectField, InputField } from "pages/InputFields/InputFields";
 
 const AdditionalTerms = ({ formData, handleChange, handleAsyncSelectChange }) => {
-    const loadOptions = (optionsList) => (inputValue, callback) => {
-        const filtered = optionsList.filter((opt) =>
-            opt.label.toLowerCase().includes(inputValue.toLowerCase())
-        );
-        callback(filtered);
-    };
-
-    const CustomMenuList = (props) => {
-        return (
-            <components.MenuList {...props}>
-                {props.children}
-                <FaPlusButton label="Add New" width="100%" outline={false} onClick={(e) => { e.stopPropagation() }} className="mt-2" />
-            </components.MenuList>
-        );
-    };
-
     return (
         <div id="section-6">
             <div className="d-block mb-3 mt-3">
@@ -29,23 +11,13 @@ const AdditionalTerms = ({ formData, handleChange, handleAsyncSelectChange }) =>
             </div>
             <Row className="g-3">
                 <Col md="12">
-                    <label>Additional Terms</label>
-                    <AsyncSelect
-                        loadOptions={loadOptions(Templates)}
-                        defaultOptions
-                        name="additional_terms"
-                        isClearable={true}
-                        components={{ MenuList: CustomMenuList }}
-                        placeholder="Search Additional Terms..."
-                        onChange={(option) => handleAsyncSelectChange("additional_terms", option)}
-                        value={Templates.find((opt) => opt.label === formData?.additional_terms)}
-                    />
+                    <AsyncSelectField label="Additional Terms" name="additional_terms" optionsList={additionalTerms}
+                        value={formData?.additional_terms} onChange={handleAsyncSelectChange} placeholder="Search Additional Terms..." />
                 </Col>
 
                 <Col md="12">
-                    <label>Custom Terms</label>
-                    <textarea name="custom_terms" className="form-control" placeholder="Or type custom terms here..." rows="4"
-                        value={formData.custom_terms || ""} onChange={handleChange} />
+                    <InputField label="Custom Terms" type="textarea" rows="4" name="custom_terms" placeholder="Or type custom terms here..."
+                        value={formData?.custom_terms} onChange={handleChange} />
                 </Col>
             </Row>
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import "flatpickr/dist/themes/material_blue.css";
 import Flatpickr from "react-flatpickr";
-
+import { DatePickerField } from "pages/InputFields/InputFields"
 const Dates = ({ formType, formData, handleDateChange }) => {
     return (
         <div id="section-5">
@@ -13,57 +13,29 @@ const Dates = ({ formType, formData, handleDateChange }) => {
             <Row className="g-3">
                 {formType === "Buyer" && (
                     <Col md="6">
-                        <label>Acceptance Date</label>
-                        <Flatpickr
-                            name="acceptance_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.acceptance_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "acceptance_date")}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Acceptance Date" name="acceptance_date" value={formData?.acceptance_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
 
                 {formType == "Buyer" && (
                     <Col md="6">
-                        <label>Closing Date</label>
-                        <Flatpickr
-                            name="closing_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.closing_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "closing_date")}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Closing Date" name="closing_date" value={formData?.closing_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
 
                 {formType == "Seller" && (
                     <Col md="6">
-                        <label>Listing Date</label>
-                        <Flatpickr
-                            name="listing_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.listing_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "listing_date")}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Listing Date" name="listing_date" value={formData?.listing_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
 
                 {formType == "Seller" && (
                     <Col md="6">
-                        <label>Expiry Date</label>
-                        <Flatpickr
-                            name="expiry_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.expiry_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "expiry_date")}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Expiry Date" name="expiry_date" value={formData?.expiry_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
             </Row>
