@@ -28,12 +28,76 @@
     width: 324px !important;
 }
 
-.dropend .dropdown-menu {
-    left: 100% !important;
-    top: 0 !important;
+.custom-dropdown .cd-toggle {
+    height: 36px;
+    background-color: #243e79;
+    border: 1px solid #243e79;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px;
+    font-weight: 500;
 }
 
-.dropstart .dropdown-menu {
-    right: 100% !important;
-    top: 0 !important;
+.custom-dropdown .cd-toggle:hover,
+.custom-dropdown .cd-toggle:focus {
+    background-color: #1b2f5a;
+    border-color: #1b2f5a;
+}
+
+.cd-menu {
+    text-align: center;
+    min-width: 160px;
+}
+
+.cd-item {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+/* Hover effect */
+.cd-item:hover {
+    background-color: #243e79;
+    color: white;
+}
+
+/* Selected item */
+.cd-item.active {
+    background-color: #243e79;
+    color: white;
+}
+
+.custom-dropdown-item {
+    transition: 0.2s ease;
+}
+
+.custom-dropdown-item:hover {
+    background: #243e79 !important;
+    /* purple */
+    color: white !important;
+}
+
+.custom-dropdown-item:hover i {
+    color: white !important;
+}
+
+.dot-menu-btn {
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.dot-menu-btn:hover {
+    background-color: #243e79 !important;
+    color: white !important;
+}
+
+.dot-menu-btn:hover i {
+    color: white !important;
+    /* icon turns white on hover */
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody, Row, Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import MainButton from "../MainButton";
 import FolderList from "./FolderList";
 import ContactList from "./ContactList";

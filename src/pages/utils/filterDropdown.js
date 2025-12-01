@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { Card, CardBody, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown } from "reactstrap";
 import { CheckButton, EllipsisVButton, DownButton } from "./allButton";
 import "../../assets/custom.css"
 
@@ -156,21 +156,45 @@ export const AdvancedSearchDropdown = () => {
     );
 };
 
-export const DropExample = () => {
-    const [open, setOpen] = useState(false);
 
+export const OptionsDropdown = ({ options = [], onSelect = () => { }, icon = "mdi mdi-dots-vertical font-size-18" }) => {
     return (
-        <div className="dropdown dropup show">
-            <Dropdown isOpen={open} toggle={() => setOpen(!open)} direction="up" >
-                <DropdownToggle caret color="primary">Dropup</DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem header>Header</DropdownItem>
-                    <DropdownItem disabled>Action</DropdownItem>
-                    <DropdownItem>Another Action</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Another Action</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-        </div>
+        <UncontrolledDropdown>
+            <DropdownToggle color="white" className="btn btn-link text-muted dot-menu-btn" >
+                <i className={icon}></i>
+            </DropdownToggle>
+
+            <DropdownMenu style={{ marginLeft: "-145px", borderRadius: "12px", padding: "6px 0", border: "1px solid #dad1e0", borderRadius: "8px", }}>
+                {options.map((opt) => (
+                    <DropdownItem key={opt.value} onClick={() => onSelect(opt)} style={{ display: "flex", alignItems: "center", gap: "10px", borderRadius: "5px" }}
+                        className="custom-dropdown-item" >
+                        <i className={opt.icon} style={{ fontSize: "14px" }}></i>
+                        {opt.label}
+                    </DropdownItem>
+                ))}
+            </DropdownMenu>
+        </UncontrolledDropdown>
     );
 };
+
+export const OptionsDropdownNew = ({ options = [], onSelect = () => { }, icon = "mdi mdi-dots-horizontal font-size-18" }) => {
+    return (
+        <UncontrolledDropdown>
+            <DropdownToggle color="white" className="btn btn-link text-muted dot-menu-btn" >
+                <i className={icon}></i>
+            </DropdownToggle>
+
+            <DropdownMenu style={{ marginLeft: "-150px", borderRadius: "12px", padding: "6px 0", border: "1px solid #dad1e0", borderRadius: "8px", }}>
+                {options.map((opt) => (
+                    <DropdownItem key={opt.value} onClick={() => onSelect(opt)} style={{ display: "flex", alignItems: "center", gap: "10px", borderRadius: "5px" }}
+                        className="custom-dropdown-item" >
+                        <i className={opt.icon} style={{ fontSize: "14px" }}></i>
+                        {opt.label}
+                    </DropdownItem>
+                ))}
+            </DropdownMenu>
+        </UncontrolledDropdown>
+    );
+};
+
+

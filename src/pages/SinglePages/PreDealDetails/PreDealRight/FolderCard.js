@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Collapse, Input, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import React, { useState } from "react";
+import { Row, Col, Card, Collapse, Input } from "reactstrap";
 import AllButton, { AddPlusCircleButton, UploadButton } from "pages/utils/allButton";
 import { preDealsFolderHeaderOptions, preDealsFoldersOptions } from "AllDummyData/PreDealDummyData";
-import { EllipsisVDropdown, DropExample } from "pages/utils/filterDropdown";
+import { OptionsDropdown, OptionsDropdownNew } from "pages/utils/filterDropdown";
 import classnames from "classnames"
 import AddDocumentModal from "pages/AllModals/AddDocumentModal";
 
 const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleDocCheckbox }) => {
     const allDocsChecked = folder.documents.every((_, i) => selectedDocs[`${index}-${i}`]);
     const [openFolders, setOpenFolders] = useState(true)
-    const [selected, setSelected] = useState("rename");
-    const [selectedOption, setSelectedOption] = useState("open");
     const [docModalOpen, setDocModalOpen] = useState(false);
 
     const newToggleFolder = () => {
         setOpenFolders(!openFolders)
     }
 
+    const handleFolderAction = (item) => {
+        console.log("Selected:", item);
+    };
+
     return (
         <>
-            <Card className="accordion" id="accordion">
+            <Card className="accordion mt-3" id="accordion">
                 <div className="accordion-item">
                     <div className={classnames("accordion-button accordion-header", { collapsed: !openFolders })} onClick={newToggleFolder}
                         style={{ cursor: "pointer" }}>
-                        <Input type="checkbox" checked={allDocsChecked}
+                        <Input type="checkbox" checked={allDocsChecked} onClick={(e) => e.stopPropagation()}
                             onChange={() => handleFolderCheckbox(index, folder.documents)}
                             className="me-3 mb-2" style={{ width: "30px", height: "20px", cursor: "pointer" }}
                         />
@@ -34,114 +36,7 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                         <div className="d-flex gap-2 me-3" onClick={(e) => e.stopPropagation()} >
                             <AddPlusCircleButton label="Add Form" onClick={(e) => { console.log("Button 1 Clicked") }} />
                             <UploadButton label="Upload Document" width="180px" onClick={(e) => { e.stopPropagation(); setDocModalOpen(true) }} />
-                            {/* <div className="d-flex justify-content-center">
-                                <UncontrolledDropdown
-                                    className="me-2"
-                                    direction="up"
-                                >
-                                    <DropdownToggle
-                                        caret
-                                        color="primary"
-                                    >
-                                        Dropup
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem header>
-                                            Header
-                                        </DropdownItem>
-                                        <DropdownItem disabled>
-                                            Action
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                        <DropdownItem divider />
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                                <UncontrolledDropdown
-                                    className="me-2"
-                                    direction="down"
-                                >
-                                    <DropdownToggle
-                                        caret
-                                        color="primary"
-                                    >
-                                        Dropdown
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem header>
-                                            Header
-                                        </DropdownItem>
-                                        <DropdownItem disabled>
-                                            Action
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                        <DropdownItem divider />
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                                <UncontrolledDropdown
-                                    className="me-2"
-                                    direction="end"
-                                >
-                                    <DropdownToggle
-                                        caret
-                                        color="primary"
-                                    >
-                                        Dropend
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem header>
-                                            Header
-                                        </DropdownItem>
-                                        <DropdownItem disabled>
-                                            Action
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                        <DropdownItem divider />
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                                <UncontrolledDropdown
-                                    className="me-2"
-                                    direction="right"
-                                >
-                                    <DropdownToggle
-                                        caret
-                                        color="primary"
-                                    >
-                                        Dropstart
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem header>
-                                            Header
-                                        </DropdownItem>
-                                        <DropdownItem disabled>
-                                            Action
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                        <DropdownItem divider />
-                                        <DropdownItem>
-                                            Another Action
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </div> */}
-
-                            <DropExample />
+                            <OptionsDropdown options={preDealsFolderHeaderOptions} onSelect={handleFolderAction} />
                         </div>
                     </div>
 
@@ -151,23 +46,21 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                                 folder.documents.map((doc, i) => (
                                     <Row key={i} className="align-items-center py-2" style={{ borderBottom: "1px solid #dad3deff" }}>
                                         <Col xs="auto">
-                                            <Input type="checkbox" checked={!!selectedDocs[`${index}-${i}`]} onChange={() => handleDocCheckbox(index, i)} />
+                                            <input type="checkbox" checked={!!selectedDocs[`${index}-${i}`]} onChange={() => handleDocCheckbox(index, i)} />
                                         </Col>
                                         <Col>
                                             <p className="text-primary fw-bold mb-0">{doc.title}</p>
                                         </Col>
                                         <Col xs="auto">
                                             {doc.status === "Signed" ? (
-                                                <AllButton label="Signed" color="success" width="160px" borderless={true} onClick={() => console.log("Click")} />
+                                                <AllButton label="Signed" color="success" width="145px" onClick={() => console.log("Click")} />
                                             ) : (
-                                                <AllButton label="Request Signature" color="info" width="160px" borderless={true} onClick={() => console.log("Click")}
+                                                <AllButton label="Request Signature" color="info" width="145px" onClick={() => console.log("Click")}
                                                 />
                                             )}
                                         </Col>
                                         <Col xs="auto">
-                                            {/* <EllipsisVDropdown width="30px" dropdownFilterOptions={preDealsFoldersOptions}
-                                                selectedOption={selectedOption} setSelectedOption={setSelectedOption} isVertical={false}
-                                                style={{ position: "absolute", left: "-140px", border: "1px solid #353435ff", borderRadius: "12px" }} /> */}
+                                            <OptionsDropdownNew options={preDealsFoldersOptions} onSelect={handleFolderAction} />
                                         </Col>
                                     </Row>
                                 ))

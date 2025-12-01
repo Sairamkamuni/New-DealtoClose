@@ -62,22 +62,22 @@ export const LinkedDealTitle = ["Linked Pre-Deal or Deal - Title of Deal"];
 export const LinkedWebLinks = ["Web Link - 1", "Web Link - 2"];
 
 export const preDealsFolderHeaderOptions = [
-    { value: "rename", label: "Rename" },
-    { value: "download", label: "Download" },
-    { value: "duplicate_folder", label: "Duplicate Folder" },
-    { value: "archive_folder", label: "Archive Folder" },
+    { value: 1, label: "Rename", icon: "mdi mdi-pencil-outline" },
+    { value: 2, label: "Download", icon: "mdi mdi-download-outline" },
+    { value: 3, label: "Duplicate Folder", icon: "mdi mdi-folder-multiple-outline" },
+    { value: 4, label: "Archive Folder", icon: "mdi mdi-archive-outline" },
 ];
 
 export const preDealsFoldersOptions = [
-    { value: "open", label: "Open" },
-    { value: "rRename", label: "Rename" },
-    { value: "send_sign_request", label: "Send Sign Request" },
-    { value: "cancel_sign_request", label: "Cancel Sign Request" },
-    { value: "download", label: "Download" },
-    { value: "print", label: "Print" },
-    { value: "copy", label: "Copy To" },
-    { value: "move", label: "Move To" },
-    { value: "archive", label: "Archive" },
+    { value: 1, label: "Open" },
+    { value: 2, label: "Rename" },
+    { value: 3, label: "Send Sign Request" },
+    { value: 4, label: "Cancel Sign Request" },
+    { value: 5, label: "Download" },
+    { value: 6, label: "Print" },
+    { value: 7, label: "Copy To" },
+    { value: 8, label: "Move To" },
+    { value: 9, label: "Archive" },
 ];
 
 export const folders = [
