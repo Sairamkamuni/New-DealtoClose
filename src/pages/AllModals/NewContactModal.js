@@ -4,7 +4,7 @@ import AsyncSelect from "react-select/async";
 import Select, { components } from "react-select";
 import { contactRoles, buyerTypeOptions } from "constants/config";
 import { FaPlusButton } from "pages/utils/allButton";
-import ContactModal from "pages/Contacts/ContactFrom/ContactModal";
+import ContactModal from "pages/Contacts/ContactModal/ContactModal";
 
 const NewContactModal = ({ isOpen, toggle }) => {
     const [modalOpen, setModalOpen] = useState(false);

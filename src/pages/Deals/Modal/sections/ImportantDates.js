@@ -1,8 +1,6 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import "flatpickr/dist/themes/material_blue.css"
-import Flatpickr from "react-flatpickr"
-import { DatePickerField } from "pages/InputFields/InputFields";
+import { DatePickerField, InputField } from "pages/InputFields/InputFields";
 
 const ImportantDates = ({ formType, handleChange, formData, handleDateChange }) => {
 
@@ -15,113 +13,57 @@ const ImportantDates = ({ formType, handleChange, formData, handleDateChange }) 
             <Row className="g-3">
                 {formType === "Buyer" && (
                     <Col md="6">
-                        <DatePickerField
-                            label="Effective Date"
-                            name="effective_date"
-                            value={formData?.effective_date}
-                            onChange={handleDateChange}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Effective Date" name="effective_date" value={formData?.effective_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
 
                 {formType == "Buyer" && (
                     <Col md="6">
-                        <label>Closing Date</label>
-                        <Flatpickr
-                            name="closing_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.closing_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "closing_date")}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Closing Date" name="closing_date" value={formData?.closing_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
 
                 {formType == "Seller" && (
                     <Col md="6">
-                        <label>Listing Date</label>
-                        <Flatpickr
-                            name="listing_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.listing_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "listing_date")}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Listing Date" name="listing_date" value={formData?.listing_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
 
                 {formType == "Seller" && (
                     <Col md="6">
-                        <label>Expiry Date</label>
-                        <Flatpickr
-                            name="expiry_date"
-                            className="form-control d-block"
-                            options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d" }}
-                            value={formData?.expiry_date || ""}
-                            onChange={(dates) => handleDateChange(dates, "expiry_date")}
-                            placeholder="MM, DD, YYYY"
-                        />
+                        <DatePickerField label="Expiry Date" name="expiry_date" value={formData?.expiry_date}
+                            onChange={handleDateChange} placeholder="MM, DD, YYYY" />
                     </Col>
                 )}
 
                 {formType === "Buyer" && (
                     <>
                         <Col md="6">
-                            <label>1st Escrow Due (Days)</label>
-                            <input name="first_escrow_days"
-                                className="form-control"
-                                type="number"
-                                value={formData?.first_escrow_days || ""}
-                                onChange={handleChange}
-                            />
+                            <InputField label="1st Escrow Due (Days)" type="text" name="first_escrow_days"
+                                value={formData?.first_escrow_days} onChange={handleChange} />
                         </Col>
                         <Col md="6">
-                            <label>2nd Escrow Due (Days)</label>
-                            <input name="second_escrow_days"
-                                className="form-control"
-                                type="number"
-                                value={formData?.second_escrow_days || ""}
-                                onChange={handleChange}
-                            />
+                            <InputField label="2nd Escrow Due (Days)" type="text" name="additional_escrow_days"
+                                value={formData?.additional_escrow_days} onChange={handleChange} />
                         </Col>
                         <Col md="6">
-                            <label>Loan Application Due (Days)</label>
-                            <input name="loan_application_days"
-                                className="form-control"
-                                type="number"
-                                value={formData?.loan_application_days || ""}
-                                onChange={handleChange}
-                            />
+                            <InputField label="Loan Application Due (Days)" type="text" name="loan_application_days"
+                                value={formData?.loan_application_days} onChange={handleChange} />
                         </Col>
                         <Col md="6">
-                            <label>HOA Application Due (Days)</label>
-                            <input name="hoa_application_days"
-                                className="form-control"
-                                type="number"
-                                value={formData?.hoa_application_days || ""}
-                                onChange={handleChange}
-                            />
+                            <InputField label="HOA Application Due (Days)" type="text" name="hoa_application_days"
+                                value={formData?.hoa_application_days} onChange={handleChange} />
                         </Col>
                         <Col md="6">
-                            <label>Inspection Period Due (Days)</label>
-                            <input name="inspection_period_days"
-                                className="form-control"
-                                type="number"
-                                value={formData?.inspection_period_days || ""}
-                                onChange={handleChange}
-                            />
+                            <InputField label="Inspection Period Due (Days)" type="text" name="inspection_period_days"
+                                value={formData?.inspection_period_days} onChange={handleChange} />
                         </Col>
                         <Col md="6">
-                            <label>Loan Commitment Due (Days)</label>
-                            <input name="loan_commitment_days"
-                                className="form-control"
-                                type="number"
-                                value={formData?.loan_commitment_days || ""}
-                                onChange={handleChange}
-                            />
+                            <InputField label="Loan Commitment Due (Days)" type="text" name="loan_commitment_days"
+                                value={formData?.loan_commitment_days} onChange={handleChange} />
                         </Col>
                     </>
                 )}

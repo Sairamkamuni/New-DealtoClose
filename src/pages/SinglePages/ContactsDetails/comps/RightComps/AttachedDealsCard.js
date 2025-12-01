@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import { Card, CardBody } from "reactstrap";
-import AddTaskModal from "./AddTaskModal";
-import { FaPlusButton } from "pages/utils/allButton";
+import { Link } from "react-router-dom";
 
 const AttachedDealsCard = () => {
-    const [modalOpen, setModalOpen] = useState(false)
 
     return (
-        <>
-            <Card className="shadow-sm mb-4" style={{ border: "1px solid #dad1e0", borderRadius: "12px" }}>
-                <CardBody>
-                    <h4 className="mb-3 fw-bold">Attached Deals</h4> <p className="mb-3">No deals attached yet.</p>
-                    <FaPlusButton label="Add Deal" width="100%" onClick={() => setModalOpen(true)} outline={false} />
-                </CardBody>
-            </Card>
-
-            <AddTaskModal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)} />
-        </>
+        <Card className="shadow-sm mb-4" style={{ border: "1px solid #dad1e0", borderRadius: "12px" }}>
+            <CardBody>
+                <h4 className="mb-3 fw-bolder">Attached Deals</h4> <p className="mb-3">No deals attached yet.</p>
+                <Link to="/deals-details" style={{ borderBottom: "2px solid transparent", transition: "border-color 0.2s ease" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.borderBottom = "1px solid #908e93ff")}
+                    onMouseLeave={(e) => (e.currentTarget.style.borderBottom = "1px solid transparent")}>
+                    123 Main Street Purchase
+                </Link>
+            </CardBody>
+        </Card>
     );
 };
 

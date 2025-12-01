@@ -20,7 +20,7 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
         if (tab >= 1 && tab <= 5) setActiveTabVartical(tab);
     };
 
-    const { formData, setFormData, handleChange, handleSubmit, handleSelectChange, handleDateChange, handleContactChange } =
+    const { formData, handleChange, handleSubmit, handleSelectChange, handleDateChange, handleContactChange } =
         FormHandlers({ apiUrl: "/api/deals", toggle: toggle, entity: "Deal", });
 
     // reset on open
@@ -93,21 +93,29 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                                     handleSelectChange={handleSelectChange}
                                     handleAsyncSelectChange={handleSelectChange}
                                 />
-
                             </div>
-
-                            {/* 
-                            <div id="section-2"><FinancialInformation formType={formType} handleSelectChange={handleSelectChange}
-                                handleChange={handleChange} formData={formData} /></div>
-                            <div id="section-3"><ImportantDates formType={formType} handleDateChange={handleDateChange} formData={formData}
-                                handleChange={handleChange} /></div>
-                            <div id="section-4"><Contact onContactChange={handleContactChange} /></div>
-                            <div id="section-5">
-                                <Template
+                            <div id="section-3">
+                                <ImportantDates
+                                    formType={formType}
+                                    handleDateChange={handleDateChange}
                                     formData={formData}
                                     handleChange={handleChange}
                                 />
-                            </div> */}
+                            </div>
+                            <div id="section-4">
+                                <Contact
+                                    onContactChange={handleContactChange}
+                                    handleAsyncSelectChange={handleSelectChange}
+                                    formData={formData}
+                                    handleSelectChange={handleSelectChange}
+                                />
+                            </div>
+                            <div id="section-5">
+                                <Template
+                                    formData={formData}
+                                    handleAsyncSelectChange={handleSelectChange}
+                                />
+                            </div>
                         </TabContent>
                     </Col>
                 </Row>
@@ -118,15 +126,9 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                     <AllButton label="Previous" width="80px" color="secondary" className="me-2" disabled={activeTabVartical === 1}
                         onClick={() => toggleTabVertical(activeTabVartical - 1)}
                     />
-                    <AllButton
-                        label={activeTabVartical === 5 ? "Submit" : "Next"}
-                        width="80px"
+                    <AllButton label={activeTabVartical === 5 ? "Submit" : "Next"} width="80px"
                         color={activeTabVartical === 5 ? "success" : "primary"}
-                        onClick={() =>
-                            activeTabVartical === 5
-                                ? handleSubmit()
-                                : toggleTabVertical(activeTabVartical + 1)
-                        }
+                        onClick={() => activeTabVartical === 5 ? handleSubmit() : toggleTabVertical(activeTabVartical + 1)}
                     />
                 </div>
             </div>

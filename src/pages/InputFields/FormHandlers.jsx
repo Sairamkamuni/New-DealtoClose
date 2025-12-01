@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { showSuccessAlert } from "pages/utils/Alerts/alertMessages";
-
+import { post, put, get, del } from "helpers/api_helper"
 export const FormHandlers = ({ apiUrl, toggle, entity }) => {
     const [formData, setFormData] = useState({});
     const [editMode, setEditMode] = useState(false);
@@ -59,7 +59,7 @@ export const FormHandlers = ({ apiUrl, toggle, entity }) => {
             setFormData({});
             setEditMode(false);
             setEditingId(null);
-            toggle && toggle();
+            toggle();
         }
     };
 

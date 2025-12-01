@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, CardBody, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { CheckButton, EllipsisVButton, DownButton } from "./allButton";
+import "../../assets/custom.css"
 
 export const FilterDropdown = ({ dropdownFilterOptions, selectedOption, setSelectedOption, width, height, size = 34, }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -150,6 +151,25 @@ export const AdvancedSearchDropdown = () => {
                         </Card>
                     </DropdownMenu>
                 </div>
+            </Dropdown>
+        </div>
+    );
+};
+
+export const DropExample = () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <div className="dropdown dropup show">
+            <Dropdown isOpen={open} toggle={() => setOpen(!open)} direction="up" >
+                <DropdownToggle caret color="primary">Dropup</DropdownToggle>
+                <DropdownMenu>
+                    <DropdownItem header>Header</DropdownItem>
+                    <DropdownItem disabled>Action</DropdownItem>
+                    <DropdownItem>Another Action</DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>Another Action</DropdownItem>
+                </DropdownMenu>
             </Dropdown>
         </div>
     );

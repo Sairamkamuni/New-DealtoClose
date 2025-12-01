@@ -146,3 +146,10 @@ export const StatusOption = [
     { value: 4, label: "Closed" },
     { value: 5, label: "Cancelled" },
 ];
+
+export const AgentsName = [
+    { value: 1, label: "Sai Kamuni" },
+    { value: 2, label: "Usha Kamuni" },
+    { value: 3, label: "Raj Kamuni" },
+    { value: 4, label: "Praveen Kumar" },
+];

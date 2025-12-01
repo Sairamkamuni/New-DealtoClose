@@ -27,3 +27,13 @@
 .fixed-width {
     width: 324px !important;
 }
+
+.dropend .dropdown-menu {
+    left: 100% !important;
+    top: 0 !important;
+}
+
+.dropstart .dropdown-menu {
+    right: 100% !important;
+    top: 0 !important;
+}

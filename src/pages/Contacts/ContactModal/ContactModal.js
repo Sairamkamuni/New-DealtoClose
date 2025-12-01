@@ -1,52 +1,17 @@
 import React, { useState } from "react"
 import { Row, Col, Modal } from "reactstrap"
-import { post, put } from "helpers/api_helper"
-import { showSuccessAlert } from "pages/utils/Alerts/alertMessages"
-import { FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption, TagsOption } from "AllDummyData/ContacsDummyData"
+import {
+    FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption, TagsOption, AgentsName
+} from "AllDummyData/ContacsDummyData"
 import { InputField, SelectField, DatePickerField } from "pages/InputFields/InputFields"
 import AllButton from "pages/utils/allButton"
+import { FormHandlers } from "pages/InputFields/FormHandlers"
 
 const ContactModal = ({ isOpen, toggle }) => {
     const [formType, setFormType] = useState("Client");
-    const [formData, setFormData] = useState({});
-    const [editMode, setEditMode] = useState(false);
 
-    // Handle select change
-    const handleSelectChange = (selectedOption, field) => {
-        const name = field.name;
-        const label = selectedOption?.label || null;
-        const value = selectedOption ? selectedOption.value : null;
-
-        setFormData({ ...formData, [name]: { value, label }, });
-    };
-
-    // Handle date change
-    const handleDateChange = (selectedDates, name) => {
-        const date = selectedDates?.[0];
-        setFormData(prev => ({ ...prev, [name]: date ? date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : "" }));
-    };
-    // Handle normal input change
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
-    }
-
-    // Submit function
-    const handleSubmit = async () => {
-        console.log('Submitting formData:', formData);
-        // const url = editMode ? `${BANK_URL}/${editingId}` : BANK_URL;
-        // const method = editMode ? put : post;
-        // const { success, body } = await method(url, formData); 
-        console.log("Edit mode:", editMode);
-        console.log("API method call:", editMode ? "PUT" : "POST");
-        const success = true;
-        if (success) {
-            showSuccessAlert(editMode ? `${formData.first_name} ${formData.last_name} updated successfully!` : `${formData.first_name} ${formData.last_name} has been created successfully!`);
-            setFormData({});
-            setEditMode(false);
-            toggle();
-        }
-    };
+    const { formData, handleChange, handleSubmit, handleSelectChange, handleDateChange, handleContactChange } =
+        FormHandlers({ apiUrl: "/api/deals", toggle: toggle, entity: "Pre Deal", });
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} scrollable={true} style={{ maxWidth: "650px" }} >
@@ -91,19 +56,20 @@ const ContactModal = ({ isOpen, toggle }) => {
                             onChange={handleChange} />
                     </Col>
 
-                    <Col md="12">
-                        <SelectField label="Type" name="type" options={TypeOption} value={formData?.type}
-                            onChange={handleSelectChange} placeholder="Select Type..." />
-                    </Col>
+                    {formType === "Client" && (
+                        <Col md="12">
+                            <SelectField label="Type" name="type" options={TypeOption} value={formData?.type}
+                                onChange={handleSelectChange} placeholder="Select Type..." />
+                        </Col>
+                    )}
 
                     <Col md="12">
                         <SelectField label="Title" name="title" options={TitleOption} value={formData.title}
                             onChange={handleSelectChange} placeholder="Select Title..." />
                     </Col>
 
-                    {formType === "Collabrator" && (
+                    {formType === "Client" && (
                         <>
-
                             <Col md="12">
                                 <SelectField label="Status" name="status" options={StatusOption} value={formData?.status}
                                     onChange={handleSelectChange} placeholder="Select Status..." />
@@ -123,9 +89,7 @@ const ContactModal = ({ isOpen, toggle }) => {
                                 <SelectField label="Source" name="source" options={SourceOption} value={formData?.source}
                                     onChange={handleSelectChange} placeholder="Select Source..." />
                             </Col>
-
-                        </>
-                    )}
+                        </>)}
 
                     <Col md="12">
                         <SelectField label="Tags" name="tags" options={TagsOption} value={formData?.tags}
@@ -149,7 +113,7 @@ const ContactModal = ({ isOpen, toggle }) => {
                     </div>
 
                     <Col md="12" className="mb-3">
-                        <SelectField label="Agent Name" name="agent_name" options={RelationshipTypeOption} value={formData?.agent_name}
+                        <SelectField label="Agent Name" name="agent_name" options={AgentsName} value={formData?.agent_name}
                             onChange={handleSelectChange} placeholder="Select Agent Name..." />
                     </Col>
                 </Row>

@@ -9,8 +9,8 @@ const PreDealsHeader = () => {
                 <Link to="/pre-deals" className="d-flex align-items-center gap-2" style={{ cursor: "pointer" }} >
                     <i className="bx bx-chevron-left" style={{ fontSize: "24px" }}></i>
                     <h5 className="mb-0" style={{ borderBottom: "2px solid transparent", transition: "border-color 0.2s ease" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.borderBottom = "2px solid #000")}
-                        onMouseLeave={(e) => (e.currentTarget.style.borderBottom = "2px solid transparent")}
+                        onMouseEnter={(e) => (e.currentTarget.style.borderBottom = "1px solid #908e93ff")}
+                        onMouseLeave={(e) => (e.currentTarget.style.borderBottom = "1px solid transparent")}
                     >
                         Back
                     </h5>

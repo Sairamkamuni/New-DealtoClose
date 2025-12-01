@@ -3,7 +3,7 @@ import MetaTags from "react-meta-tags";
 import { Row, Col, Container } from "reactstrap";
 import { PencilButton } from "pages/utils/allButton";
 
-import ContactModal from "pages/Contacts/ContactFrom/ContactModal";
+import ContactModal from "pages/Contacts/ContactModal/ContactModal";
 import ContactInfo from "./comps/LeftComps/ContactInfo/ContactInfo";
 import AdditionalInfo from "./comps/LeftComps/AdditoinalInfo";
 
@@ -27,7 +27,8 @@ const ContactDetails = () => {
                         <Row className="align-items-center mb-3" >
                             <Col md={4} className="d-flex align-items-center">
                                 <h6 className="back-link mb-0">
-                                    <Link to="/contacts" className="d-flex align-items-center">
+                                    <Link to="/contacts" className="d-flex align-items-center" style={{ borderBottom: "2px solid transparent", transition: "border-color 0.2s ease" }} onMouseEnter={(e) => (e.currentTarget.style.borderBottom = "1px solid #908e93ff")}
+                                        onMouseLeave={(e) => (e.currentTarget.style.borderBottom = "1px solid transparent")}>
                                         <i className="bx bx-chevron-left me-1" />
                                         Back
                                     </Link>

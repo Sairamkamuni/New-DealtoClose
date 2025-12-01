@@ -8,7 +8,7 @@ import { FilterOptions } from "pages/Options/DropdownOptions";
 import { AddPlusCircleButton } from "pages/utils/allButton";
 import ContactTable from "./Table/ContactTable";
 import { allContacts, clientContacts, collaboratorContacts } from "../../AllDummyData/ContacsDummyData";
-import ContactModal from "./ContactFrom/ContactModal";
+import ContactModal from "./ContactModal/ContactModal";
 
 const Contacts = () => {
     const [activeTab, setActiveTab] = useState(1);

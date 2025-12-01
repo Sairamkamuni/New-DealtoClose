@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Collapse, Input } from "reactstrap";
+import { Row, Col, Card, Collapse, Input, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import AllButton, { AddPlusCircleButton, UploadButton } from "pages/utils/allButton";
 import { preDealsFolderHeaderOptions, preDealsFoldersOptions } from "AllDummyData/PreDealDummyData";
-import { EllipsisVDropdown } from "pages/utils/filterDropdown";
+import { EllipsisVDropdown, DropExample } from "pages/utils/filterDropdown";
 import classnames from "classnames"
 import AddDocumentModal from "pages/AllModals/AddDocumentModal";
 
@@ -23,9 +23,9 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                 <div className="accordion-item">
                     <div className={classnames("accordion-button accordion-header", { collapsed: !openFolders })} onClick={newToggleFolder}
                         style={{ cursor: "pointer" }}>
-                        <Input type="checkbox" checked={allDocsChecked} onClick={(e) => e.stopPropagation()}
+                        <Input type="checkbox" checked={allDocsChecked}
                             onChange={() => handleFolderCheckbox(index, folder.documents)}
-                            className="me-3 mb-2" style={{ width: "20px", height: "20px", cursor: "pointer" }}
+                            className="me-3 mb-2" style={{ width: "30px", height: "20px", cursor: "pointer" }}
                         />
                         <div className="w-100 me-3 d-flex justify-content-between align-items-center">
                             <h2 style={{ fontSize: "18px", fontWeight: "bold", margin: 0 }} >{folder.folderName} </h2>
@@ -34,8 +34,114 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                         <div className="d-flex gap-2 me-3" onClick={(e) => e.stopPropagation()} >
                             <AddPlusCircleButton label="Add Form" onClick={(e) => { console.log("Button 1 Clicked") }} />
                             <UploadButton label="Upload Document" width="180px" onClick={(e) => { e.stopPropagation(); setDocModalOpen(true) }} />
-                            <EllipsisVDropdown width="30px" dropdownFilterOptions={preDealsFolderHeaderOptions} selectedOption={selected}
-                                setSelectedOption={setSelected} style={{ left: "-140px", border: "1px solid #353435ff", borderRadius: "12px" }} />
+                            {/* <div className="d-flex justify-content-center">
+                                <UncontrolledDropdown
+                                    className="me-2"
+                                    direction="up"
+                                >
+                                    <DropdownToggle
+                                        caret
+                                        color="primary"
+                                    >
+                                        Dropup
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem header>
+                                            Header
+                                        </DropdownItem>
+                                        <DropdownItem disabled>
+                                            Action
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown
+                                    className="me-2"
+                                    direction="down"
+                                >
+                                    <DropdownToggle
+                                        caret
+                                        color="primary"
+                                    >
+                                        Dropdown
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem header>
+                                            Header
+                                        </DropdownItem>
+                                        <DropdownItem disabled>
+                                            Action
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown
+                                    className="me-2"
+                                    direction="end"
+                                >
+                                    <DropdownToggle
+                                        caret
+                                        color="primary"
+                                    >
+                                        Dropend
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem header>
+                                            Header
+                                        </DropdownItem>
+                                        <DropdownItem disabled>
+                                            Action
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown
+                                    className="me-2"
+                                    direction="right"
+                                >
+                                    <DropdownToggle
+                                        caret
+                                        color="primary"
+                                    >
+                                        Dropstart
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem header>
+                                            Header
+                                        </DropdownItem>
+                                        <DropdownItem disabled>
+                                            Action
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem>
+                                            Another Action
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </div> */}
+
+                            <DropExample />
                         </div>
                     </div>
 
@@ -45,7 +151,7 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                                 folder.documents.map((doc, i) => (
                                     <Row key={i} className="align-items-center py-2" style={{ borderBottom: "1px solid #dad3deff" }}>
                                         <Col xs="auto">
-                                            <input type="checkbox" checked={!!selectedDocs[`${index}-${i}`]} onChange={() => handleDocCheckbox(index, i)} />
+                                            <Input type="checkbox" checked={!!selectedDocs[`${index}-${i}`]} onChange={() => handleDocCheckbox(index, i)} />
                                         </Col>
                                         <Col>
                                             <p className="text-primary fw-bold mb-0">{doc.title}</p>
@@ -59,9 +165,9 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                                             )}
                                         </Col>
                                         <Col xs="auto">
-                                            <EllipsisVDropdown width="30px" dropdownFilterOptions={preDealsFoldersOptions}
+                                            {/* <EllipsisVDropdown width="30px" dropdownFilterOptions={preDealsFoldersOptions}
                                                 selectedOption={selectedOption} setSelectedOption={setSelectedOption} isVertical={false}
-                                                style={{ position: "absolute", left: "-140px", border: "1px solid #353435ff", borderRadius: "12px" }} />
+                                                style={{ position: "absolute", left: "-140px", border: "1px solid #353435ff", borderRadius: "12px" }} /> */}
                                         </Col>
                                     </Row>
                                 ))
