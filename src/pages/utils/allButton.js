@@ -7,6 +7,8 @@ import {
 import { FaEllipsis, FaMessage, FaScissors, FaTrashCan, FaUserGroup, FaGear, FaLifeRing, FaListCheck } from "react-icons/fa6";
 import { BiSolidInbox } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { BiSolidPencil, BiComment, BiSave } from "react-icons/bi";
+
 
 const AllButton = ({ icon: Icon, size = 40, width = "130px", height = "34px", color = "primary", className = "", label,
     asIconOnly = false, outline = true, to, ...props }) => {
@@ -79,5 +81,8 @@ export const HelpButton = (props) => <AllButton icon={FaLifeRing} {...props} />;
 export const ListCheckButton = (props) => <AllButton icon={FaListCheck} {...props} />;
 export const BackButton = (props) => <AllButton icon={FaChevronLeft} {...props} />;
 export const EyeButton = (props) => <AllButton icon={FaEye} {...props} />;
+export const EditButton = (props) => <AllButton icon={BiSolidPencil} {...props} />;
+export const CommentButton = (props) => <AllButton icon={BiComment} {...props} />;
+export const SaveButton = (props) => <AllButton icon={BiSave} {...props} />;
 
 export default AllButton;

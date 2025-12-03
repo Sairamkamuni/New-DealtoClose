@@ -8,7 +8,7 @@ const DealsTableTabs = ({ activeTab, allRows, buyerRows, sellerRows, callback })
         <Row>
             <Col>
                 <Card>
-                    <TabContent activeTab={activeTab} className="border border-primary-subtle">
+                    <TabContent activeTab={activeTab}>
                         <TabPane tabId={1}>
                             <Datatables
                                 columns={PreDealTableColumns(callback)}

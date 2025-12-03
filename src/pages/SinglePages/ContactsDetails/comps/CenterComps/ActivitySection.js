@@ -41,7 +41,7 @@ const ActivitySection = () => {
                         <AllButton width="140px" outline={false} label="Add Note" className="mt-3" />
                     </div>
                     <hr />
-                    <h6 className="fw-semibold mb-3">History</h6>
+                    <h5 className="fw-bolder mb-3">History</h5>
 
                     <TabPane tabId={1}>
                         <AllTab initialData={sampleData} />

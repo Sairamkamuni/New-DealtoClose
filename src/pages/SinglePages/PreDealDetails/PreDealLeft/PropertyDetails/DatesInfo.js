@@ -28,9 +28,11 @@ const DatesInfo = ({ isOpen, toggle }) => {
             {infoItems.map((item, index) => (
                 <Row key={index} className="align-items-center mb-1">
                     <Col xs="auto">
-                        <p className="mb-0">{item.label}:</p>
+                        <p className="mb-0 fw-bold text-muted">{item.label}:</p>
                     </Col>
-                    <Col className="ps-0">{item.value}</Col>
+                    <Col className="ps-0 ">
+                        <span className="text-underline-after">{item.value}</span>
+                    </Col>
                 </Row>
             ))}
         </AccordionSection>

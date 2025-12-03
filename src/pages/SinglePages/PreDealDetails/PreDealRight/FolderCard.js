@@ -27,7 +27,7 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                         style={{ cursor: "pointer" }}>
                         <Input type="checkbox" checked={allDocsChecked} onClick={(e) => e.stopPropagation()}
                             onChange={() => handleFolderCheckbox(index, folder.documents)}
-                            className="me-3 mb-2" style={{ width: "30px", height: "20px", cursor: "pointer" }}
+                            className="me-3 mb-2" style={{ width: "20px", height: "20px", cursor: "pointer" }}
                         />
                         <div className="w-100 me-3 d-flex justify-content-between align-items-center">
                             <h2 style={{ fontSize: "18px", fontWeight: "bold", margin: 0 }} >{folder.folderName} </h2>
@@ -53,7 +53,7 @@ const FolderCard = ({ folder, index, selectedDocs, handleFolderCheckbox, handleD
                                         </Col>
                                         <Col xs="auto">
                                             {doc.status === "Signed" ? (
-                                                <AllButton label="Signed" color="success" width="145px" onClick={() => console.log("Click")} />
+                                                <AllButton label="Signed" color="success" outline={false} width="145px" onClick={() => console.log("Click")} />
                                             ) : (
                                                 <AllButton label="Request Signature" color="info" width="145px" onClick={() => console.log("Click")}
                                                 />

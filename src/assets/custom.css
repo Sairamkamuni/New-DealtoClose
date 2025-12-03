@@ -101,3 +101,31 @@
     color: white !important;
     /* icon turns white on hover */
 }
+
+
+/* Border Bottom on Hover */
+.text-underline-after {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* the underline element */
+.text-underline-after::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    /* adjust distance from text */
+    height: 1px;
+    width: 0%;
+    background: #908e93ff;
+    transition: width 0.18s ease;
+}
+
+/* on hover expand underline to full text width */
+.text-underline-after:hover::after,
+.text-underline-after:focus::after {
+    width: 100%;
+}

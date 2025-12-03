@@ -17,21 +17,24 @@ const PropertyInfo = ({ isOpen, toggle }) => {
         <AccordionSection title="Property Information" isOpen={isOpen} toggle={toggle}>
             <Row className="mb-1">
                 <Col>
-                    <p className="mb-0">{data.address}</p>
+                    <p className="mb-0 text-underline-after">{data.address}</p>
                 </Col>
             </Row>
             <Row className="mb-2">
                 <Col>
-                    <p className="mb-0  ">{data.city}</p>
+                    <p className="mb-0  text-underline-after">{data.city}</p>
                 </Col>
             </Row>
 
             {infoItems.map((item, index) => (
                 <Row key={index} className="align-items-center mb-1">
                     <Col xs="auto">
-                        <p className="mb-0">{item.label}:</p>
+                        <p className="mb-0 fw-bold text-muted">{item.label}:</p>
                     </Col>
-                    <Col className="ps-0">{item.value}</Col>
+                    <Col className="ps-0 ">
+                        <span className="text-underline-after">{item.value}</span>
+                    </Col>
+
                 </Row>
             ))}
         </AccordionSection>
