@@ -36,7 +36,7 @@ const Deals = () => {
                         <Col md="4">
                             <MenuTabs menus={dealStatusFilters} activeTab={dealStatusFilters[activeFilterTab].id} setActiveTab={setActiveFilterTab} />
                         </Col>
-                        <Col md="8">
+                        <Col md="7">
                             <div className="d-flex align-items-center justify-content-end gap-2 mt-1">
                                 <Searchbar style={{ width: "500px" }} />
                                 <FilterDropdown dropdownFilterOptions={FilterOptions} selectedOption={selectedOption}

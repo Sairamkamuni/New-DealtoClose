@@ -99,7 +99,7 @@ export const AdvancedSearchDropdown = () => {
         <div className="d-flex">
             <Dropdown isOpen={dropdownOpen} toggle={toggle} className="">
                 <DropdownToggle tag="span" data-toggle="dropdown" aria-expanded={dropdownOpen}>
-                    <DownButton width="38px" />
+                    <DownButton width="40px" iconMarginRight="0px" />
                 </DropdownToggle>
                 <div className="dropdownPosition">
                     <DropdownMenu direction="end" className="mt-1 p-0" >
@@ -157,14 +157,14 @@ export const AdvancedSearchDropdown = () => {
 };
 
 
-export const OptionsDropdown = ({ options = [], onSelect = () => { }, icon = "mdi mdi-dots-vertical font-size-18" }) => {
+export const OptionsDropdown = ({ options = [], onSelect = () => { }, icon = "mdi mdi-dots-vertical font-size-18", leftMargin = "-145px" }) => {
     return (
         <UncontrolledDropdown>
             <DropdownToggle color="white" className="btn btn-link text-muted dot-menu-btn" >
                 <i className={icon}></i>
             </DropdownToggle>
 
-            <DropdownMenu style={{ marginLeft: "-145px", borderRadius: "12px", padding: "6px 0", border: "1px solid #dad1e0", borderRadius: "8px", }}>
+            <DropdownMenu style={{ marginLeft: leftMargin, borderRadius: "12px", padding: "6px 0", border: "1px solid #dad1e0", borderRadius: "8px", }}>
                 {options.map((opt) => (
                     <DropdownItem key={opt.value} onClick={() => onSelect(opt)} style={{ display: "flex", alignItems: "center", gap: "10px", borderRadius: "5px" }}
                         className="custom-dropdown-item" >

@@ -41,12 +41,12 @@ const DocumentsTab = ({ callback }) => {
                             ))
                         }
                     </Nav>
-                    <AddPlusCircleButton width="36px" borderless={true} onClick={() => console.log("clicked")} className="ms-2" />
+                    <AddPlusCircleButton width="36px" borderless onClick={() => console.log("clicked")} className="ms-2" />
                 </Col>
                 <Col md={7} className="d-flex justify-content-end align-item-center">
                     <Searchbar style={{ width: "300px", height: "36px" }} />
-                    <AddPlusCircleButton label="Add Document" width="150px" height="36px" borderless={true} onClick={(e) => { e.stopPropagation(); setDocModalOpen(true) }} className="ms-2" />
-                    <AllButton label="Archive" width="100px" height="36px" borderless={true} onClick={() => console.log("clicked")} className="ms-2" />
+                    <AddPlusCircleButton label="Add Document" width="150px" height="36px" borderless onClick={(e) => { e.stopPropagation(); setDocModalOpen(true) }} className="ms-2" />
+                    <AllButton label="Archive" width="100px" height="36px" borderless onClick={() => console.log("clicked")} className="ms-2" />
                 </Col>
             </Row >
 

@@ -124,4 +124,4 @@ MailsList.propTypes = {
   showToolbar: PropTypes.bool,
 }
 
-export default withRouter(MailsList)
+export default MailsList;

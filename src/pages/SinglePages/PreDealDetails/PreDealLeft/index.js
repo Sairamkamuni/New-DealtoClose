@@ -10,8 +10,7 @@ import PreDealsModal from "pages/Pre-Deals/Modal";
 import { Representing, Type } from "AllDummyData/PreDealDummyData";
 
 const PreDealLeft = () => {
-    const selectedRepresenting = Representing[0];
-    const selectedType = Type[0];
+    const data = { representing: Representing[0], type: Type[2] };
     const [modalOpen, setModalOpen] = useState(false);
     const [cols, setCols] = useState({ col1: true, col2: true, col3: true, col4: true });
 
@@ -19,6 +18,10 @@ const PreDealLeft = () => {
         setCols((prev) => ({ ...prev, [colName]: !prev[colName], }));
     };
 
+    const infoItems = [
+        { label: "Representing", value: data.representing },
+        { label: "Type #", value: data.type },
+    ];
 
     return (
         <Card className="mt-4" style={{ border: "1px solid #dad1e0", borderRadius: "12px" }}>
@@ -33,19 +36,17 @@ const PreDealLeft = () => {
                     </Col>
                 </Row>
 
-                <Row className="align-items-center">
-                    <Col xs="auto">
-                        <p className="fw-bold mb-0">Representing:</p>
-                    </Col>
-                    <Col style={{ marginLeft: "-18px" }}>{selectedRepresenting}</Col>
-                </Row>
+                {infoItems.map((item, index) => (
+                    <Row key={index} className="align-items-center mb-1">
+                        <Col xs="auto">
+                            <p className="mb-0 fw-bold text-muted">{item.label}:</p>
+                        </Col>
+                        <Col className="ps-0" style={{ marginLeft: "-5px" }}>
+                            <span className="text-underline-after">{item.value}</span>
+                        </Col>
 
-                <Row className="align-items-center mt-2">
-                    <Col xs="auto">
-                        <p className="fw-bold mb-0">Type:</p>
-                    </Col>
-                    <Col style={{ marginLeft: "-18px" }}>{selectedType}</Col>
-                </Row>
+                    </Row>
+                ))}
 
                 <Row className="mt-4">
                     <Col>

@@ -292,3 +292,10 @@ export const noteText2 = "Initial client conversation was positive. They are ver
 export const noteAgentUser = "Alice Agent";
 export const noteDate = "Sep 17, 2025";
 export const noteTime = "5:40 AM";
+
+
+//  DropDown Options for horizontal & vertical
+export const taskDropdownOption = [
+    { value: 1, label: "Edit" },
+    { value: 2, label: "Delete" },
+];

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import { Input } from "reactstrap";
 import { CalendarButton, SideDotsButton } from "pages/utils/allButton";
+import { OptionsDropdown, OptionsDropdownNew } from "pages/utils/filterDropdown";
+import { taskDropdownOption } from "AllDummyData/DealsDummyData";
 
 export let DealTableColumns = (callback = {}) => [
     {
@@ -126,7 +128,9 @@ export let DealTaskTableColumns = (callback = {}, DocumentAgentUser = [], Docume
     },
     {
         dataField: "actions", text: "", isDummyField: true,
-        formatter: (cell, row) => (<SideDotsButton width={28} onClick={() => callback?.onActionClick?.(row)} />),
+        formatter: (cell, row) => (
+            <OptionsDropdownNew options={taskDropdownOption} />
+        ),
         headerStyle: { width: "60px" },
     },
 ];

@@ -36,15 +36,15 @@ const EmailTab = () => {
                                 </NavItem>
                             ))}
                         </Nav>
-                        <EmailButton label="Compose Email" width="160px" height="36px" onClick={(e) => { e.stopPropagation(); setModalOpen(true) }} className="ms-2" />
+                        <EmailButton label="Compose Email" width="160px" height="36px" onClick={(e) => { e.stopPropagation(); setModalOpen(true) }} className="me-2" />
                     </div>
                 </Col>
 
                 <Col>
                     <div className="d-flex align-items-center justify-content-end gap-2 mt-2">
                         <Searchbar style={{ width: "400px", height: "36px" }} />
-                        <AdvancedSearchDropdown style={{ height: "36px" }} />
-                        <PrintButton width="38px" height="36px" onClick={() => window.print()} />
+                        <AdvancedSearchDropdown style={{ height: "36px", marginRight: "200px" }} />
+                        <PrintButton width="40px" height="36px" iconMarginRight="0px" onClick={() => window.print()} />
                     </div>
                 </Col>
             </Row>

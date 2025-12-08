@@ -31,7 +31,7 @@ export const PreDealCreatedBy = ["Agent 01", "Agent 02", "Agent 03", "Agent 04",
 
 // Collapse Details Dummy Data
 export const Representing = ["Buyer", "Seller", "Tenant", "Landlord"]
-export const Type = ["Pre-Offer", "Pre-Listing",]
+export const Type = ["Pre-Offer", "Pre-Listing", "Purchase Offer"]
 
 // Property Details Dummy Data
 export const PropertyAddress = ["2650 SW 76th Ave #101,",]

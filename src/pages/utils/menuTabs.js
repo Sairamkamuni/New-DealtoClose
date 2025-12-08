@@ -6,17 +6,17 @@ const MenuTabs = ({ menus = [], activeTab, setActiveTab, isCustomStyle = false }
     const toggleTab = (tab) => { setActiveTab(tab) };
 
     return (
-        <Nav pills className="navtab-bg justify-content-between" style={{ backgroundColor: "#e1e7f6", padding: "6px", borderRadius: "10px" }} >
+        <Nav pills className="d-flex justify-content-between" style={{ backgroundColor: "#e1e7f6", padding: "6px", borderRadius: "10px" }} >
             {menus.map((tab, index) => (
                 <React.Fragment key={tab.id}>
-                    <NavItem className="me-2">
+                    <NavItem>
                         <NavLink onClick={() => toggleTab(index)}
                             style={{
                                 cursor: "pointer",
                                 backgroundColor: activeTab !== tab.id ? "#ffffff" : "#243e79",
                                 color: activeTab !== tab.id ? "#243e79" : "#ffffff",
-                                border: "1px solid #bfc9e0",
                                 borderRadius: "6px",
+                                marginLeft: "0px"
                             }}
                         >
                             {tab.label}
@@ -30,7 +30,7 @@ const MenuTabs = ({ menus = [], activeTab, setActiveTab, isCustomStyle = false }
                                         alignSelf: "center",
                                         color: "#243e79",
                                         fontWeight: "bold",
-                                        marginRight: "8px",
+                                        marginRight: "0px",
                                         fontSize: "18px"
                                     }}
                                 >

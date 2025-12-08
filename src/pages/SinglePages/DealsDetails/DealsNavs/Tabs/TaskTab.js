@@ -100,25 +100,29 @@ const TaskTab = () => {
                         </Dropdown>
 
                         <AddPlusCircleButton label="Add Task" width="120px" onClick={setModalOpen} />
-                        <AddPlusCircleButton label="Add Template" width="140px" onClick={() => console.log("Add Template clicked")} />
+                        <AddPlusCircleButton label="Add Template" width="145px" onClick={() => console.log("Add Template clicked")} />
                         <ArchiveButton label="Archive" width="100px" onClick={() => console.log("Archive clicked")} />
                     </div>
                 </Col>
             </Row>
 
             <TabContent activeTab={taskTags} className="p-2 text-muted">
-                <TabPane tabId={1} style={{ border: "1px solid #dad1e0", borderRadius: "10px", marginTop: "5px", }}>
-                    <Datatables
-                        columns={DealTaskTableColumns(callback, DocumentAgentUser, DocumentStatus)}
-                        showTableOnly={true}
-                        rows={tasks}
-                        keyField={"id"}
-                        loading={false}
-                        rowStyle={rowStyle}
-                        showPagination={true}
-                        ssr={() => { }}
-                    />
-                </TabPane>
+                <Row style={{ border: "1px solid #dad1e0", borderRadius: "10px", marginTop: "5px", }}>
+                    <Col>
+                        <TabPane tabId={1}>
+                            <Datatables
+                                columns={DealTaskTableColumns(callback, DocumentAgentUser, DocumentStatus)}
+                                showTableOnly={true}
+                                rows={tasks}
+                                keyField={"id"}
+                                loading={false}
+                                rowStyle={rowStyle}
+                                showPagination={true}
+                                ssr={() => { }}
+                            />
+                        </TabPane>
+                    </Col>
+                </Row>
             </TabContent>
 
             <AddTaskModal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)} formTask={true} />

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Row, Col, Card } from "reactstrap";
-import AllButton, { PencilButton } from "pages/utils/allButton";
+import AllButton, { EditButton } from "pages/utils/allButton";
 import Flatpickr from "react-flatpickr";
 import moment from "moment";
-import "../../Style.css"
 
 const keyWithDates = [
     { label: "Effective Date", date: "Nov 12, 2025" },
@@ -55,9 +54,8 @@ const KeyDatesTab = () => {
                     {/* Header */}
                     <div className="d-flex justify-content-between align-items-center mb-2">
                         <h5 className="text-start fw-bolder mb-0">Key Dates</h5>
-                        <PencilButton className={dateChangeMode ? "active" : ""}
-                            title={`Edit Mode ${dateChangeMode ? "Active" : "Disabled"}`} width="36px" borderless={true} outline={true}
-                            onClick={() => setDateChangeMode(!dateChangeMode)} />
+                        <EditButton className={dateChangeMode ? "active" : ""} iconMarginRight="0px" iconFontSize="20px"
+                            title={`Edit Mode ${dateChangeMode ? "Active" : "Disabled"}`} width="40px" onClick={() => setDateChangeMode(!dateChangeMode)} />
                     </div>
 
 
@@ -65,17 +63,17 @@ const KeyDatesTab = () => {
                         {keyWithDates.map((item, index) => (
                             <Row key={index} >
                                 <Col className="d-flex">
-                                    <span className="me-3 mb-0">o</span>
-                                    <p className="mb-2">{item.label} :</p>
+                                    <span className="me-3 mb-3 mb-0">o</span>
+                                    <p className="mb-4">{item.label} :</p>
                                 </Col>
                                 <Col>
                                     {dateChangeMode ? (
-                                        <div className="w-100">
-                                            <Flatpickr className="form-control form-control-sm" value={moment(`Nov ${index + 1}, 2025`).format("YYYY-MM-DD")}
+                                        <div className="w-100 mt-1">
+                                            <Flatpickr className="form-control" value={moment(`Nov ${index + 1}, 2025`).format("YYYY-MM-DD")}
                                                 options={{ altInput: true, altFormat: "F j, Y", dateFormat: "Y-m-d", }} placeholder="MM, DD, YYYY" />
                                         </div>
                                     ) : (
-                                        <p className="ms-4 mb-2 fw-bold ">{item.date}</p>
+                                        <h6 className="ms-5 mb-2 fw-bold">{item.date}</h6>
                                     )}
                                 </Col>
                             </Row>
@@ -93,13 +91,13 @@ const KeyDatesTab = () => {
                 <Row>
                     {topSection.map((item, index) => (
                         <Col md={4} key={index} className="mb-3">
-                            <p className="text-muted mb-0" style={{ fontSize: "14px" }}>
+                            <p className="mb-0" style={{ fontSize: "14px" }}>
                                 {item.label}
                             </p>
                             {isEditMode ? (
                                 <input type="text" defaultValue={item.value} className="form-control mt-1" />
                             ) : (
-                                <p className="fw-bold text-dark mt-1">{item.value}</p>
+                                <h6 className="fw-bold mt-1">{item.value}</h6>
                             )}
                         </Col>
                     ))}
@@ -108,13 +106,13 @@ const KeyDatesTab = () => {
                 <Row>
                     {bottomSection.map((item, index) => (
                         <Col md={4} key={index} className="mb-3">
-                            <p className="text-muted mb-0" style={{ fontSize: "14px" }}>
+                            <p className="mb-0" style={{ fontSize: "14px" }}>
                                 {item.label}
                             </p>
                             {isEditMode ? (
                                 <input type="text" defaultValue={item.value} className="form-control mt-1" />
                             ) : (
-                                <p className="fw-bold text-dark mt-1">{item.value}</p>
+                                <h6 className="fw-bold mt-1">{item.value}</h6>
                             )}
                         </Col>
                     ))}
