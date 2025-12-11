@@ -59,9 +59,7 @@ const PreDealsModal = ({ isOpen, toggle, preDeal }) => {
 
             <div className="modal-header d-block">
                 <h4 className="modal-title fw-bolder"> {preDeal ? "Edit Pre-Deal" : "Create a New Pre-Deal"} </h4>
-                <button type="button" onClick={toggle} className="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" onClick={toggle} className="close" aria-label="Close"> </button>
             </div>
 
 

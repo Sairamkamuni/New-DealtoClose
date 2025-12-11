@@ -20,7 +20,7 @@ export const InputField = ({ label, type = "text", rows, name, value, onChange, 
                 <textarea
                     name={name}
                     rows={rows || 3}
-                    className="form-control "
+                    className="form-control"
                     placeholder={placeholder}
                     value={value || ""}
                     onChange={onChange}

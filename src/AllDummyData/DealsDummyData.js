@@ -60,7 +60,6 @@ export const transactionOwner = [
     { value: 3, label: "Raj Kamuni" },
     { value: 4, label: "Praveen Kumar" },
 ];
-
 export const BuyersOrTenants = [
     { value: 1, label: "Sai Kamuni" },
     { value: 2, label: "Usha Kamuni" },
@@ -298,4 +297,42 @@ export const noteTime = "5:40 AM";
 export const taskDropdownOption = [
     { value: 1, label: "Edit" },
     { value: 2, label: "Delete" },
+];
+
+export const dealsPropertyDetails = [
+    { value: "Street Address", label: "123 NW Main St" },
+    { value: "Unit #", label: "103" },
+    { value: "City", label: "Wellington" },
+    { value: "State", label: "FL" },
+    { value: "Zip", label: "33414" },
+    { value: "County", label: "Palm Beach" },
+    { value: "Property Type", label: "Condo" },
+    { value: "Year Built", label: "1989" },
+];
+
+export const dealsPartyList = [
+    { title: "Buyer 01", name: "Buyer Name 01", phone: "(123) 456-7890", email: "Buyer01@gmail.com" },
+    { title: "Seller 01", name: "Seller Name 01", phone: "(987) 654-3210", email: "Seller01@gmail.com" },
+    { title: "Buyer 02", name: "Buyer Name 02", phone: "(123) 456-7890", email: "Buyer02@gmail.com" },
+    { title: "Seller 02", name: "Seller Name 02", phone: "(987) 654-3210", email: "Seller02@gmail.com" },
+    { title: "Buyer Agent 01", name: "Buyer Agent Name 01", phone: "(987) 654-3210", email: "BuyerAgent01@gmail.com" },
+    { title: "Seller Agent 01", name: "Seller Agent Name 01", phone: "(987) 654-3210", email: "SellerAgent01@gmail.com" },
+    { title: "Co-Buyer Agent", name: "Co-Buyer Agent Name", phone: "(987) 654-3210", email: "BuyerAgent02@gmail.com" },
+    { title: "Seller Agent 01", name: "Seller Agent Name 02", phone: "(987) 654-3210", email: "SellerAgent02@gmail.com" },
+    { title: "Title Company", name: "Title Company Agent Name", phone: "(123) 456-7890", email: "TitleCompany@gmail.com", company: "Title Company" },
+    { title: "Escrow Agent", name: "Escrow Agent Name", phone: "(987) 654-3210", email: "EscrowAgent@gmail.com" },
+];
+
+export const dealsAdditionalInformation = [
+    { value: "Beds", label: "3" },
+    { value: "Baths", label: "2" },
+    { value: "SqFt", label: "1234" },
+    { value: "Lot Size", label: "5678" },
+    { value: "Subdivision", label: "Subdivision Name" },
+    { value: "HOA", label: "YES / NO" },
+    { value: "HOA Amount", label: "Per Month / Quater / Year" },
+    { value: "Property Tax ID", label: "1234567897" },
+    { value: "Tax Amount", label: "123456" },
+    { value: "Property Tax Year", label: "2025" },
+    { value: "List Date", label: "Aug 15th 1947" },
 ];

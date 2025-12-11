@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { showSuccessAlert } from "pages/utils/Alerts/alertMessages";
 import { post, put, get, del } from "helpers/api_helper"
+
 export const FormHandlers = ({ apiUrl, toggle, entity }) => {
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({ type: "", });
     const [editMode, setEditMode] = useState(false);
     const [editingId, setEditingId] = useState(null);
+
+    const [collapseOpen, setCollapseOpen] = useState(null);
+
+    // --- Collapse Handler ---
+    const collapseToggle = (index) => {
+        setCollapseOpen(prev => (prev === index ? null : index));
+    };
 
     // --- Handle normal text input ---
     const handleChange = (e) => {
@@ -63,15 +71,31 @@ export const FormHandlers = ({ apiUrl, toggle, entity }) => {
         }
     };
 
+    const handleFilesData = (files) => {
+        setFormData(p => ({ ...p, files: files }));
+    }
+
+    const handleRadioChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
     return {
         formData,
         setFormData,
         editMode,
+        setEditMode,
         handleChange,
         handleSelectChange,
         handleDateChange,
         handleContactChange,
         handleSubmit,
         startEditing,
+        handleFilesData,
+        handleRadioChange,
+        collapseToggle,
+        collapseOpen,
     };
 };

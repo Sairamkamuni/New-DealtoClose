@@ -129,3 +129,71 @@
 .text-underline-after:focus::after {
     width: 100%;
 }
+
+
+/* Create New Deal Modal  */
+.sale-lease-toggle {
+    display: flex;
+    background: #243d78;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.sale-lease-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* center the text */
+    text-align: center;
+    position: relative;
+    margin-bottom: 0px;
+    /* allow absolute child */
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-weight: 400;
+    border: 1px solid #ffffff;
+}
+
+.sale-lease-option.active {
+    background: white;
+    color: #243d78;
+}
+
+/* indicator stays on the left side */
+.sale-lease-indicator {
+    position: absolute;
+    left: 10px;
+    /* adjust dot position */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffffff99;
+    margin-bottom: 4px
+}
+
+.sale-lease-option.active .sale-lease-indicator {
+    background: #243d78;
+}
+
+.sale-lease-radio {
+    display: none;
+}
+
+/* For All Buttons For Using in New Deal Modal */
+.allbutton-wrapper {
+    border-radius: 6px;
+    padding: 2px;
+    background: white;
+    display: inline-block;
+}
+
+.allbutton-wrapper.active {
+    background: #243d78;
+}
+
+.allbutton-wrapper.active button {
+    color: white !important;
+}

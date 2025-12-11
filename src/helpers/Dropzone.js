@@ -59,8 +59,7 @@ export const Dropzone = ({ callback }) => {
   );
 };
 
-
-export const BigDropzone = ({ callback }) => {
+export const BigDropzone = ({ callback, showExtras = true }) => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
   const [files, setFiles] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
@@ -90,7 +89,9 @@ export const BigDropzone = ({ callback }) => {
 
   const filesTable = () => (
     <>
-      <Select name="file_name" isClearable classNamePrefix="select" placeholder="Select a File Name..." />
+      {showExtras && (
+        <Select name="file_name" isClearable classNamePrefix="select" placeholder="Select a File Name..." />
+      )}
       <table className="table table-borderless align-middle mb-0">
         <thead>
           <tr>
@@ -119,8 +120,23 @@ export const BigDropzone = ({ callback }) => {
                   file.name
                 )}
               </td>
-              <td> <PencilButton width="36px" borderless={true} onClick={() => { setEditingIndex(index); setEditedName(file.name) }} /> </td>
+              <td>
+                {showExtras && editingIndex !== index && (
+                  <PencilButton
+                    width="36px"
+                    borderless={true}
+                    iconMarginRight="0px"
+                    onClick={() => {
+                      setEditingIndex(index);
+                      setEditedName(file.name);
+                    }}
+                  />
+                )}
+              </td>
               <td>{(file.size / (1024 * 1024)).toFixed(2)} MB</td>
+              <td>
+                <button className='bx bx-trash btn btn-danger' role='button'></button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -143,16 +159,18 @@ export const BigDropzone = ({ callback }) => {
           cursor: "pointer",
           transition: "all 0.3s ease-in-out",
           padding: "20px",
+          height: "200px"
         }}
       >
         <input {...getInputProps()} />
         <div style={{ color: "#555", fontSize: "14px" }}>
           <i
-            className="fas fa-upload fa-2x"
+            className="bx bx-upload fa-2x"
             style={{
               color: "#949494ff",
               marginBottom: "8px",
               display: "block",
+              fontSize: "40px",
               transition: "transform 0.3s ease-in-out",
             }}
           />
