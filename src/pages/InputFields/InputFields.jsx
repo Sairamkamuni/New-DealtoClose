@@ -7,7 +7,7 @@ import { components } from "react-select";
 import { FaPlusButton } from "pages/utils/allButton";
 import "../../assets/custom.css";
 
-export const InputField = ({ label, type = "text", rows, name, value, onChange, placeholder, showDollar = false, width = false }) => {
+export const InputField = ({ label, type = "text", rows, name, value, onChange, placeholder, showDollar = false, width = false, readOnly = false, }) => {
     return (
         <div className="position-relative">
             {label && <label className="form-label">{label}</label>}
@@ -24,7 +24,8 @@ export const InputField = ({ label, type = "text", rows, name, value, onChange, 
                     placeholder={placeholder}
                     value={value || ""}
                     onChange={onChange}
-                    style={{ paddingLeft: showDollar ? "30px" : undefined }}
+                    readOnly={readOnly}
+                    style={{ paddingLeft: showDollar ? "30px" : undefined, cursor: readOnly ? "pointer" : "text" }}
                 />
             ) : (
                 <input
@@ -34,7 +35,8 @@ export const InputField = ({ label, type = "text", rows, name, value, onChange, 
                     placeholder={placeholder}
                     value={value || ""}
                     onChange={onChange}
-                    style={{ paddingLeft: showDollar ? "30px" : undefined }}
+                    readOnly={readOnly}
+                    style={{ paddingLeft: showDollar ? "30px" : undefined, cursor: readOnly ? "pointer" : "text" }}
                 />
             )}
         </div>

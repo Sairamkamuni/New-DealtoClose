@@ -197,3 +197,8 @@
 .allbutton-wrapper.active button {
     color: white !important;
 }
+
+/* Speed up collapse animation */
+.collapsing {
+    transition: height 0.12s ease !important;
+}

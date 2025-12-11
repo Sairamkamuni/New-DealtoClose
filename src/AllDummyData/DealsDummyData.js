@@ -310,6 +310,20 @@ export const dealsPropertyDetails = [
     { value: "Year Built", label: "1989" },
 ];
 
+export const dealFields = [
+    { key: "purchase_price", label: "Purchase Price", values: "$100,000" },
+    { key: "initial_escrow_details", label: "Initial Escrow Details", values: "3 Days" },
+    { key: "additional_escrow_deposit", label: "Additional Escrow Deposit", values: "$5,000" },
+    { key: "finance_types", label: "Finance Types", values: "Cash" },
+    { key: "listing_agent_commission", label: "Listing Agent Commission", values: "3%" },
+    { key: "buyer_agent_commission", label: "Buyer Agent Commission", values: "3%" },
+    { key: "transaction_fee_from_seller", label: "Transaction Fee From Seller", values: "$500" },
+    { key: "transaction_fee_from_buyer", label: "Transaction Fee From Buyer", values: "$300" },
+    { key: "equipments_included", label: "Equipments Included", values: "None" },
+    { key: "additional_terms", label: "Additional Terms", values: "N/A" },
+];
+
+
 export const dealsPartyList = [
     { title: "Buyer 01", name: "Buyer Name 01", phone: "(123) 456-7890", email: "Buyer01@gmail.com" },
     { title: "Seller 01", name: "Seller Name 01", phone: "(987) 654-3210", email: "Seller01@gmail.com" },
