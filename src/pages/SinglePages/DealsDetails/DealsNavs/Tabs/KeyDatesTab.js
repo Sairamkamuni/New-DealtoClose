@@ -44,8 +44,8 @@ const KeyDatesTab = () => {
     const [dateChangeMode, setDateChangeMode] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const topSection = keyDetails.slice(0, 13)
-    const bottomSection = keyDetails.slice(13)
+    const topSection = keyDetails.slice(0, 13);
+    const bottomSection = keyDetails.slice(13);
 
     return (
         <Row className="pe-3" >

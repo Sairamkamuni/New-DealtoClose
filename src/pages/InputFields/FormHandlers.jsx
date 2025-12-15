@@ -67,7 +67,10 @@ export const FormHandlers = ({ apiUrl, toggle, entity }) => {
             setFormData({});
             setEditMode(false);
             setEditingId(null);
-            toggle();
+
+            if (typeof toggle === 'function') {
+                toggle();
+            }
         }
     };
 

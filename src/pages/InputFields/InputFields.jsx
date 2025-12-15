@@ -7,12 +7,12 @@ import { components } from "react-select";
 import { FaPlusButton } from "pages/utils/allButton";
 import "../../assets/custom.css";
 
-export const InputField = ({ label, type = "text", rows, name, value, onChange, placeholder, showDollar = false, width = false, readOnly = false, }) => {
+export const InputField = ({ label, type = "text", rows, name, value, onChange, placeholder, showDollar = false, width = false, readOnly = false, dollarStop = "73%" }) => {
     return (
         <div className="position-relative">
             {label && <label className="form-label">{label}</label>}
             {showDollar && (
-                <span className="position-absolute" style={{ top: "73%", left: "12px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px", }} >
+                <span className="position-absolute" style={{ top: dollarStop, left: "12px", transform: "translateY(-50%)", color: "#6c757d", fontSize: "18px", }} >
                     $
                 </span>
             )}
@@ -43,25 +43,82 @@ export const InputField = ({ label, type = "text", rows, name, value, onChange, 
     );
 };
 
-export const ToggleSelector = ({ options = [], value, onChange, height = "36px" }) => {
+export const ToggleField = ({
+    value,
+    onChange,
+    leftValue = "percentage",
+    rightValue = "fixed",
+    leftLabel = "%",
+    rightLabel = "$",
+    activeColor = "#243e79",
+    height = "36px",
+}) => {
+    const commonStyle = {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "6px 14px",
+        borderRadius: "6px",
+        cursor: "pointer",
+        fontWeight: 600,
+        width: "50%",
+    };
+
     return (
-        <div className="d-flex align-items-center" style={{ border: "1px solid #dad1e0", height: height, borderRadius: "8px", padding: "0" }}>
-            {options.map((opt, index) => (
-                <div key={opt.value} onClick={() => onChange(opt.value)}
-                    style={{
-                        background: value === opt.value ? "#243e79" : "transparent",
-                        color: value === opt.value ? "white" : "#231f20", display: "flex", alignItems: "center", justifyContent: "center",
-                        padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%",
-                    }}
-                >
-                    {opt.label}
-                </div>
-            ))}
+        <div
+            className="d-flex align-items-center"
+            style={{
+                border: "1px solid #dad1e0",
+                height,
+                borderRadius: "8px",
+                padding: "0",
+            }}
+        >
+            <div
+                onClick={() => onChange(leftValue)}
+                style={{
+                    ...commonStyle,
+                    background: value === leftValue ? activeColor : "transparent",
+                    color: value === leftValue ? "white" : "#231f20",
+                }}
+            >
+                {leftLabel}
+            </div>
+
+            <div
+                onClick={() => onChange(rightValue)}
+                style={{
+                    ...commonStyle,
+                    background: value === rightValue ? activeColor : "transparent",
+                    color: value === rightValue ? "white" : "#231f20",
+                    marginLeft: "4px",
+                }}
+            >
+                {rightLabel}
+            </div>
         </div>
     );
 };
 
-export const SelectField = ({ id, label, name, options, value, onChange, isClearable = true, placeholder }) => {
+// export const ToggleSelector = ({ options = [], value, onChange, height = "36px" }) => {
+//     return (
+//         <div className="d-flex align-items-center" style={{ border: "1px solid #dad1e0", height: height, borderRadius: "8px", padding: "0" }}>
+//             {options.map((opt, index) => (
+//                 <div key={opt.value} onClick={() => onChange(opt.value)}
+//                     style={{
+//                         background: value === opt.value ? "#243e79" : "transparent",
+//                         color: value === opt.value ? "white" : "#231f20", display: "flex", alignItems: "center", justifyContent: "center",
+//                         padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%",
+//                     }}
+//                 >
+//                     {opt.label}
+//                 </div>
+//             ))}
+//         </div>
+//     );
+// };
+
+export const SelectField = ({ id, label, name, options, value, onChange, readOnly = false, isClearable = true, placeholder }) => {
     return (
         <div>
             {label && <label>{label}</label>}
@@ -72,6 +129,7 @@ export const SelectField = ({ id, label, name, options, value, onChange, isClear
                 className="basic-single"
                 classNamePrefix="select"
                 options={options}
+                readOnly={readOnly}
                 value={options.find((opt) => opt.label === value) || null}
                 onChange={onChange}
                 placeholder={placeholder}
@@ -80,7 +138,7 @@ export const SelectField = ({ id, label, name, options, value, onChange, isClear
     );
 };
 
-export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = "Select...", value, onChange, isClearable = true, defaultOptions = true }) => {
+export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = "Select...", value, onChange, isClearable = true, readOnly = false, defaultOptions = true }) => {
 
     const [inputValue, setInputValue] = useState("");
 
@@ -113,6 +171,7 @@ export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = 
                 loadOptions={loadOptions}
                 isClearable={isClearable}
                 placeholder={placeholder}
+                readOnly={readOnly}
                 value={optionsList.find(opt => opt.label === value) || null}
                 onChange={onChange}
                 onInputChange={(val) => setInputValue(val)}
@@ -122,7 +181,7 @@ export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = 
     );
 };
 
-export const DatePickerField = ({ label, name, value, onChange, placeholder = "MM, DD, YYYY" }) => {
+export const DatePickerField = ({ label, name, value, onChange, placeholder = "MM, DD, YYYY", readOnly = false, }) => {
     return (
         <div>
             {label && <label>{label}</label>}
@@ -133,6 +192,8 @@ export const DatePickerField = ({ label, name, value, onChange, placeholder = "M
                 value={value}
                 onChange={(dates) => onChange(dates, name)}
                 placeholder={placeholder}
+                readOnly={readOnly}
+                style={{ cursor: readOnly ? "pointer" : "text" }}
             />
         </div>
     );

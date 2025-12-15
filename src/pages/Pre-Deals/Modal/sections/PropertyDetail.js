@@ -52,7 +52,6 @@ const PropertyDetail = ({ formType, formData, handleChange }) => {
                 <Col md="12">
                     <InputField label="Equipment's Included" type="textarea" rows="4" name="equipments_Included"
                         value={formData?.equipments_Included} onChange={handleChange} />
-                        
                 </Col>
             </Row>
 

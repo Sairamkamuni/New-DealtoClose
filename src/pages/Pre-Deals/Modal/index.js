@@ -17,9 +17,6 @@ const PreDealsModal = ({ isOpen, toggle, preDeal }) => {
     const [activeTabVartical, setActiveTabVartical] = useState(1);
     const [formType, setFormType] = useState("Buyer");
 
-    const { formData, setFormData, handleChange, handleSubmit, handleSelectChange, handleDateChange, handleContactChange } =
-        FormHandlers({ apiUrl: "/api/deals", toggle: toggle, entity: "Pre Deal", });
-
     const toggleTabVertical = (tab) => {
         if (tab >= 1 && tab <= 6) setActiveTabVartical(tab);
     };
@@ -53,6 +50,8 @@ const PreDealsModal = ({ isOpen, toggle, preDeal }) => {
         return () => sections.forEach((section) => observer.unobserve(section));
     }, [isOpen]);
 
+    const { formData, setFormData, handleContactChange, handleChange, handleSubmit, handleSelectChange, handleDateChange } =
+        FormHandlers({ apiUrl: "/api/deals", toggle, entity: "Pre-Deal" });
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} scrollable size="xl" centered className="custom-modal">
@@ -128,11 +127,12 @@ const PreDealsModal = ({ isOpen, toggle, preDeal }) => {
 
                 <Row>
                     <Col className="d-flex justify-content-end mt-3">
-                        <AllButton label="Cancel" width="80px" color="danger" className="me-2" onClick={toggle} />
-                        <AllButton label="Previous" width="80px" color="secondary" className="me-2" disabled={activeTabVartical === 1}
+                        <AllButton label="Cancel" width="80px" color="danger" className="me-2" outline={false} onClick={toggle} />
+                        <AllButton label="Previous" width="80px" color="secondary" className="me-2" outline={false} disabled={activeTabVartical === 1}
                             onClick={() => toggleTabVertical(activeTabVartical - 1)}
                         />
-                        <AllButton label={activeTabVartical === 6 ? "Submit" : "Next"} width="80px" color={activeTabVartical === 6 ? "success" : "primary"}
+                        <AllButton label={activeTabVartical === 6 ? "Submit" : "Next"} width="80px" outline={false}
+                            color={activeTabVartical === 6 ? "success" : "primary"}
                             onClick={() => activeTabVartical === 6 ? handleSubmit() : toggleTabVertical(activeTabVartical + 1)}
                         />
                     </Col>

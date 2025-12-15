@@ -300,14 +300,14 @@ export const taskDropdownOption = [
 ];
 
 export const dealsPropertyDetails = [
-    { value: "Street Address", label: "123 NW Main St" },
-    { value: "Unit #", label: "103" },
-    { value: "City", label: "Wellington" },
-    { value: "State", label: "FL" },
-    { value: "Zip", label: "33414" },
-    { value: "County", label: "Palm Beach" },
-    { value: "Property Type", label: "Condo" },
-    { value: "Year Built", label: "1989" },
+    { key: "street_address", label: "Street Address", values: "123 NW Main St" },
+    { key: "unit_number", label: "Unit #", values: "103" },
+    { key: "city", label: "City", values: "Wellington" },
+    { key: "state", label: "State", values: "FL" },
+    { key: "zip", label: "Zip", values: "33414" },
+    { key: "county", label: "County", values: "Palm_beach" },
+    { key: "property_type", label: "Property Type", values: "Condo" },
+    { key: "year_built", label: "Year Built", values: "1989" },
 ];
 
 export const dealFields = [
@@ -323,7 +323,6 @@ export const dealFields = [
     { key: "additional_terms", label: "Additional Terms", values: "N/A" },
 ];
 
-
 export const dealsPartyList = [
     { title: "Buyer 01", name: "Buyer Name 01", phone: "(123) 456-7890", email: "Buyer01@gmail.com" },
     { title: "Seller 01", name: "Seller Name 01", phone: "(987) 654-3210", email: "Seller01@gmail.com" },
@@ -338,15 +337,26 @@ export const dealsPartyList = [
 ];
 
 export const dealsAdditionalInformation = [
-    { value: "Beds", label: "3" },
-    { value: "Baths", label: "2" },
-    { value: "SqFt", label: "1234" },
-    { value: "Lot Size", label: "5678" },
-    { value: "Subdivision", label: "Subdivision Name" },
-    { value: "HOA", label: "YES / NO" },
-    { value: "HOA Amount", label: "Per Month / Quater / Year" },
-    { value: "Property Tax ID", label: "1234567897" },
-    { value: "Tax Amount", label: "123456" },
-    { value: "Property Tax Year", label: "2025" },
-    { value: "List Date", label: "Aug 15th 1947" },
+    { key: "beds", label: "Beds", values: "3" },
+    { key: "baths", label: "Baths", values: "2" },
+    { key: "sq_ft", label: "SqFt", values: "1234" },
+    { key: "lot_size", label: "Lot Size", values: "5678" },
+    { key: "subdivision", label: "Subdivision", values: "Subdivision Name" },
+    { key: "hoa", label: "HOA", values: "YES / NO" },
+    { key: "hoa_amount", label: "HOA Amount", values: "Per Month / Quater / Year" },
+    { key: "property_tax_id", label: "Property Tax ID", values: "1234567897" },
+    { key: "tax_amount", label: "Tax Amount", values: "123456" },
+    { key: "property_tax_year", label: "Property Tax Year", values: "2025" },
+    { key: "list_date", label: "List Date", values: "Aug 15th 1947" },
+];
+
+export const keyWithDates = [
+    { key: "effective_date", label: "Effective Date", date: "Nov 12, 2025" },
+    { key: "first_escrow_due", label: "1st Escrow Due", date: "Nov 15, 2025" },
+    { key: "loan_application_due", label: "Loan Application Due", date: "Nov 17, 2025" },
+    { key: "association_app_due", label: "Association App Due", date: "Nov 17, 2025" },
+    { key: "additional_escrow_due", label: "2nd Escrow Due", date: "Nov 12, 2025" },
+    { key: "inspection_due", label: "Inspection Due", date: "Nov 12, 2025" },
+    { key: "loan_commitment_due", label: "Loan Commitment Due", date: "Nov 30, 2025" },
+    { key: "closing_date", label: "Closing Date", date: "Dec 12, 2025" },
 ];

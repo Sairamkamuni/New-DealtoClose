@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Card } from "reactstrap";
 import AllButton from "pages/utils/allButton";
 import { noteText1, noteText2, noteAgentUser, noteDate, noteTime } from "AllDummyData/DealsDummyData";
+import { InputField } from "pages/InputFields/InputFields";
 
 const NoteTab = () => {
     const [notes, setNotes] = useState([
@@ -25,7 +26,7 @@ const NoteTab = () => {
         const formatted = formatDateTime(now);
         setNotes([...notes, { text: inputText, user: currentUser, dateTime: formatted }]);
         setInputText("");
-    }; ``
+    };
 
     return (
         <Row>
@@ -33,11 +34,9 @@ const NoteTab = () => {
                 <Card className="p-3">
 
                     <div className="mb-3">
-                        <textarea rows="4" className="form-control" placeholder="Write your note here..." value={inputText}
-                            onChange={(e) => setInputText(e.target.value)}
-                        />
-
-                        <AllButton outline={false} className="mt-3 mb-2" label="Add Note" width="130px" onClick={handleAddNote} />
+                        <InputField type="textarea" rows="4" placeholder="Write your note here..."
+                            value={inputText} onChange={(e) => setInputText(e.target.value)} />
+                        <AllButton outline={false} className="mt-3 mb-2" label="Add Note" width="120px" onClick={handleAddNote} />
                     </div>
 
                     {notes.map((note, index) => (

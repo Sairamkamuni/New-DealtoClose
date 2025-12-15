@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import { financeTypes } from "AllDummyData/DealsDummyData";
 import "../../../../assets/custom.css"
-import { InputField, SelectField, ToggleSelector } from "pages/InputFields/InputFields";
+import { InputField, SelectField, ToggleSelector, ToggleField } from "pages/InputFields/InputFields";
 
 const OfferDetail = ({ formType, handleChange, formData, handleSelectChange }) => {
 
-    const [loanValue, SetLoanValue] = useState("%");
-    const [compensationBuyer, SetCompensationBuyer] = useState("fixed");
-    const [compensationSeller, SetCompensationSeller] = useState("%");
+    const [loanValue, setLoanValue] = useState("percentage");
+    const [compensationBuyer, setCompensationBuyer] = useState("fixed");
+    const [compensationSeller, setCompensationSeller] = useState("percentage");
 
     return (
         <div id="section-3">
@@ -60,30 +60,31 @@ const OfferDetail = ({ formType, handleChange, formData, handleSelectChange }) =
                         <label>Loan Value</label>
                         <Row>
                             <div className="d-flex  gap-2 ">
-                                <Col md={2} className="d-flex align-items-center"
+                                {/* <Col md={2} className="d-flex align-items-center"
                                     style={{ border: "1px solid #dad1e0", height: "36px", borderRadius: "8px", padding: "0" }} >
-                                    <div onClick={() => SetLoanValue("%")}
+                                    <div onClick={() => SetLoanValue("percentage")}
                                         style={{
-                                            background: loanValue === "%" ? "#243e79" : "transparent",
-                                            color: loanValue === "%" ? "white" : "#231f20", display: "flex", alignItems: "center", justifyContent: "center",
+                                            background: loanValue === "percentage" ? "#243e79" : "transparent",
+                                            color: loanValue === "percentage" ? "white" : "#231f20", display: "flex", alignItems: "center", justifyContent: "center",
                                             padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%"
                                         }} >
                                         %
                                     </div>
-                                    <div onClick={() => SetLoanValue("$")}
+                                    <div onClick={() => SetLoanValue("fixed")}
                                         style={{
-                                            background: loanValue === "$" ? "#243e79" : "transparent",
-                                            color: loanValue === "$" ? "white" : "#231f20", display: "flex", alignItems: "center", justifyContent: "center",
+                                            background: loanValue === "fixed" ? "#243e79" : "transparent",
+                                            color: loanValue === "fixed" ? "white" : "#231f20", display: "flex", alignItems: "center", justifyContent: "center",
                                             padding: "6px 14px", borderRadius: "6px", marginLeft: "4px", cursor: "pointer", fontWeight: 600, width: "50%"
                                         }} >
                                         $
                                     </div>
+                                </Col> */}
+                                <Col>
+                                    <ToggleField value={loanValue} onChange={setLoanValue} leftLabel="%" rightLabel="$" />
                                 </Col>
-
                                 <Col md={10}>
-                                    <div className="d-flex">
-                                        <input type="text" name="loan_value" className="form-control fixed-width"
-                                            value={formData.loan_value || ""} onChange={handleChange} />
+                                    <div style={{ width: "310px" }}>
+                                        <InputField type="text" name="loan_value" value={formData?.loan_value} onChange={handleChange} />
                                     </div>
                                 </Col>
                             </div>
@@ -96,38 +97,14 @@ const OfferDetail = ({ formType, handleChange, formData, handleSelectChange }) =
                         <label>Compensation to Listing Agent</label>
                         <Row>
                             <div className="d-flex  gap-2 ">
-                                <Col md={2} className="d-flex align-items-center"
-                                    style={{ border: "1px solid #dad1e0", height: "36px", borderRadius: "8px", padding: "0" }} >
-                                    <div onClick={() => SetCompensationSeller("%")}
-                                        style={{
-                                            background: compensationSeller === "%" ? "#243e79" : "transparent",
-                                            color: compensationSeller === "%" ? "white" : "#231f20", display: "flex",
-                                            alignItems: "center", justifyContent: "center",
-                                            padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%"
-                                        }} >
-                                        %
-                                    </div>
-                                    <div onClick={() => SetCompensationSeller("$")}
-                                        style={{
-                                            background: compensationSeller === "$" ? "#243e79" : "transparent",
-                                            color: compensationSeller === "$" ? "white" : "#231f20", display: "flex",
-                                            alignItems: "center", justifyContent: "center",
-                                            padding: "6px 14px", borderRadius: "6px", marginLeft: "4px", cursor: "pointer", fontWeight: 600, width: "50%"
-                                        }} >
-                                        $
-                                    </div>
+                                <Col>
+                                    <ToggleField value={compensationSeller} onChange={setCompensationSeller} leftLabel="%" rightLabel="$" />
                                 </Col>
 
                                 <Col md={10}>
-                                    <div className="d-flex">
-                                        <input
-                                            type="text"
-                                            name="compensation_to_listing_agent"
-                                            className="form-control fixed-width"
-                                            onChange={handleChange}
-                                            value={formData.compensation_to_listing_agent || ""}
-                                            style={{ width: "322px !important" }}
-                                        />
+                                    <div style={{ width: "310px" }}>
+                                        <InputField type="text" name="compensation_to_listing_agent" value={formData?.compensation_to_listing_agent}
+                                            onChange={handleChange} />
                                     </div>
                                 </Col>
                             </div>
@@ -138,13 +115,21 @@ const OfferDetail = ({ formType, handleChange, formData, handleSelectChange }) =
                 <Col md="6">
                     <Row>
                         <label>Compensation to Buyer&apos;s Agent</label>
-                        <Col md="2">
-                            <ToggleSelector options={[{ label: "%", value: "percentage" }, { label: "$", value: "fixed" }]}
-                                value={compensationBuyer} onChange={SetCompensationBuyer} />
-                        </Col>
+                        <Col md="6">
+                            <Row>
+                                <div className="d-flex  gap-2 ">
+                                    <Col>
+                                        <ToggleField value={compensationBuyer} onChange={setCompensationBuyer} leftLabel="%" rightLabel="$" />
+                                    </Col>
 
-                        <Col md="10">
-                            <InputField type="text" name="compensation_to_buyer" width={true} value={formData?.compensation_to_buyer} onChange={handleChange} />
+                                    <Col md={10}>
+                                        <div style={{ width: "310px" }}>
+                                            <InputField type="text" name="compensation_to_buyer" value={formData?.compensation_to_buyer}
+                                                onChange={handleChange} />
+                                        </div>
+                                    </Col>
+                                </div>
+                            </Row>
                         </Col>
                     </Row>
                 </Col>

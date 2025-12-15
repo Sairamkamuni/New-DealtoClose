@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
-import { SelectField } from "pages/InputFields/InputFields";
+import { SelectField, InputField } from "pages/InputFields/InputFields";
 import { BigDropzone } from "helpers/Dropzone";
 import AllButton from "pages/utils/allButton";
 import { transactionOwner } from "AllDummyData/DealsDummyData";

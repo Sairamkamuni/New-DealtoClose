@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col, Collapse } from "reactstrap";
 import AllButton, { EditButtonSolid } from "pages/utils/allButton";
 import { Link } from "react-router-dom";
-import { dealsPropertyDetails, dealsPartyList, dealsAdditionalInformation, dealFields } from "AllDummyData/DealsDummyData";
-import { InputField } from "pages/InputFields/InputFields";
+import { dealsPropertyDetails, dealsPartyList, dealsAdditionalInformation, dealFields, keyWithDates, Templates } from "AllDummyData/DealsDummyData";
+import { InputField, DatePickerField, AsyncSelectField } from "pages/InputFields/InputFields"
 
-const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, formData, handleChange, }) => {
-
+const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, formData, handleChange, handleDateChange, handleSelectChange }) => {
     return (
         <Row>
-            <Col xs="12" md="6">
+            <Col md="6">
                 <Row>
                     <div className="d-flex justify-content-between align-items-center mb-3">
                         <h5 className="fw-bolder mb-0 text-primary">Property Details</h5>
@@ -20,11 +19,12 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                         {dealsPropertyDetails.map((item, index) => (
                             <Row className="g-0" key={index}>
                                 <Col md="5" className="d-flex align-items-center" style={{ border: "1px solid #dcdcdc", padding: "0px 12px", borderRadius: "6px" }}>
-                                    <label className="fw-bold" style={{ marginTop: "3px" }}>{item.value}</label>
+                                    <label className="fw-bold" style={{ marginTop: "3px" }}>{item.label}</label>
                                 </Col>
                                 <Col>
-                                    <InputField type="text" name={item.value} className="form-control"
-                                        placeholder={item.label} value={formData?.[item.value]} onChange={handleChange} readOnly={!editMode} />
+                                    <InputField type="text" name={item.key} className="form-control"
+                                        placeholder={item.label} value={formData?.[item.key] ?? item.values} onChange={handleChange} readOnly={!editMode}
+                                        style={{ borderRadius: "6px", marginLeft: "6px" }} />
                                 </Col>
                             </Row>
                         ))}
@@ -84,11 +84,12 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                         {dealsAdditionalInformation.map((item, index) => (
                             <Row className="g-0 mb-2" key={index}>
                                 <Col md="4" className="d-flex align-items-center">
-                                    <label className="fw-bold me-2">{item.value} : </label>
+                                    <label className="fw-bold me-2">{item.label} : </label>
                                 </Col>
                                 <Col>
-                                    <InputField type="text" name={item.value} className="form-control" placeholder={item.label}
-                                        value={formData?.[item.value]} onChange={handleChange} readOnly={!editMode} />
+                                    <InputField type="text" name={item.key} className="form-control"
+                                        placeholder={item.label} value={formData?.[item.key] ?? item.values} onChange={handleChange} readOnly={!editMode}
+                                        style={{ borderRadius: "6px", marginLeft: "6px" }} />
                                 </Col>
                             </Row>
                         ))}
@@ -99,7 +100,7 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                 </Row>
             </Col>
 
-            <Col xs="6">
+            <Col md="6">
                 <Row>
                     <div className="d-flex justify-content-between align-items-center mb-3">
                         <h5 className="fw-bolder mb-0 text-primary">Contract Details</h5>
@@ -109,13 +110,13 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                     <Col>
                         {dealFields.map((item, index) => (
                             <Row className="g-0" key={index}>
-                                <Col md="5" className="d-flex align-items-center" style={{ border: "1px solid #dcdcdc", padding: "0px 12px", borderRadius: "6px" }}>
-                                    <label className="fw-bold" style={{ marginTop: "3px" }}>{item.label}</label>
+                                <Col md="5" className="d-flex align-items-center" style={{ padding: "0px 12px", }}>
+                                    <label className="fw-bold" >{item.label}</label>
                                 </Col>
                                 <Col>
-                                    <InputField type="text" name={item.key} className="form-control"
+                                    : <input type="text" name={item.key} className=""
                                         placeholder={item.label} value={formData?.[item.key] ?? item.values} onChange={handleChange} readOnly={!editMode}
-                                        style={{ borderRadius: "6px", marginLeft: "6px" }} />
+                                        style={{ border: 'none', borderRadius: "6px", marginLeft: "6px" }} />
                                 </Col>
                             </Row>
                         ))}
@@ -126,13 +127,54 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                         </div>
                     </Col>
                 </Row>
-            </Col>
 
+                <Row>
+                    <div className="d-flex justify-content-between align-items-center mb-3 mt-3">
+                        <h5 className="fw-bolder mb-0 text-primary">Important Details</h5>
+                        <EditButtonSolid className={editMode ? "active" : ""} iconMarginRight="0px" iconFontSize="20px"
+                            title={`Edit Mode ${editMode ? "Active" : "Disabled"}`} width="40px" onClick={() => setEditMode(!editMode)} />
+                    </div>
+                    <Col>
+                        {keyWithDates.map((item, index) => (
+                            <Row className="g-0" key={index}>
+                                <Col md="5" className="d-flex align-items-center" style={{ border: "1px solid #dcdcdc", padding: "0px 12px", borderRadius: "6px" }}>
+                                    <label className="fw-bold" style={{ marginTop: "3px" }}>{item.label}</label>
+                                </Col>
+                                <Col>
+                                    <DatePickerField
+                                        name={item.key}
+                                        onChange={handleDateChange}
+                                        value={formData?.[item.key] ?? item.date}
+                                        readOnly={!editMode}
+                                    />
+                                </Col>
+                            </Row>
+                        ))}
+
+                        {/* APPROVE BUTTON */}
+                        <div className="d-flex justify-content-end mt-3">
+                            <AllButton label="Approve" outline={false} />
+                        </div>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col>
+                        <div className="d-flex justify-content-between align-items-center mb-3 mt-3">
+                            <h5 className="fw-bolder mb-0 text-primary">Cheklist Template</h5>
+                        </div>
+                        <AsyncSelectField name="templates" optionsList={Templates} value={formData?.templates}
+                            onChange={handleSelectChange} />
+                        <div className="d-flex justify-content-end mt-3">
+                            <AllButton label="Approve" outline={false} />
+                        </div>
+                    </Col>
+
+
+                </Row>
+            </Col>
         </Row >
     );
 };
 
 export default PropertyDetails;
-
-
-

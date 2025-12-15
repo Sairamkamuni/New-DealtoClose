@@ -1,32 +1,47 @@
 import React, { useState } from "react";
 import { Row, Col, } from "reactstrap";
-import Flatpickr from "react-flatpickr";
-import Select from "react-select";
 import AllButton from "pages/utils/allButton";
-import { post, put } from "helpers/api_helper"
-import { showSuccessAlert } from "pages/utils/Alerts/alertMessages";
 import { referralTypes } from "AllDummyData/DealsDummyData";
+import { InputField, SelectField, AsyncSelectField, DatePickerField } from "pages/InputFields/InputFields";
+import { FormHandlers } from "pages/InputFields/FormHandlers";
 
-const InitialFormatData = {
-    sales_price: "450,000.00", holdEarnestMoney: "Yes", personal_deal: "No", listing_commission: "3%", sale_commission: "2,000.00", transaction_fee: "495.00",
-    other_deduction: "250.00", office_gross: "15,000.00", admin_broker_commission: "300.00", transaction_coordinator: "Steve Kamuni", seller_creatid_buyer: "2,000.00",
-    broker_credit: "500.00", lender_credit: "750.00", additional_comments: "This is a sample comment for demo purposes.", deposit_amount: "1,0000.00",
-    date_of_check: new Date(), date_posted_log: new Date(), referral_type: "Buyer Referral", referral_amount: "25%", referral_agent: "Raj Kamuni",
-    referral_brokerage_name: "ABC Realty Group",
-};
+const formattedData = [
+    { key: "sales_price", label: "Sales Price", value: "450,000.00" },
+    { key: "listing_commission", label: "Listing Commission", value: "3%" },
+    { key: "sale_commission", label: "Sale Commission", value: "2,000.00" },
+    { key: "transaction_fee", label: "Transaction Fee", value: "495.00" },
+    { key: "other_deduction", label: "Other Deduction", value: "250.00" },
+    { key: "holdEarnestMoney", label: "Hold Earnest Money", value: "Yes" },
+    { key: "personal_deal", label: "Personal Deal", value: "No" },
+    { key: "office_gross", label: "Office Gross", value: "15,000.00" },
+    { key: "admin_broker_commission", label: "TC Fee / Admin Broker Commission", value: "300.00" },
+    { key: "transaction_coordinator", label: "Transaction Coordinator Name", value: "Steve Kamuni" },
+    { key: "seller_creatid_buyer", label: "Seller Credited Buyer", value: "2,000.00" },
+    { key: "broker_credit", label: "Broker Credit", value: "500.00" },
+    { key: "lender_credit", label: "Lender Credit", value: "750.00" },
+    { key: "additional_comments", label: "Additional Comments", value: "This is a sample comment for demo purposes." },
+    { key: "deposit_amount", label: "Deposit Amount", value: "1,0000.00" },
+    { key: "date_of_check", label: "Date Of Check", value: new Date() },
+    { key: "date_posted_log", label: "Date Posted Log", value: new Date() },
+    { key: "referral_type", label: "Referral Type", value: "Buyer Referral" },
+    { key: "referral_amount", label: "Referral Amount", value: "25%" },
+    { key: "referral_agent", label: "Referral Agent", value: "Raj Kamuni" },
+    { key: "referral_brokerage_name", label: "Referral Brokerage Name", value: "ABC Realty Group" },
+];
 
 const CommissionTab = () => {
     const [listingType, setListingType] = useState("%");
     const [saleType, setSaleType] = useState("$");
     const [referralType, setReferralType] = useState("%");
 
-    const [formData, setFormData] = useState(InitialFormatData);
+    // const [formData, setFormData] = useState(InitialFormatData);
     const [editMode, setEditMode] = useState(false);
 
-    const [inputFields, setInputFields] = useState([
-        { agent_name: "Michael Smith", percentage: "50%", commission: "7,500.00" },
-        { agent_name: "Jennifer Wilson", percentage: "50%", commission: "7,500.00" }]
-    );
+    const [inputFields, setInputFields] = useState([{ agent_name: "Michael Smith", percentage: "50%", commission: "7,500.00" }]);
+
+
+    const { formData, setFormData, handleChange, handleSubmit, handleSelectChange, handleDateChange } =
+        FormHandlers({ apiUrl: "/api/deals", entity: "Commission Info", });
 
     const handleAddFields = () => {
         setInputFields([...inputFields, { agent_name: "", percentage: "", commission: "" }]);
@@ -45,35 +60,6 @@ const CommissionTab = () => {
         });
     };
 
-    const handleFileChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.files[0],
-        });
-    };
-
-    // Handle normal input change
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
-    }
-
-    // Submit function
-    const handleSubmit = async () => {
-        console.log('Submitting formData:', formData);
-        // const url = editMode ? `${BANK_URL}/${editingId}` : BANK_URL;
-        // const method = editMode ? put : post;
-        // const { success, body } = await method(url, formData); 
-        console.log("Edit mode:", editMode);
-        console.log("API method call:", editMode ? "PUT" : "POST");
-        const success = true;
-        if (success) {
-            showSuccessAlert(editMode ? 'Commission Info updated successfully!' : 'Commission Info created successfully!');
-            setFormData(InitialFormatData);
-            setEditMode(false);
-        }
-    };
-
     return (
         <>
             {/* SAVE BUTTON */}
@@ -87,16 +73,13 @@ const CommissionTab = () => {
 
             {/* ===================== COMMISSION INFO + DEAL INFO + CREDITS ===================== */}
             <Row className="gy-4">
-                {/* COMMISSION INFO */}
                 <Col>
                     <h5 className="fw-bold mb-3">Commission Info</h5>
 
                     <Row className="g-3">
                         <Col md={12}>
                             <label>Sales Price:</label>
-                            <span className="position-absolute" style={{ top: "52%", left: "18px", fontSize: "16px" }} > $ </span>
-                            <input type="text" name="sales_price" className="form-control ps-4" value={formData.sales_price}
-                                onChange={handleChange} readOnly={!editMode} />
+                            <InputField showDollar dollarStop="50%" type="text" name="sales_price" value={formData?.sales_price} onChange={handleChange} readOnly={!editMode} />
                         </Col>
 
                         <Col md={12}>
@@ -122,15 +105,13 @@ const CommissionTab = () => {
                                             $
                                         </div>
                                     </Col>
-
-
                                     <Col md={10}>
-                                        <div className="d-flex">
-                                            <input type="text" name="listing_commission" value={formData.listing_commission} className="form-control"
-                                                style={{ height: "36px", borderRadius: "8px" }} onChange={handleChange} readOnly={!editMode} />
+                                        <div style={{ width: "384px" }}>
+                                            <InputField type="text" name="listing_commission" value={formData?.listing_commission} onChange={handleChange}
+                                                readOnly={!editMode} />
                                         </div>
-                                    </Col>
 
+                                    </Col>
                                 </div>
                             </Row>
                         </Col>
@@ -163,9 +144,9 @@ const CommissionTab = () => {
                                     </Col>
 
                                     <Col md={10}>
-                                        <div className="d-flex">
-                                            <input type="text" name="sale_commission" value={formData.sale_commission} className="form-control"
-                                                style={{ height: "36px", borderRadius: "8px" }} onChange={handleChange} readOnly={!editMode} />
+                                        <div style={{ width: "384px" }}>
+                                            <InputField type="text" name="sale_commission" value={formData?.sale_commission} onChange={handleChange}
+                                                readOnly={!editMode} />
                                         </div>
                                     </Col>
                                 </div>
@@ -174,21 +155,17 @@ const CommissionTab = () => {
 
                         <Col md={12}>
                             <label>Transaction Fee:</label>
-                            <span className="position-absolute" style={{ top: "52%", left: "18px", fontSize: "16px" }} > $ </span>
-                            <input type="text" name="transaction_fee" value={formData.transaction_fee} className="form-control ps-4"
-                                onChange={handleChange} readOnly={!editMode} />
-                            {/*  */}
+                            <InputField showDollar dollarStop="50%" type="text" name="transaction_fee" value={formData?.transaction_fee} onChange={handleChange}
+                                readOnly={!editMode} />
                         </Col>
                         <Col md={12}>
                             <label>Other Deduction:</label>
-                            <span className="position-absolute" style={{ top: "52%", left: "18px", fontSize: "16px" }} > $ </span>
-                            <input type="text" name="other_deduction" value={formData.other_deduction} className="form-control ps-4"
-                                onChange={handleChange} readOnly={!editMode} />
+                            <InputField showDollar dollarStop="50%" type="text" name="other_deduction" value={formData?.other_deduction} onChange={handleChange}
+                                readOnly={!editMode} />
                         </Col>
                     </Row>
                 </Col>
 
-                {/* DEAL INFO */}
                 <Col>
                     <h5 className="fw-bold mb-3">Deal Info</h5>
                     <Row className="g-3">
@@ -209,31 +186,27 @@ const CommissionTab = () => {
                             </div>
                         </Col>
 
-
                         <Col md={12}>
                             <label>Office Gross Commission on Sale:</label>
-                            <span className="position-absolute" style={{ top: "52%", left: "18px", fontSize: "16px" }} > $ </span>
-                            <input type="text" name="office_gross" value={formData.office_gross} className="form-control ps-4"
-                                onChange={handleChange} readOnly={!editMode} />
+                            <InputField showDollar dollarStop="50%" type="text" name="office_gross" value={formData?.office_gross} onChange={handleChange}
+                                readOnly={!editMode} />
                         </Col>
 
                         <Col md={12}>
                             <label>TC Fee/Admin Brokerage Commission:</label>
-                            <span className="position-absolute" style={{ top: "52%", left: "18px", fontSize: "16px" }} > $ </span>
-                            <input type="text" name="admin_broker_commission" value={formData.admin_broker_commission} className="form-control ps-4"
+                            <InputField showDollar dollarStop="50%" type="text" name="admin_broker_commission" value={formData?.admin_broker_commission}
                                 onChange={handleChange} readOnly={!editMode} />
                         </Col>
 
                         <Col md={12}>
                             <label>Transaction Coordinator Name:</label>
-                            <input type="text" name="transaction_coordinator" value={formData.transaction_coordinator} className="form-control"
+                            <InputField showDollar dollarStop="50%" type="text" name="transaction_coordinator" value={formData?.transaction_coordinator}
                                 onChange={handleChange} readOnly={!editMode} />
                         </Col>
                     </Row>
                 </Col>
 
                 <Col>
-                    {/* CREDITS */}
                     <h5 className="fw-bold mb-3">Credits</h5>
 
                     <Row className="g-3">
@@ -258,7 +231,6 @@ const CommissionTab = () => {
                     </Row>
                 </Col>
             </Row>
-
             <hr />
 
             {/* ===================== COMMISSION SPLIT BETWEEN AGENTS ===================== */}
@@ -318,7 +290,7 @@ const CommissionTab = () => {
                                             </Col>
 
 
-                                            <Col md={1} className="d-flex flex-column justify-content-end" style={{ marginBottom: "20px" }}>
+                                            <Col md={1} className="d-flex flex-column justify-content-end" style={{ marginBottom: "18px" }}>
                                                 {(inputFields.length - 1) === key ? (
                                                     <button type="button" className="btn btn-primary" onClick={handleAddFields} disabled={!editMode} >
                                                         <i className="mdi mdi-plus" />
@@ -337,7 +309,6 @@ const CommissionTab = () => {
                     </div>
                 </Col>
             </Row>
-
             <hr />
 
             {/* ===================== ADDITIONALL COMMISSION INFORMATION ===================== */}
@@ -345,7 +316,7 @@ const CommissionTab = () => {
                 <h5 className="fw-bold mb-3">Additional Commission Information</h5>
                 <Col md={12}>
                     <div className="mb-3">
-                        <textarea rows="4" type="text" name="additional_comments" value={formData.additional_comments} className="form-control" placeholder="Write your note here..."
+                        <InputField type="textarea" rows="4" name="additional_comments" value={formData?.additional_comments}
                             onChange={handleChange} readOnly={!editMode} />
                         <div className="d-flex justify-content-start mt-3">
                             <AllButton width="140px" label="Add Comment" outline={false} onClick={() => console.log("Edit clicked")} disabled={!editMode} />
@@ -353,7 +324,6 @@ const CommissionTab = () => {
                     </div>
                 </Col>
             </Row>
-
             <hr />
 
             {/* ===================== DEPOSITS + REFERRAL DETAILS ===================== */}
@@ -365,14 +335,12 @@ const CommissionTab = () => {
                             <label className="form-label d-block">Will Your Brokerage Hold Earnest Money: </label>
                             <div className="d-flex gap-2">
 
-                                {/* YES Option */}
                                 <div className="form-check form-check-inline">
                                     <input type="radio" id="holdEarnestYes" name="holdEarnestMoney" className="form-check-input" value="Yes"
                                         checked={formData.holdEarnestMoney === "Yes"} onChange={handleRadioChange} disabled={!editMode} />
                                     <label className="form-check-label" htmlFor="holdEarnestYes">Yes</label>
                                 </div>
 
-                                {/* NO Option */}
                                 <div className="form-check form-check-inline">
                                     <input type="radio" id="holdEarnestNo" name="holdEarnestMoney" className="form-check-input" value="No"
                                         checked={formData.holdEarnestMoney === "No"} onChange={handleRadioChange} disabled={!editMode} />
@@ -385,29 +353,18 @@ const CommissionTab = () => {
 
                         <Col md={12}>
                             <label>Deposit Amount:</label>
-                            <span className="position-absolute" style={{ top: "52%", left: "18px", fontSize: "16px" }} > $ </span>
-                            <input type="text" name="deposit_amount" value={formData.deposit_amount} className="form-control ps-4"
+                            <InputField showDollar dollarStop="50%" type="text" name="deposit_amount" value={formData?.deposit_amount}
                                 onChange={handleChange} readOnly={!editMode} />
                         </Col>
 
                         <Col md={12}>
-                            <label>Date of Check:</label>
-                            <Flatpickr className="form-control d-block" name="date_of_check" value={formData.date_of_check}
-                                options={{ altInput: true, time_24hr: false, altFormat: "F j, Y" }}
-                                placeholder="MM, DD, YYYY" onChange={(date) => {
-                                    setFormData(prev => ({ ...prev, date_of_check: date[0] }));
-                                }} disabled={!editMode}
-                            />
+                            <DatePickerField label="Date of Check: " name="date_of_check" value={formData?.date_of_check}
+                                onChange={handleDateChange} placeholder="MM, DD, YYYY" readOnly={false} />
                         </Col>
 
                         <Col md={12}>
-                            <label>Date Posted to Log Book:</label>
-                            <Flatpickr className="form-control d-block" name="date_posted_log" value={formData.date_posted_log}
-                                options={{ altInput: true, time_24hr: false, altFormat: "F j, Y" }}
-                                placeholder="MM, DD, YYYY" onChange={(date) => {
-                                    setFormData(prev => ({ ...prev, date_posted_log: date[0] }));
-                                }} disabled={!editMode}
-                            />
+                            <DatePickerField label="Date Posted to Log Book" name="date_posted_log" value={formData?.date_posted_log}
+                                onChange={handleDateChange} placeholder="MM, DD, YYYY" readOnly={!editMode} />
                         </Col>
                     </Row>
                 </Col>
@@ -416,12 +373,8 @@ const CommissionTab = () => {
                     <h5 className="fw-bold ">Referral Details</h5>
                     <Row className="g-3">
                         <Col md={12}>
-                            <label>Referral Type:</label>
-                            <Select className="basic-single" classNamePrefix="select" name="referral_type" isClearable={true} options={referralTypes}
-                                defaultValue={referralTypes[0]}
-                                onChange={(option) => setFormData(prev => ({ ...prev, referral_type: option ? option.value : "" }))}
-                                isDisabled={!editMode}
-                            />
+                            <SelectField label="Referral Type" name="referral_type" options={referralTypes} value={formData?.referral_type}
+                                onChange={handleSelectChange} placeholder="Select Type..." readOnly={!editMode} />
                         </Col>
 
                         <Col md={12}>
@@ -430,8 +383,8 @@ const CommissionTab = () => {
                                 <div className="d-flex  gap-2 ">
                                     <Col md={2} className="d-flex align-items-center"
                                         style={{
-                                            border: "1px solid #dad1e0", height: "36px", borderRadius: "8px", padding: "0", opacity: !editMode ? "0.6" : "1",
-                                            pointerEvents: !editMode ? "none" : "auto"
+                                            border: "1px solid #dad1e0", height: "36px", borderRadius: "8px", padding: "0",
+                                            opacity: !editMode ? "0.6" : "1", pointerEvents: !editMode ? "none" : "auto"
                                         }} >
                                         <div onClick={() => setReferralType("%")}
                                             style={{
@@ -452,9 +405,9 @@ const CommissionTab = () => {
                                     </Col>
 
                                     <Col md={10}>
-                                        <div className="d-flex">
-                                            <input type="text" name="referral_amount" className="form-control" value={formData.referral_amount}
-                                                onChange={handleChange} readOnly={!editMode} />
+                                        <div style={{ width: "592px" }}>
+                                            <InputField type="text" name="referral_amount" value={formData?.referral_amount} onChange={handleChange}
+                                                readOnly={!editMode} />
                                         </div>
                                     </Col>
 
@@ -466,11 +419,9 @@ const CommissionTab = () => {
                             <label>Referral Agent:</label>
                             <Row >
                                 <div className="d-flex gap-2">
-                                    <Col md={11} className="d-flex align-items-center"
-                                        style={{ border: "1px solid #dad1e0", height: "36px", borderRadius: "8px", padding: "0", }} >
-                                        <input type="text" name="referral_agent" className="form-control" value={formData.referral_agent}
+                                    <Col md={11}>
+                                        <InputField type="text" name="referral_agent" value={formData?.referral_agent}
                                             onChange={handleChange} readOnly={!editMode} />
-
                                     </Col>
                                     <Col md={1}>
                                         <div className="d-flex">
@@ -485,9 +436,8 @@ const CommissionTab = () => {
                             <label>W9 Form (PDF Only):</label>
                             <Row >
                                 <div className="d-flex gap-2" >
-                                    <Col md={11} className="d-flex align-items-center">
-                                        <input type="file" name="w9_form" className="form-control" value={formData.w9_form}
-                                            onChange={handleChange} readOnly={!editMode} />
+                                    <Col md={11}>
+                                        <InputField type="file" name="w9_form" value={formData?.w9_form} onChange={handleChange} readOnly={!editMode} />
                                     </Col>
                                     <Col md={1}>
                                         <div className="d-flex">
@@ -500,8 +450,8 @@ const CommissionTab = () => {
 
                         <Col md={12}>
                             <label>Referral Brokerage Name:</label>
-                            <input type="text" name="referral_brokerage_name" value={formData.referral_brokerage_name}
-                                className="form-control ps-4" onChange={handleChange} readOnly={!editMode} />
+                            <InputField type="text" name="referral_brokerage_name" value={formData?.referral_brokerage_name}
+                                onChange={handleChange} readOnly={!editMode} />
                         </Col>
                     </Row>
                 </Col>
@@ -512,3 +462,50 @@ const CommissionTab = () => {
 };
 
 export default CommissionTab;
+
+
+// const commissionSection = formattedData.slice(0, 5);
+// const dealSection = formattedData.slice(6, 10);
+// const CreditSection = formattedData.slice(10, 13);
+
+{/* <Row>
+                <Col>
+                    <h5 className="fw-bolder mb-3">Commission Info</h5>
+                    {commissionSection.map((item, index) => (
+                        <Row key={index}>
+                            <Col>
+                                <label className="fw-bold mt-3">{item.label}</label>
+                                <InputField type="text" name={item.key} className="form-control mb-0"
+                                    placeholder={item.label} value={formData?.[item.key] ?? item.value} onChange={handleChange} readOnly={!editMode}
+                                    style={{ borderRadius: "6px", marginLeft: "6px" }} />
+                            </Col>
+                        </Row>
+                    ))}
+                </Col>
+                <Col>
+                    <h5 className="fw-bolder mb-3">Commission Info</h5>
+                    {dealSection.map((item, index) => (
+                        <Row key={index}>
+                            <Col>
+                                <label className="fw-bold mt-3">{item.label}</label>
+                                <InputField type="text" name={item.key} className="form-control mb-0"
+                                    placeholder={item.label} value={formData?.[item.key] ?? item.value} onChange={handleChange} readOnly={!editMode}
+                                    style={{ borderRadius: "6px", marginLeft: "6px" }} />
+                            </Col>
+                        </Row>
+                    ))}
+                </Col>
+                <Col>
+                    <h5 className="fw-bolder mb-3">Commission Info</h5>
+                    {CreditSection.map((item, index) => (
+                        <Row key={index}>
+                            <Col>
+                                <label className="fw-bold mt-3">{item.label}</label>
+                                <InputField type="text" name={item.key} className="form-control mb-0"
+                                    placeholder={item.label} value={formData?.[item.key] ?? item.value} onChange={handleChange} readOnly={!editMode}
+                                    style={{ borderRadius: "6px", marginLeft: "6px" }} />
+                            </Col>
+                        </Row>
+                    ))}
+                </Col>
+            </Row> */}

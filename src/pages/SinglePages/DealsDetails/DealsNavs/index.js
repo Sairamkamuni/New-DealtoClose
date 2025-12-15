@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col, Card, CardBody, TabContent, TabPane } from "reactstrap";
 
 import DealsTabs from "./DealsTabs";
@@ -11,7 +11,13 @@ import ComplianceTab from "./Tabs/ComplianceTab";
 import CommissionTab from "./CommissionTab";
 import NoteTab from "./Tabs/NoteTab";
 
+import { FormHandlers } from "pages/InputFields/FormHandlers";
+
 const NavsHeader = ({ activeTags, toggleTags }) => {
+
+    const { formData, setFormData, handleChange, handleSubmit, handleSelectChange, handleDateChange, handleContactChange } =
+        FormHandlers({ apiUrl: "/api/deals", entity: "Deal", });
+
 
     return (
         <Row className="mt-4">
@@ -22,7 +28,9 @@ const NavsHeader = ({ activeTags, toggleTags }) => {
                     <CardBody>
                         <TabContent activeTab={activeTags} className=" text-muted">
                             <TabPane tabId={1}>
-                                <KeyDatesTab />
+                                <KeyDatesTab
+
+                                />
                             </TabPane>
 
                             <TabPane tabId={2}>
@@ -46,7 +54,10 @@ const NavsHeader = ({ activeTags, toggleTags }) => {
                             </TabPane>
 
                             <TabPane tabId={7}>
-                                <CommissionTab />
+                                <CommissionTab
+                                    handleDateChange={handleDateChange}
+                                    handleSelectChange={handleSelectChange}
+                                />
                             </TabPane>
 
                             <TabPane tabId={8}>
