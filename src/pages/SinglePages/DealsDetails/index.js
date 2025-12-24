@@ -6,7 +6,7 @@ import CenterButtons from "./CenterButtons";
 import NavsHeader from "./DealsNavs";
 
 const DealsDetails = () => {
-    const [activeTags, setActiveTags] = useState(7);
+    const [activeTags, setActiveTags] = useState(4);
 
     const toggleTags = (tab) => {
         if (activeTags !== tab) setActiveTags(tab);

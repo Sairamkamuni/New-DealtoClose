@@ -213,11 +213,34 @@ export const dealsDocumentsTabs = [
 ];
 
 export const foldersRows = [
-    { title: "Cash AS IS Residential Contract for Sale And Purchase (FAR/BAR ASIS-5x)", added_by: "Raj Kamuni", date: "Jun 25, 2025", time: "10:31 AM EST", sing_status: "Signed" },
-    { title: "Executed Residential Contract for Sale And Purchase (FAR/BAR ASIS-5x)", added_by: "Sai Kamuni", date: "Jun 25, 2025", time: "10:31 AM EST", sing_status: "Request Signature" },
+    {
+        title: "Cash AS IS Residential Contract for Sale And Purchase (FAR/BAR ASIS-5x)", added_by: "Raj Kamuni", date: "Jun 25, 2025",
+        time: "10:31 AM EST", sing_status: "Signed"
+    },
+    {
+        title: "Executed Residential Contract for Sale And Purchase (FAR/BAR ASIS-5x)", added_by: "Sai Kamuni", date: "Jun 25, 2025",
+        time: "10:31 AM EST", sing_status: "Request Signature"
+    },
     { title: "Inspection Report", added_by: "Raj Kamuni", date: "Jun 25, 2025", time: "10:31 AM EST", sing_status: "Signature Requested" },
-    { title: "Addendum to Contract", added_by: "Raj Kamuni", added_by: "Sai Kamuni", date: "Jun 25, 2025", time: "10:31 AM EST", sing_status: "Signed" },
-    { title: "Extension Addendum", added_by: "Raj Kamuni", added_by: "Sai Kamuni", date: "Jun 25, 2025", time: "10:31 AM EST", sing_status: "Signature Requested" },
+    {
+        title: "Addendum to Contract", added_by: "Raj Kamuni", added_by: "Sai Kamuni", date: "Jun 25, 2025",
+        time: "10:31 AM EST", sing_status: "Signed"
+    },
+    {
+        title: "Extension Addendum", added_by: "Raj Kamuni", added_by: "Sai Kamuni", date: "Jun 25, 2025",
+        time: "10:31 AM EST", sing_status: "Signature Requested"
+    },
+];
+
+export const DealsFoldersOptions = [
+    { value: 1, label: "Rename" },
+    { value: 2, label: "Send to Review" },
+    { value: 3, label: "Make a Copy" },
+    { value: 4, label: "Move to Folder" },
+    { value: 5, label: "Remove Signature" },
+    { value: 6, label: "History" },
+    { value: 7, label: "Print" },
+    { value: 8, label: "Archive" },
 ];
 
 // Contact Tabs
@@ -341,13 +364,13 @@ export const dealsAdditionalInformation = [
     { key: "baths", label: "Baths", values: "2" },
     { key: "sq_ft", label: "SqFt", values: "1234" },
     { key: "lot_size", label: "Lot Size", values: "5678" },
-    { key: "subdivision", label: "Subdivision", values: "Subdivision Name" },
     { key: "hoa", label: "HOA", values: "YES / NO" },
+    { key: "subdivision", label: "Subdivision", values: "Subdivision Name" },
     { key: "hoa_amount", label: "HOA Amount", values: "Per Month / Quater / Year" },
-    { key: "property_tax_id", label: "Property Tax ID", values: "1234567897" },
     { key: "tax_amount", label: "Tax Amount", values: "123456" },
+    { key: "list_date", label: "List Date", values: "Aug 15th, 1947" },
+    { key: "property_tax_id", label: "Property Tax ID", values: "1234567897" },
     { key: "property_tax_year", label: "Property Tax Year", values: "2025" },
-    { key: "list_date", label: "List Date", values: "Aug 15th 1947" },
 ];
 
 export const keyWithDates = [

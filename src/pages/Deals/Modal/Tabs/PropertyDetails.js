@@ -19,7 +19,7 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                         {dealsPropertyDetails.map((item, index) => (
                             <Row className="g-0" key={index}>
                                 <Col md="5" className="d-flex align-items-center" style={{ border: "1px solid #dcdcdc", padding: "0px 12px", borderRadius: "6px" }}>
-                                    <label className="fw-bold" style={{ marginTop: "3px" }}>{item.label}</label>
+                                    <label className="fw-bold" style={{ marginTop: "6px" }}>{item.label}</label>
                                 </Col>
                                 <Col>
                                     <InputField type="text" name={item.key} className="form-control"
@@ -82,14 +82,13 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                     </div>
                     <Col>
                         {dealsAdditionalInformation.map((item, index) => (
-                            <Row className="g-0 mb-2" key={index}>
-                                <Col md="4" className="d-flex align-items-center">
-                                    <label className="fw-bold me-2">{item.label} : </label>
+                            <Row key={index}>
+                                <Col md="4">
+                                    <label className="fw-bold">{item.label}</label>
                                 </Col>
-                                <Col>
-                                    <InputField type="text" name={item.key} className="form-control"
-                                        placeholder={item.label} value={formData?.[item.key] ?? item.values} onChange={handleChange} readOnly={!editMode}
-                                        style={{ borderRadius: "6px", marginLeft: "6px" }} />
+                                <Col xs="auto" style={{ borderRight: "1px solid #a4a2a2ff" }}> </Col>
+                                <Col md="4" style={{ cursor: "pointer" }}>
+                                    <label className="fw-bold ms-5">{item.values}</label>
                                 </Col>
                             </Row>
                         ))}
@@ -110,18 +109,17 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                     <Col>
                         {dealFields.map((item, index) => (
                             <Row className="g-0" key={index}>
-                                <Col md="5" className="d-flex align-items-center" style={{ padding: "0px 12px", }}>
-                                    <label className="fw-bold" >{item.label}</label>
+                                <Col md="5" className="d-flex align-items-center" style={{ border: "1px solid #dcdcdc", padding: "0px 12px", borderRadius: "6px" }}>
+                                    <label className="fw-bold" style={{ marginTop: "6px" }}>{item.label}</label>
                                 </Col>
                                 <Col>
-                                    : <input type="text" name={item.key} className=""
+                                    <InputField type="text" name={item.key} className="form-control"
                                         placeholder={item.label} value={formData?.[item.key] ?? item.values} onChange={handleChange} readOnly={!editMode}
-                                        style={{ border: 'none', borderRadius: "6px", marginLeft: "6px" }} />
+                                        style={{ borderRadius: "6px", marginLeft: "6px" }} />
                                 </Col>
                             </Row>
                         ))}
 
-                        {/* APPROVE BUTTON */}
                         <div className="d-flex justify-content-end mt-3">
                             <AllButton label="Approve" outline={false} />
                         </div>
@@ -138,7 +136,7 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                         {keyWithDates.map((item, index) => (
                             <Row className="g-0" key={index}>
                                 <Col md="5" className="d-flex align-items-center" style={{ border: "1px solid #dcdcdc", padding: "0px 12px", borderRadius: "6px" }}>
-                                    <label className="fw-bold" style={{ marginTop: "3px" }}>{item.label}</label>
+                                    <label className="fw-bold" style={{ marginTop: "6px" }}>{item.label}</label>
                                 </Col>
                                 <Col>
                                     <DatePickerField
@@ -151,7 +149,6 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
                             </Row>
                         ))}
 
-                        {/* APPROVE BUTTON */}
                         <div className="d-flex justify-content-end mt-3">
                             <AllButton label="Approve" outline={false} />
                         </div>
@@ -178,3 +175,17 @@ const PropertyDetails = ({ collapseToggle, collapseOpen, editMode, setEditMode, 
 };
 
 export default PropertyDetails;
+
+
+{/* {dealsAdditionalInformation.map((item, index) => (
+                            <Row className="g-0 mb-2" key={index}>
+                                <Col md="4" className="d-flex align-items-center">
+                                    <label className="fw-bold me-2">{item.label} : </label>
+                                </Col>
+                                <Col>
+                                    <InputField type="text" name={item.key} className="form-control"
+                                        placeholder={item.label} value={formData?.[item.key] ?? item.values} onChange={handleChange} readOnly={!editMode}
+                                        style={{ borderRadius: "6px", marginLeft: "6px" }} />
+                                </Col>
+                            </Row>
+                        ))} */}

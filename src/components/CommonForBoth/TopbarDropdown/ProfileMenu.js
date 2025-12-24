@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from 'prop-types'
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap"
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
 import { withTranslation } from "react-i18next"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router-dom"
@@ -25,11 +20,11 @@ const ProfileMenu = props => {
       <Dropdown isOpen={menu} toggle={() => setMenu(!menu)} className="d-inline-block">
         <DropdownToggle className="btn header-item " id="page-header-user-dropdown" tag="button" >
           <img className="rounded-circle header-profile-user" src={user1} alt="Header Avatar" />
-          <span className="d-none d-xl-inline-block ms-2 me-1">{username}</span>
-          <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
+          <span className="d-none d-xl-inline-block ms-2 me-1 text-white">{username}</span>
+          <i className="mdi mdi-chevron-down d-none d-xl-inline-block text-white" />
         </DropdownToggle>
 
-        <DropdownMenu className="dropdown-menu-end">
+        <DropdownMenu className="dropdown-menu-end" style={{ marginTop: "34px" }}>
           <DropdownItem tag="a" href="#" className="d-flex">
             <i className="bx bx-envelope font-size-16 align-middle me-1" />
             <p>Steve@VTechAgents.Com</p>

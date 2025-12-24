@@ -137,7 +137,7 @@ export let DealTaskTableColumns = (callback = {}, DocumentAgentUser = [], Docume
 
 export let DealDockTableColumns = (callback = {}) => [
     { dataField: "checkbox", text: "", isDummyField: true, headerStyle: { width: "40px" } },
-    { dataField: "title", text: "File Name", },
+    { dataField: "title", text: "File Name", headerStyle: { width: "580px" } },
     { dataField: "added_by", text: "Added By", },
     { dataField: "date", text: "Date", },
     { dataField: "time", text: "Time", },

@@ -31,7 +31,7 @@ const ContactList = ({ contacts }) => {
                             <h2 style={{ fontSize: "18px", fontWeight: "bold", margin: 0 }}> Contacts </h2>
 
                             <div className="d-flex gap-2">
-                                <AddPlusCircleButton label="Add Contact" onClick={(e) => { e.stopPropagation(); setModalOpen(true) }} />
+                                <AddPlusCircleButton label="Add Contact" width="135px" onClick={(e) => { e.stopPropagation(); setModalOpen(true) }} />
                             </div>
                         </div>
                     </div>

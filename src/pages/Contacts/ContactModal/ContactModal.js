@@ -56,17 +56,17 @@ const ContactModal = ({ isOpen, toggle }) => {
                             onChange={handleChange} />
                     </Col>
 
-                    {formType === "Client" && (
+                    <Col md="12">
+                        <SelectField label="Type" name="type" options={TypeOption} value={formData?.type}
+                            onChange={handleSelectChange} placeholder="Select Type..." />
+                    </Col>
+
+                    {formType === "Collaborator" && (
                         <Col md="12">
-                            <SelectField label="Type" name="type" options={TypeOption} value={formData?.type}
-                                onChange={handleSelectChange} placeholder="Select Type..." />
+                            <SelectField label="Title" name="title" options={TitleOption} value={formData?.title}
+                                onChange={handleSelectChange} placeholder="Select Title..." />
                         </Col>
                     )}
-
-                    <Col md="12">
-                        <SelectField label="Title" name="title" options={TitleOption} value={formData.title}
-                            onChange={handleSelectChange} placeholder="Select Title..." />
-                    </Col>
 
                     {formType === "Client" && (
                         <>
