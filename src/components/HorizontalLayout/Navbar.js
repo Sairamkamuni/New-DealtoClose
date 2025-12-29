@@ -46,7 +46,7 @@ const Navbar = props => {
             </Collapse>
 
             {/* RIGHT SIDE */}
-            <div className="ms-auto d-flex align-items-center flex-nowrap gap-3">
+            <div className="ms-auto d-flex align-items-center flex-nowrap gap-3" style={{ cursor: "pointer" }}>
               <Searchbar style={{ width: "560px", borderRadius: "50%" }} />
               <i className="far fa-envelope-open fs-4 text-white" />
               <i className="far fa-bell fs-4 text-white" />

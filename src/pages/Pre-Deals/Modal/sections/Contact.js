@@ -5,7 +5,6 @@ import { AsyncSelectField } from "pages/InputFields/InputFields";
 import { contactRoles, contactNames } from "AllDummyData/DealsDummyData";
 
 const Contact = ({ onContactChange }) => {
-
     const [inputFields, setInputFields] = useState([
         { contact_role: "", contact_name: "" }
     ]);

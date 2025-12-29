@@ -3,14 +3,15 @@ import { Collapse, Row, Col, Card } from "reactstrap";
 import { AddPlusCircleButton, PencilButton } from "pages/utils/allButton";
 import classnames from "classnames";
 import NewContactModal from "pages/AllModals/NewContactModal";
+import { contacts } from "AllDummyData/PreDealDummyData";
 
-const ContactList = ({ contacts }) => {
+const ContactList = () => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [openFolders, setOpenFolders] = useState(false);
+    const [openCollapse, setOpenCollapse] = useState(false);
     const [openGroups, setOpenGroups] = useState(contacts.map((_, i) => i));
 
     const toggleFolder = () => {
-        setOpenFolders(!openFolders);
+        setOpenCollapse(!openCollapse);
     };
 
     const toggleContactGroup = (index) => {
@@ -26,7 +27,7 @@ const ContactList = ({ contacts }) => {
             <Card className="accordion" id="accordion">
                 <div className="accordion-item">
                     {/* Accordion Header */}
-                    <div className={classnames("accordion-button accordion-header", { collapsed: !openFolders })} onClick={toggleFolder} style={{ cursor: "pointer" }} >
+                    <div className={classnames("accordion-button accordion-header", { collapsed: !openCollapse })} onClick={toggleFolder} style={{ cursor: "pointer" }} >
                         <div className="w-100 me-3 d-flex justify-content-between align-items-center">
                             <h2 style={{ fontSize: "18px", fontWeight: "bold", margin: 0 }}> Contacts </h2>
 
@@ -37,7 +38,7 @@ const ContactList = ({ contacts }) => {
                     </div>
 
                     {/* Main Collapse */}
-                    <Collapse isOpen={openFolders} className="accordion-collapse">
+                    <Collapse isOpen={openCollapse} className="accordion-collapse">
                         {contacts.map((contact, index) => (
                             <div key={index} className="mb-3 shadow-sm border rounded">
                                 {/* Contact Group Header */}

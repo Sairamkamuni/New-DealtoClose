@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 import EmailCompose from "pages/AllModals/EmailCompose";
 import MailsList from "pages/Inbox/email-list"
+import EmailSideBar from "pages/Inbox/email-sidebar";
 import Searchbar from "pages/utils/search_bar";
 import { AdvancedSearchDropdown } from "pages/utils/filterDropdown";
 
@@ -16,6 +17,7 @@ const EmailTab = () => {
     const toggleEmail = (tab) => {
         if (emailTags !== tab) setEmailTags(tab);
     };
+
     return (
         <>
             <Row>
@@ -49,10 +51,19 @@ const EmailTab = () => {
                 </Col>
             </Row>
 
-            <TabContent activeTab={emailTags} className="p-2 text-muted">
-                <TabPane tabId={1} style={{ border: "1px solid #dad1e0", borderRadius: "10px", marginTop: "5px" }} >
-                    <MailsList showToolbar={false} />
+            <TabContent activeTab={emailTags} className="mt-3">
+                <TabPane tabId={1}>
+                    <Row className="g-0">
+                        <Col md={2}>
+                            <EmailSideBar />
+                        </Col>
+
+                        <Col md={10}>
+                            <MailsList showToolbar={false} />
+                        </Col>
+                    </Row>
                 </TabPane>
+
 
                 <TabPane tabId={2}>
                     <div className="p-3">

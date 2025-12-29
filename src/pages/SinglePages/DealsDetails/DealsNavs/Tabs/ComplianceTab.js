@@ -6,6 +6,7 @@ import { complianceTabs, complianceOptions, omplianceTableData, ComplianceCommen
 import { FilterDropdown } from "pages/utils/filterDropdown";
 import Datatables from "pages/table/datatable";
 import { DealComplianceColumns } from "pages/TableColumns/DealTableColumns";
+import ComplianceComp from "./Comps/Compliance";
 
 const ComplianceTab = ({ callback }) => {
     const [complianceTab, setComplianceTab] = useState(2);
@@ -20,7 +21,7 @@ const ComplianceTab = ({ callback }) => {
             <Row>
                 <Col>
                     <div className="d-flex align-items-center flex-nowrap">
-                        <Nav pills style={{ borderRadius: "12px", padding: "5px", gap: "5px" }}>
+                        <Nav pills style={{ borderRadius: "12px" }}>
                             {complianceTabs.map((ct) => (
                                 <NavItem key={ct.id}>
                                     <NavLink
@@ -45,7 +46,9 @@ const ComplianceTab = ({ callback }) => {
 
             <TabContent activeTab={complianceTab} className="mt-3">
                 <TabPane tabId={2}>
-                    <div style={{ border: "1px solid #dad1e0", borderRadius: "10px", marginTop: "15px" }} >
+                    <ComplianceComp />
+
+                    {/* <Row style={{ border: "1px solid #dad1e0", borderRadius: "10px", marginTop: "15px" }} >
                         <Datatables
                             columns={DealComplianceColumns(callback, ComplianceComments)}
                             showTableOnly={true}
@@ -54,7 +57,7 @@ const ComplianceTab = ({ callback }) => {
                             loading={false}
                             ssr={() => { }}
                         />
-                    </div>
+                    </Row> */}
                 </TabPane>
             </TabContent>
 

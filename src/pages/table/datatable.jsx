@@ -247,7 +247,7 @@ const Datatables = ({
                       {isSearch && (
                         <div className="search-box me-2 d-inline-block" style={{ width: "100%" }} >
                           <div className="position-relative">
-                            <input className="form-control" placeholder={placeholder} value={searchTerm}
+                            <Input className="form-control" placeholder={placeholder} value={searchTerm}
                               onChange={(e) => setSearchTerm(e.target.value.trim())}
                             />
                             <i className="bx bx-search-alt search-icon" />

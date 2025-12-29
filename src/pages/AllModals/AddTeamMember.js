@@ -19,7 +19,7 @@ const AddTeamMember = ({ isOpen, toggle, style }) => {
     return (
         <Dropdown isOpen={isOpen} toggle={toggle} className="d-inline-block">
             <DropdownToggle tag="span" role="button" onClick={toggle} style={{ cursor: "pointer" }}>
-                <UserPlusButton label="Add Team Member" width="200px" />
+                <UserPlusButton label="Add Team Member" width="175px" />
             </DropdownToggle>
 
             <div style={{ position: "absolute", left: "-40px", style }}>

@@ -100,24 +100,6 @@ export const ToggleField = ({
     );
 };
 
-// export const ToggleSelector = ({ options = [], value, onChange, height = "36px" }) => {
-//     return (
-//         <div className="d-flex align-items-center" style={{ border: "1px solid #dad1e0", height: height, borderRadius: "8px", padding: "0" }}>
-//             {options.map((opt, index) => (
-//                 <div key={opt.value} onClick={() => onChange(opt.value)}
-//                     style={{
-//                         background: value === opt.value ? "#243e79" : "transparent",
-//                         color: value === opt.value ? "white" : "#231f20", display: "flex", alignItems: "center", justifyContent: "center",
-//                         padding: "6px 14px", borderRadius: "6px", cursor: "pointer", fontWeight: 600, width: "50%",
-//                     }}
-//                 >
-//                     {opt.label}
-//                 </div>
-//             ))}
-//         </div>
-//     );
-// };
-
 export const SelectField = ({ id, label, name, options, value, onChange, readOnly = false, isClearable = true, placeholder }) => {
     return (
         <div>
@@ -133,6 +115,7 @@ export const SelectField = ({ id, label, name, options, value, onChange, readOnl
                 value={options.find((opt) => opt.label === value) || null}
                 onChange={onChange}
                 placeholder={placeholder}
+                style={{ cursor: readOnly ? "pointer" : "text" }}
             />
         </div>
     );
@@ -176,6 +159,7 @@ export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = 
                 onChange={onChange}
                 onInputChange={(val) => setInputValue(val)}
                 components={{ MenuList: CustomMenuList }}
+                style={{ cursor: readOnly ? "pointer" : "text" }}
             />
         </div>
     );

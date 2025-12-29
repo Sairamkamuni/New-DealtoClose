@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, TabContent, TabPane } from "reactstrap";
 import AllButton from "pages/utils/allButton";
 import CreateNewDeal from "./Tabs/AddFile";
-import PropertyDetails from "./Tabs/PropertyDetails";
+import Index from "./Tabs/PropertyDetails";
 import { FormHandlers } from "pages/InputFields/FormHandlers";
 
 const DealsModal = ({ isOpen, toggle, deal }) => {
@@ -33,7 +33,7 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
 
             <div className="modal-body" style={{ maxHeight: "75vh", overflowY: "auto" }}>
                 <TabContent activeTab={activeTabVartical}>
-                    <TabPane tabId={1}>
+                    <TabPane tabId={2}>
                         <CreateNewDeal
                             formData={formData}
                             handleRadioChange={handleRadioChange}
@@ -42,8 +42,8 @@ const DealsModal = ({ isOpen, toggle, deal }) => {
                         />
                     </TabPane>
 
-                    <TabPane tabId={2}>
-                        <PropertyDetails
+                    <TabPane tabId={1}>
+                        <Index
                             collapseToggle={collapseToggle}
                             collapseOpen={collapseOpen}
                             editMode={editMode}

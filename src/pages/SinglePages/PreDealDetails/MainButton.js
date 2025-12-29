@@ -18,7 +18,7 @@ const MainButton = () => {
                 </Link>
                 <EmailButton label="Compose Email" width="170px" onClick={(e) => { e.stopPropagation(); setModalOpen(true) }} />
                 <FileSignatureButton label="Submit Offer to LA" width="175px" onClick={() => console.log('Button Clicked')} />
-                <AddTeamMember isOpen={teamModalOpen} toggle={() => setTeamModalOpen(!teamModalOpen)} width="160px" />
+                <AddTeamMember isOpen={teamModalOpen} toggle={() => setTeamModalOpen(!teamModalOpen)} />
                 <AddFolderButton label="Create Folder" width="140px" onClick={(e) => { e.stopPropagation(); setFolderModalOpen(true) }} />
                 <HistoryButton label="Activity Log" width="130px" onClick={() => console.log('Button Clicked')} />
                 <ArchiveButton label="Archive" width="110px" onClick={() => console.log('Button Clicked')} />

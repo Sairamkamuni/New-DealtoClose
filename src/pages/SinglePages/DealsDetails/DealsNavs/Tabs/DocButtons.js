@@ -1,11 +1,11 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import { ShareButton, EmailButton, ScissorsButton, DownloadButton, PrintButton, CopyButton, MovetButton, CertificateButton, CancelButton, ArchiveButton, } 
-from "pages/utils/allButton";
+import { ShareButton, EmailButton, ScissorsButton, DownloadButton, PrintButton, CopyButton, MovetButton, CertificateButton, CancelButton, ArchiveButton, }
+    from "pages/utils/allButton";
 
 const DocButtons = () => {
     return (
-        <Row style={{ margin: "5px", border: "1px solid #dad1e0", borderRadius: "10px", backgroundColor: "#ece4f1", }}>
+        <Row className="mb-3" style={{ border: "1px solid #dad1e0", borderRadius: "10px", backgroundColor: "#ffffff", }}>
             <Col>
                 <div className="p-2 d-flex justify-content-between align-items-center gap-2" style={{ whiteSpace: "nowrap" }} >
                     <ShareButton label="Send to Review" width="170px" onClick={() => console.log("clicked")} />

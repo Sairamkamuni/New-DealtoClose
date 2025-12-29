@@ -1,30 +1,45 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Row, Col, Modal } from "reactstrap"
 import {
     FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption, TagsOption, AgentsName
 } from "AllDummyData/ContacsDummyData"
-import { InputField, SelectField, DatePickerField } from "pages/InputFields/InputFields"
-import AllButton from "pages/utils/allButton"
+import { InputField, SelectField, AsyncSelectField, DatePickerField } from "pages/InputFields/InputFields"
+import AllButton, { FaPlusButton, FaTrashCanButton } from "pages/utils/allButton"
 import { FormHandlers } from "pages/InputFields/FormHandlers"
 
 const ContactModal = ({ isOpen, toggle }) => {
     const [formType, setFormType] = useState("Client");
-
+    const [inputFields, setInputFields] = useState([{ family_member: "", relation_type: "" }]);
     const { formData, handleChange, handleSubmit, handleSelectChange, handleDateChange, handleContactChange } =
-        FormHandlers({ apiUrl: "/api/deals", toggle: toggle, entity: "Pre Deal", });
+        FormHandlers({ apiUrl: "/api/deals", toggle: toggle, entity: "Contact", });
+
+
+    useEffect(() => {
+        handleContactChange(inputFields);
+    }, [inputFields]);
+
+    const handleAddFields = () => {
+        setInputFields([
+            ...inputFields,
+            { family_member: "", relation_type: "" }
+        ]);
+    };
+
+    const handleRemoveFields = (index) => {
+        const values = [...inputFields];
+        values.splice(index, 1);
+        setInputFields(values);
+    };
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} scrollable={true} style={{ maxWidth: "650px" }} >
             <div className="modal-header d-block">
                 <h3 className="modal-title fw-bold mb-1">Add New Contact</h3>
                 <h6 className="modal-subtitle text-muted">Fill in the details below to add a new contact.</h6>
-                <button type="button" onClick={toggle} className="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" onClick={toggle} className="close" aria-label="Close"></button>
             </div>
 
             <div className="modal-body">
-                {/* Switch buttons */}
                 <div className="mb-4">
                     <button className={`btn me-3 w-25 ${formType === "Client" ? "btn-primary" : "btn-outline-primary"}`}
                         onClick={() => setFormType("Client")}>Client</button>
@@ -99,16 +114,47 @@ const ContactModal = ({ isOpen, toggle }) => {
                     <div style={{ marginTop: "22px" }}>
                         <div className="p-3" style={{ border: "1px solid #dad1e0", borderRadius: "5px", backgroundColor: "#ece4f1" }}>
                             <h5 className="text-primary fw-bolder">Add Family Member</h5>
-                            <Row>
-                                <Col md="6">
-                                    <SelectField label="Add Family Member" name="family_member" options={FamilyMembersOption} value={formData?.family_member}
-                                        onChange={handleSelectChange} placeholder="Select Contact Name..." />
-                                </Col>
-                                <Col md="6" >
-                                    <SelectField label="Relation Type" name="relation_type" options={RelationshipTypeOption} value={formData?.relation_type}
-                                        onChange={handleSelectChange} placeholder="Select Relation Type..." />
-                                </Col>
-                            </Row>
+                            {inputFields.map((field, key) => (
+                                <div key={key} id={`nested${key}`}>
+                                    <Row>
+                                        <Col md="5" className="mb-3">
+                                            <AsyncSelectField label="Family Member" name="family_member"
+                                                optionsList={FamilyMembersOption} value={field.family_member}
+                                                onChange={(e) => {
+                                                    setInputFields(prev => {
+                                                        const updated = [...prev];
+                                                        updated[key] = { ...updated[key], family_member: e?.label || "" };
+                                                        return updated;
+                                                    });
+                                                }}
+
+                                            />
+                                        </Col>
+
+                                        <Col md="5">
+                                            <AsyncSelectField label="Relation Type" name="relation_type"
+                                                optionsList={RelationshipTypeOption} value={field.relation_type}
+                                                onChange={(e) => {
+                                                    setInputFields(prev => {
+                                                        const updated = [...prev];
+                                                        updated[key] = { ...updated[key], relation_type: e?.label || "" };
+                                                        return updated;
+                                                    });
+                                                }}
+                                            />
+                                        </Col>
+
+                                        <Col md="1" className="d-flex flex-column justify-content-end" style={{ marginBottom: "18px" }}>
+                                            {(inputFields.length - 1) === key ? (
+                                                <FaPlusButton width="70px" outline={false} onClick={handleAddFields} iconMarginRight="0px" />
+                                            ) : (
+                                                <FaTrashCanButton width="70px" color="danger" outline={false} iconMarginRight="0px"
+                                                    onClick={() => handleRemoveFields(key)} />
+                                            )}
+                                        </Col>
+                                    </Row>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -130,4 +176,4 @@ const ContactModal = ({ isOpen, toggle }) => {
     )
 }
 
-export default ContactModal
+export default ContactModal;

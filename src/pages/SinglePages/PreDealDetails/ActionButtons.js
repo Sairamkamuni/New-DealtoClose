@@ -5,7 +5,7 @@ import { EmailButton, DownloadButton, PrintButton, CopyButton, MovetButton, Cert
 const ActionButtons = () => {
 
     return (
-        <Row style={{ margin: "5px", border: "1px solid #dad1e0", borderRadius: "10px", backgroundColor: "#ffffff", }} >
+        <Row className="mt-3" style={{ margin: "5px", border: "1px solid #dad1e0", borderRadius: "10px", backgroundColor: "#ffffff", }} >
             <Col>
                 <div className="p-2 d-flex justify-content-between align-items-center gap-2" style={{ whiteSpace: "nowrap" }} >
                     <EmailButton label="Send Sign Request" width="180px" />

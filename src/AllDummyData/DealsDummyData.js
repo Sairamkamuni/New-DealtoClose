@@ -204,6 +204,17 @@ export const dealsTableTasksData = [
     { id: 5, task: "Confirm escrow deposit", due_date: "2025-09-14", assigned_to: "John Doe", status: "Completed" },
 ];
 
+export const DealsTaskOptions = [
+    { value: 1, label: "Edit" },
+    { value: 2, label: "Delete" },
+];
+
+export const DealsComplianceOptions = [
+    { value: 1, label: "Edit Comment" },
+    { value: 2, label: "View History" },
+    { value: 3, label: "Delete" },
+];
+
 // Documents Tabs
 export const dealsDocumentsTabs = [
     { id: 1, label: "Listing Docs" },
@@ -285,11 +296,11 @@ export const complianceOptions = [
 ];
 
 export const omplianceTableData = [
-    { sr_no: "01", checklist_name: "Executed Contract", comments: "Approved, KSB" },
-    { sr_no: "02", checklist_name: "LBP Rider", comments: "Reviewed, KSB" },
-    { sr_no: "03", checklist_name: "HOA Addendum Rider", comments: "Please confirm if the seller has agreed..." },
-    { sr_no: "04", checklist_name: "Escrow Receipt", comments: "Attached to Contract" },
-    { sr_no: "05", checklist_name: "SPD Rider", comments: "Attached to Contract" },
+    { sr_no: 1, checklist_name: "Executed Contract", comments: "Approved, KSB" },
+    { sr_no: 2, checklist_name: "LBP Rider", comments: "Reviewed, KSB" },
+    { sr_no: 3, checklist_name: "HOA Addendum Rider", comments: "Please confirm if the seller has agreed..." },
+    { sr_no: 4, checklist_name: "Escrow Receipt", comments: "Attached to Contract" },
+    { sr_no: 5, checklist_name: "SPD Rider", comments: "Attached to Contract" },
 ];
 
 export const ComplianceComments = ["Executed Contract", "LBP Rider", "HOA Addendum Rider", "Escrow Receipt", "SPD Rider"];

@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col } from "reactstrap";
 import MainButton from "../MainButton";
-import FolderList from "./FolderList";
 import ContactList from "./ContactList";
 import Tasks from "./Tasks";
 import Notes from "./Notes";
-
-import { folders, contacts } from "AllDummyData/PreDealDummyData";
+import FolderCard from "./FolderCard";
 
 const PreDealRight = () => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [contactModalOpen, setContactModalOpen] = useState(false);
-    const [selectedDocs, setSelectedDocs] = useState({});
 
     return (
         <Row className="mt-4">
             <Col>
                 <MainButton />
 
-                <FolderList folders={folders} selectedDocs={selectedDocs} setSelectedDocs={setSelectedDocs} />
+                <FolderCard />
 
-                <ContactList contacts={contacts} isOpen={contactModalOpen} toggle={() => setContactModalOpen(!contactModalOpen)} />
+                <ContactList />
 
                 <Tasks />
 

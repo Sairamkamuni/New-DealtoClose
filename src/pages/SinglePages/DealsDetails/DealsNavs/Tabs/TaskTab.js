@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import classnames from "classnames";
 import AddTaskModal from "pages/AllModals/AddTaskModal";
-
 import { AddPlusCircleButton, ArchiveButton, CheckButton } from "pages/utils/allButton";
-
 import { dealsTaskTabs, dealsTasksTemplateOptions, DocumentAgentUser, DocumentStatus, dealsTableTasksData } from "AllDummyData/DealsDummyData";
-
 import Datatables from "pages/table/datatable";
 import { DealTaskTableColumns } from "pages/TableColumns/DealTableColumns";
+import TaskComp from "./Comps/Task";
 
 const TaskTab = () => {
     const [taskTags, setTaskTags] = useState(1);
@@ -25,10 +23,7 @@ const TaskTab = () => {
 
     const handleCheckboxChange = (taskId) => {
         setTasks((prevTasks) => prevTasks.map((task) =>
-            task.id === taskId ? { ...task, status: task.status === "Completed" ? "Pending" : "Completed", }
-                : task
-        )
-        );
+            task.id === taskId ? { ...task, status: task.status === "Completed" ? "Pending" : "Completed", } : task));
     };
 
     const handleAssignedChange = (id, value) => {
@@ -38,8 +33,7 @@ const TaskTab = () => {
     };
 
     const handleStatusChange = (id, value) => {
-        setTasks((tasks) => tasks.map((task) => task.id === id ? { ...task, status: value } : task)
-        );
+        setTasks((tasks) => tasks.map((task) => task.id === id ? { ...task, status: value } : task));
     };
 
     const callback = {
@@ -58,7 +52,7 @@ const TaskTab = () => {
             <Row>
                 <Col>
                     <div className="d-flex align-items-center">
-                        <Nav pills style={{ borderRadius: "12px", padding: "5px", gap: "5px" }}>
+                        <Nav pills style={{ borderRadius: "12px" }}>
                             {dealsTaskTabs.map((tab) => (
                                 <NavItem key={tab.id}>
                                     <NavLink
@@ -82,7 +76,11 @@ const TaskTab = () => {
                 <Col md={5}>
                     <div className="d-flex align-items-center justify-content-end gap-2">
                         <Dropdown isOpen={dropdownOpen} toggle={toggle} className="custom-dropdown" >
-                            <DropdownToggle caret style={{ width: "150px", height: "36px", textAlign: "center", backgroundColor: "#243e79", border: "1px solid #243e79", color: "#243e79", }} >
+                            <DropdownToggle caret
+                                style={{
+                                    width: "150px", height: "36px", textAlign: "center", backgroundColor: "#243e79",
+                                    border: "1px solid #243e79", color: "#243e79",
+                                }} >
                                 {dealsTasksTemplateOptions.find((opt) => opt.value === selectedOption)?.label}
                             </DropdownToggle>
 
@@ -107,10 +105,11 @@ const TaskTab = () => {
             </Row>
 
             <TabContent activeTab={taskTags} className="p-2 text-muted">
-                <Row style={{ border: "1px solid #dad1e0", borderRadius: "10px", marginTop: "5px", }}>
+                <Row className="mt-2">
                     <Col>
                         <TabPane tabId={1}>
-                            <Datatables
+                            <TaskComp />
+                            {/* <Datatables
                                 columns={DealTaskTableColumns(callback, DocumentAgentUser, DocumentStatus)}
                                 showTableOnly={true}
                                 rows={tasks}
@@ -119,7 +118,7 @@ const TaskTab = () => {
                                 rowStyle={rowStyle}
                                 showPagination={true}
                                 ssr={() => { }}
-                            />
+                            /> */}
                         </TabPane>
                     </Col>
                 </Row>
