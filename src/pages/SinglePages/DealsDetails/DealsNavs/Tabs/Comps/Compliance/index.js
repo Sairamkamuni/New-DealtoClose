@@ -12,8 +12,8 @@ const ComplianceComp = () => {
                 style={{ border: "1px solid #e6dff0", borderRadius: "8px", background: "#faf7fd" }} >
                 <Col md="1" className="text-center">View Doc</Col>
                 <Col md="1" className="text-center">Sr. No.</Col>
-                <Col md="3">Checklist Name</Col>
-                <Col md="4">Comments</Col>
+                <Col md="2">Checklist Name</Col>
+                <Col md="5">Comments</Col>
                 <Col md="2" className="text-center">Attach</Col>
                 <Col md="1" className="text-center">Actions</Col>
             </Row>
@@ -30,11 +30,11 @@ const ComplianceComp = () => {
                         {comps.sr_no}
                     </Col>
 
-                    <Col md="3">
+                    <Col md="2">
                         {comps.checklist_name}
                     </Col>
 
-                    <Col md="4">
+                    <Col md="5">
                         <Select value={{ label: comps.comments, value: comps.comments }} options={ComplianceComments.map(s => ({ label: s, value: s }))}
                             menuPortalTarget={document.body} classNamePrefix="react-select"
                             styles={{
@@ -51,7 +51,7 @@ const ComplianceComp = () => {
                     </Col>
 
                     <Col md="1" className="text-center">
-                        <OptionsDropdown options={DealsComplianceOptions} />
+                        <OptionsDropdown options={DealsComplianceOptions} leftMargin="-100px" />
                     </Col>
                 </Row>
             ))}

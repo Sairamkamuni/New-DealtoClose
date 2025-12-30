@@ -40,20 +40,15 @@ const EmailAddress = () => {
                 <div className="d-flex justify-content-between align-items-center">
                     <h6 className="mb-0 fw-bolder">Email Address</h6>
                     <div className="d-flex align-items-center gap-2">
-                        <button className="btn btn-sm btn-outline-secondary" onClick={() => setEditMode(!editMode)}
-                        >
+                        <button className="btn btn-sm btn-outline-secondary" onClick={() => setEditMode(!editMode)} >
                             <i className="fas fa-pencil-alt" />
                         </button>
-                        <button
-                            className="btn btn-sm btn-outline-primary"
-                            onClick={() => setShowEmailInput(true)}
-                        >
+                        <button className="btn btn-sm btn-outline-primary" onClick={() => setShowEmailInput(true)}>
                             <i className="fas fa-plus-circle" />
                         </button>
                     </div>
                 </div>
 
-                {/* Existing emails */}
                 {emails.map((email, index) => (
                     <div
                         key={index}
@@ -112,10 +107,7 @@ const EmailAddress = () => {
                             value={newEmail}
                             onChange={(e) => setNewEmail(e.target.value)}
                         />
-                        <button
-                            className="btn btn-success btn-sm"
-                            onClick={handleAddEmail}
-                        >
+                        <button className="btn btn-success btn-sm" onClick={handleAddEmail} >
                             <i className="fas fa-check" />
                         </button>
                         <button

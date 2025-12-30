@@ -22,7 +22,7 @@ const ContactTabs = () => {
             <Row>
                 <Col className="d-flex align-items-center justify-content-end gap-2">
                     <Searchbar style={{ width: "300px" }} />
-                    <UserPlusButton label="Add Contact" height="36px" outline={false} onClick={(e) => { e.stopPropagation(); setModalOpen(true) }} />
+                    <UserPlusButton label="Add Contact" width="140px" height="36px" outline={false} onClick={(e) => { e.stopPropagation(); setModalOpen(true) }} />
                 </Col>
             </Row>
 
@@ -48,7 +48,7 @@ const ContactTabs = () => {
                                                     <Col>{c.phone}</Col>
                                                     <Col>{c.email}</Col>
                                                     <Col xs="auto">
-                                                        <PencilButton width="30px" borderless onClick={() => console.log("Edit Contact Clicked")} />
+                                                        <PencilButton width="30px" iconMarginRight="0px" borderless onClick={() => console.log("Edit Contact Clicked")} />
                                                     </Col>
                                                 </Row>
                                             ))

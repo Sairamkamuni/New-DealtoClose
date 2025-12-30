@@ -47,14 +47,15 @@ const TaskComp = () => {
                         </Col>
 
                         <Col md="2" className="d-flex align-items-center">
-                            <BiCalendar className="fs-4 me-2 mb-1" color={isCompleted || isOverdue(deals.due_date) ? "#ef4444" : "#6b7280"} />
+                            <BiCalendar className="fs-4 me-2 mb-1" color={isCompleted ? "#77777" : isOverdue(deals.due_date) ? "#ef4444" : "#6b7280"} />
                             <span style={{
-                                color: isCompleted || isOverdue(deals.due_date) ? "#ef4444" : "#6b7280",
+                                color: isCompleted ? "#77777" : isOverdue(deals.due_date) ? "#ef4444" : "#6b7280",
                                 textDecoration: isCompleted ? "line-through" : "none"
-                            }} >
+                            }}>
                                 {deals.due_date || "-"}
                             </span>
                         </Col>
+
 
                         <Col md="3">
                             <Select value={deals.assigned_to ? { label: deals.assigned_to, value: deals.assigned_to } : null}

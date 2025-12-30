@@ -76,15 +76,10 @@ const PhoneNumber = () => {
 
                 {/* Display phones */}
                 {phones.map((phone, index) => (
-                    <div
-                        key={index}
-                        className={`d-flex align-items-center justify-content-between mt-2 ${editMode && editingPhone !== index ? "border border-warning" : ""
-                            }`}
+                    <div key={index}
+                        className={`d-flex align-items-center justify-content-between mt-2 ${editMode && editingPhone !== index ? "border border-warning" : ""}`}
                         onClick={() => handleSelectPhone(index)}
-                        style={{
-                            cursor: editMode ? "pointer" : "default",
-                            transition: "all 0.2s ease",
-                        }}
+                        style={{ cursor: editMode ? "pointer" : "default", transition: "all 0.2s ease" }}
                     >
                         {editingPhone === index ? (
                             <div className="d-flex align-items-center gap-2 flex-grow-1" onClick={(e) => e.stopPropagation()} >
@@ -96,13 +91,7 @@ const PhoneNumber = () => {
                                     autoFocus
                                     onClick={(e) => e.stopPropagation()}
                                 />
-                                <button
-                                    className="btn btn-success btn-sm"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleSavePhone();
-                                    }}
-                                >
+                                <button className="btn btn-success btn-sm" onClick={(e) => { e.stopPropagation(); handleSavePhone(); }}>
                                     <i className="fas fa-check" />
                                 </button>
                             </div>
