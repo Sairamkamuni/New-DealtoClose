@@ -100,7 +100,7 @@ export const ToggleField = ({
     );
 };
 
-export const SelectField = ({ id, label, name, options, value, onChange, readOnly = false, isClearable = true, placeholder }) => {
+export const SelectField = ({ id, label, name, options, value, onChange, readOnly = false, isMulti = false, isClearable = true, placeholder }) => {
     return (
         <div>
             {label && <label>{label}</label>}
@@ -111,8 +111,9 @@ export const SelectField = ({ id, label, name, options, value, onChange, readOnl
                 className="basic-single"
                 classNamePrefix="select"
                 options={options}
+                isMulti={isMulti}
                 readOnly={readOnly}
-                value={options.find((opt) => opt.label === value) || null}
+                value={value}
                 onChange={onChange}
                 placeholder={placeholder}
                 style={{ cursor: readOnly ? "pointer" : "text" }}
@@ -121,7 +122,7 @@ export const SelectField = ({ id, label, name, options, value, onChange, readOnl
     );
 };
 
-export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = "Select...", value, onChange, isClearable = true, readOnly = false, defaultOptions = true }) => {
+export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = "Select...", isMulti = false, value, onChange, isClearable = true, readOnly = false, defaultOptions = true }) => {
 
     const [inputValue, setInputValue] = useState("");
 
@@ -155,7 +156,8 @@ export const AsyncSelectField = ({ label, name, optionsList = [], placeholder = 
                 isClearable={isClearable}
                 placeholder={placeholder}
                 readOnly={readOnly}
-                value={optionsList.find(opt => opt.label === value) || null}
+                isMulti={isMulti}
+                value={value}
                 onChange={onChange}
                 onInputChange={(val) => setInputValue(val)}
                 components={{ MenuList: CustomMenuList }}

@@ -1,28 +1,55 @@
 import React, { useState, useEffect } from "react"
 import { Row, Col, Modal } from "reactstrap"
 import {
-    FamilyMembersOption, RelationshipTypeOption, TypeOption, StatusOption, TitleOption, SourceOption, TagsOption, AgentsName
+    FamilyMembersOption, RelationshipTypeOption, clientTypeOption, contactCollaboratorOption,
+    StatusOption, TitleOption, SourceOption, TagsOption, AgentsName
 } from "AllDummyData/ContacsDummyData"
 import { InputField, SelectField, AsyncSelectField, DatePickerField } from "pages/InputFields/InputFields"
 import AllButton, { FaPlusButton, FaTrashCanButton } from "pages/utils/allButton"
 import { FormHandlers } from "pages/InputFields/FormHandlers"
+import { CONTACT_URL } from "helpers/url_helper"
+import { post, get, put, del } from 'helpers/api_helper'
 
 const ContactModal = ({ isOpen, toggle }) => {
     const [formType, setFormType] = useState("Client");
     const [inputFields, setInputFields] = useState([{ family_member: "", relation_type: "" }]);
     const { formData, handleChange, handleSubmit, handleSelectChange, handleDateChange, handleContactChange } =
-        FormHandlers({ apiUrl: "/api/deals", toggle: toggle, entity: "Contact", });
+        FormHandlers({ apiUrl: CONTACT_URL, toggle: toggle, entity: "Contact", });
+    // const [formData, setFormData] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [editId, setEditId] = useState(null);
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    // useEffect(() => {
+    //     handleContactChange(inputFields);
+    // }, [inputFields]);
 
 
-    useEffect(() => {
-        handleContactChange(inputFields);
-    }, [inputFields]);
+    // // 🔹 Handle input change
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData((prev) => ({
+    //         ...prev,
+    //         [name]: value,
+    //     }));
+    // };
+
+    // const handleSubmit = async () => {
+    //     setLoading(true);
+    //     const url = isEditMode ? `${CONTACT_URL}/${editId}` : CONTACT_URL;
+    //     const method = isEditMode ? put : post;
+    //     const { status } = await method(url, formData);
+
+    //     if (status) {
+    //         showSuccessAlert(isEditMode ? "Contact updated" : "Contact added");
+    //         setLoading(false);
+    //         setFormData({});
+    //         setEditId({});
+    //     }
+    // };
 
     const handleAddFields = () => {
-        setInputFields([
-            ...inputFields,
-            { family_member: "", relation_type: "" }
-        ]);
+        setInputFields([...inputFields, { family_member: "", relation_type: "" }]);
     };
 
     const handleRemoveFields = (index) => {
@@ -72,14 +99,15 @@ const ContactModal = ({ isOpen, toggle }) => {
                     </Col>
 
                     <Col md="12">
-                        <SelectField label="Type" name="type" options={TypeOption} value={formData?.type}
-                            onChange={handleSelectChange} placeholder="Select Type..." />
+                        <SelectField label="Type" name="type" isMulti value={formData?.type}
+                            options={formType === "Collaborator" ? contactCollaboratorOption : clientTypeOption}
+                            onChange={(option) => handleSelectChange(option, { name: "type" })} placeholder="Select Type..." />
                     </Col>
 
                     {formType === "Collaborator" && (
                         <Col md="12">
                             <SelectField label="Title" name="title" options={TitleOption} value={formData?.title}
-                                onChange={handleSelectChange} placeholder="Select Title..." />
+                                onChange={(option) => handleSelectChange(option, { name: "title" })} placeholder="Select Title..." />
                         </Col>
                     )}
 
@@ -87,7 +115,7 @@ const ContactModal = ({ isOpen, toggle }) => {
                         <>
                             <Col md="12">
                                 <SelectField label="Status" name="status" options={StatusOption} value={formData?.status}
-                                    onChange={handleSelectChange} placeholder="Select Status..." />
+                                    onChange={(option) => handleSelectChange(option, { name: "status" })} placeholder="Select Status..." />
                             </Col>
 
                             <Col md="6">
@@ -101,14 +129,14 @@ const ContactModal = ({ isOpen, toggle }) => {
                             </Col>
 
                             <Col md="12">
-                                <SelectField label="Source" name="source" options={SourceOption} value={formData?.source}
-                                    onChange={handleSelectChange} placeholder="Select Source..." />
+                                <AsyncSelectField label="Source" name="source" isMulti optionsList={SourceOption} value={formData?.source}
+                                    onChange={(option) => handleSelectChange(option, { name: "source" })} placeholder="Select Source..." />
                             </Col>
                         </>)}
 
                     <Col md="12">
-                        <SelectField label="Tags" name="tags" options={TagsOption} value={formData?.tags}
-                            onChange={handleSelectChange} placeholder="Select Tags..." />
+                        <AsyncSelectField label="Tags" name="tags" isMulti optionsList={TagsOption} value={formData?.tags}
+                            onChange={(option) => handleSelectChange(option, { name: "tags" })} placeholder="Select Tags..." />
                     </Col>
 
                     <div style={{ marginTop: "22px" }}>
@@ -130,7 +158,6 @@ const ContactModal = ({ isOpen, toggle }) => {
 
                                             />
                                         </Col>
-
                                         <Col md="5">
                                             <AsyncSelectField label="Relation Type" name="relation_type"
                                                 optionsList={RelationshipTypeOption} value={field.relation_type}

@@ -17,15 +17,15 @@ export const FormHandlers = ({ apiUrl, toggle, entity }) => {
     // --- Handle normal text input ---
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     // --- Handle Select components ---
     const handleSelectChange = (selectedOption, field) => {
-        const name = field.name;
-        const value = selectedOption?.label || null;
-
-        setFormData({ ...formData, [name]: value, });
+        setFormData(prev => ({
+            ...prev,
+            [field.name]: selectedOption
+        }));
     };
 
     // --- Handle Date components ---
@@ -52,22 +52,19 @@ export const FormHandlers = ({ apiUrl, toggle, entity }) => {
     const handleSubmit = async () => {
         console.log("Submitting formData:", formData);
 
-        // const url = editMode ? `${apiUrl}/${editingId}` : apiUrl;
-        // const method = editMode ? "PUT" : "POST";
-        // const { success, body } = await method(url, formData);
-        // console.log("API method:", method);
+        const url = editMode ? `${apiUrl}/${editingId}` : apiUrl;
+        const method = editMode ? put : post;
+        const { success } = await method(url, formData);
+        console.log("API method:", method);
 
         // const { success, body } = await (editMode ? put(url, formData) : post(apiUrl, formData));
-        const success = true;
+        // const success = true;
 
         if (success) {
             showSuccessAlert(`${entity} ${editMode ? "updated" : "created"} successfully`);
-
-            // Reset form
             setFormData({});
             setEditMode(false);
             setEditingId(null);
-
             if (typeof toggle === 'function') {
                 toggle();
             }

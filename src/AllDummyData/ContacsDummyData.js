@@ -125,20 +125,22 @@ export const TitleOption = [
     { value: 22, label: "Insurance Assistant" },
 ];
 
-export const TypeOption = [
+export const clientTypeOption = [
     { value: 1, label: "Buyer" },
     { value: 2, label: "Seller" },
     { value: 3, label: "Tenant" },
     { value: 4, label: "Landlord" },
-    { value: 5, label: "Realtor" },
-    { value: 6, label: "Lender" },
-    { value: 7, label: "Title Company" },
-    { value: 8, label: "Escrow Agent" },
-    { value: 9, label: "HOA" },
-    { value: 10, label: "Inspector" },
-    { value: 11, label: "Insurance Agent" },
 ];
 
+export const contactCollaboratorOption = [
+    { value: 1, label: "Realtor" },
+    { value: 2, label: "Lender" },
+    { value: 3, label: "Title Company" },
+    { value: 4, label: "Escrow Agent" },
+    { value: 5, label: "HOA" },
+    { value: 6, label: "Inspector" },
+    { value: 7, label: "Insurance Agent" },
+];
 export const StatusOption = [
     { value: 1, label: "N/A" },
     { value: 2, label: "Active" },

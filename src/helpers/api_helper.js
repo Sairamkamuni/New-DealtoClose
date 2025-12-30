@@ -3,13 +3,13 @@ import cookieHelper from "helpers/getCookieData";
 
 // const token = cookieHelper.getCookie("access_token");
 // const API_URL = `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_VERSION}`
-const API_URL = "http://localhost:4000/api"
+const API_URL = "http://192.168.1.12:4040/api/v1"
 
 const axiosApi = axios.create({
   baseURL: API_URL,
   withCredentials: true,
   headers: {
-    // 'Content-Type': 'application/json',
+    'Content-Type': 'application/json',
     'Accept': 'application/json'
   },
   credentials: 'include'
